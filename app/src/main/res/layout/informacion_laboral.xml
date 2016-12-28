@@ -1,0 +1,662 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingBottom="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/btnGuardar"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/color_button"
+        android:textStyle="bold"
+        android:textColor="#FFF"
+        android:text="@string/save"
+        android:layout_alignParentBottom="true" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btnGuardar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/lblNombreEmpresa"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/nombreEmpresa" />
+
+            <EditText
+                android:id="@+id/txtNombreEmpresa"
+                android:layout_below="@id/lblNombreEmpresa"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:padding="7dp"
+                android:background="@drawable/my_comment"
+                android:inputType="text"
+                android:alpha="0.5"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/comments" />
+
+            <TextView
+                android:id="@+id/lblRegistroIMSS"
+                android:layout_below="@+id/txtNombreEmpresa"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="Registro IMSS: " />
+
+            <RadioGroup
+                android:id="@+id/rgRegistroIMSS"
+                android:layout_below="@id/lblRegistroIMSS"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/afirmativoRegistroImss"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="Sí" />
+                <RadioButton
+                    android:id="@+id/negativoRegistroImss"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
+                    android:text="No" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/lblLaboralDomicilioCalle"
+                android:layout_below="@+id/rgRegistroIMSS"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/domicilioLaboral" />
+
+            <EditText
+                android:id="@+id/txtLaboralDomicilioCalle"
+                android:layout_below="@id/lblLaboralDomicilioCalle"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:padding="7dp"
+                android:background="@drawable/my_comment"
+                android:inputType="text"
+                android:alpha="0.5"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/comments" />
+
+            <TextView
+                android:id="@+id/lblLaboralExterior"
+                android:layout_below="@+id/txtLaboralDomicilioCalle"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/numeroExteriorLaboral" />
+
+            <EditText
+                android:id="@+id/txtLaboralExterior"
+                android:layout_below="@id/lblLaboralExterior"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:padding="7dp"
+                android:background="@drawable/my_comment"
+                android:inputType="text"
+                android:alpha="0.5"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/comments" />
+
+            <TextView
+                android:id="@+id/lblLaboralInterior"
+                android:layout_below="@+id/txtLaboralExterior"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/numeroInteriorLaboral" />
+
+            <EditText
+                android:id="@+id/txtLaboralInterior"
+                android:layout_below="@id/lblLaboralInterior"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:padding="7dp"
+                android:background="@drawable/my_comment"
+                android:inputType="text"
+                android:alpha="0.5"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/comments" />
+
+            <TextView
+                android:id="@+id/lblLaboralColonia"
+                android:layout_below="@+id/txtLaboralInterior"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/coloniaLaboral" />
+
+            <EditText
+                android:id="@+id/txtLaboralColonia"
+                android:layout_below="@id/lblLaboralColonia"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:padding="7dp"
+                android:background="@drawable/my_comment"
+                android:inputType="text"
+                android:alpha="0.5"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/comments" />
+
+            <TextView
+                android:id="@+id/lblLaboralCP"
+                android:layout_below="@+id/txtLaboralColonia"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/cpLaboral" />
+
+            <EditText
+                android:id="@+id/txtLaboralCP"
+                android:layout_below="@id/lblLaboralCP"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:padding="7dp"
+                android:background="@drawable/my_comment"
+                android:inputType="text"
+                android:alpha="0.5"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/comments" />
+
+            <TextView
+                android:id="@+id/lblLaboralMunicipio"
+                android:layout_below="@+id/txtLaboralCP"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/municipioLaboral" />
+
+            <EditText
+                android:id="@+id/txtLaboralMunicipio"
+                android:layout_below="@id/lblLaboralMunicipio"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:padding="7dp"
+                android:background="@drawable/my_comment"
+                android:inputType="text"
+                android:alpha="0.5"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/comments" />
+
+            <TextView
+                android:id="@+id/lblLaboralEstado"
+                android:layout_below="@+id/txtLaboralMunicipio"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/estadoLaboral" />
+
+            <EditText
+                android:id="@+id/txtLaboralEstado"
+                android:layout_below="@id/lblLaboralEstado"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:padding="7dp"
+                android:background="@drawable/my_comment"
+                android:inputType="text"
+                android:alpha="0.5"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/comments" />
+
+            <TextView
+                android:id="@+id/lblLaboralDepartamento"
+                android:layout_below="@+id/txtLaboralEstado"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/departamentoLaboral" />
+
+            <EditText
+                android:id="@+id/txtLaboralDepartamento"
+                android:layout_below="@id/lblLaboralDepartamento"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:padding="7dp"
+                android:background="@drawable/my_comment"
+                android:inputType="text"
+                android:alpha="0.5"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/comments" />
+
+            <TextView
+                android:id="@+id/lblLaboralPuesto"
+                android:layout_below="@+id/txtLaboralDepartamento"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/puestoLaboral"/>
+
+            <EditText
+                android:id="@+id/txtLaboralPuesto"
+                android:layout_below="@id/lblLaboralPuesto"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:padding="7dp"
+                android:background="@drawable/my_comment"
+                android:inputType="text"
+                android:alpha="0.5"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/comments" />
+
+            <TextView
+                android:id="@+id/lblLaboralIngreso"
+                android:layout_below="@+id/txtLaboralPuesto"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/ingresoMensual"/>
+
+            <EditText
+                android:id="@+id/txtLaboralIngreso"
+                android:layout_below="@id/lblLaboralIngreso"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:padding="7dp"
+                android:background="@drawable/my_comment"
+                android:inputType="text"
+                android:alpha="0.5"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/comments" />
+
+            <TextView
+                android:id="@+id/lblOtrosIngresos"
+                android:layout_below="@+id/txtLaboralIngreso"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/otrosIngresos"/>
+
+            <RadioGroup
+                android:id="@+id/rgOtrosIngresos"
+                android:layout_below="@id/lblOtrosIngresos"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/afirmativoOtrosIngresos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="Sí" />
+                <RadioButton
+                    android:id="@+id/negativoOtrosIngresos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
+                    android:text="No" />
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/txtEspecificacionMonto"
+                android:layout_below="@id/rgOtrosIngresos"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:padding="7dp"
+                android:background="@drawable/my_comment"
+                android:inputType="text"
+                android:alpha="0.5"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/comments" />
+
+            <TextView
+                android:id="@+id/lblLaboralComprobable"
+                android:layout_below="@+id/txtEspecificacionMonto"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/ingresoComprobable" />
+
+            <RadioGroup
+                android:id="@+id/rgComprobable"
+                android:layout_below="@id/lblLaboralComprobable"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/afirmativoComprobable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="Sí" />
+                <RadioButton
+                    android:id="@+id/negativoComprobable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
+                    android:text="No" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/lblPagoDeCredito"
+                android:layout_below="@+id/rgComprobable"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/pagandoCredito" />
+
+            <RadioGroup
+                android:id="@+id/rgPagoDeCredito"
+                android:layout_below="@id/lblPagoDeCredito"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/afirmativoPagoDeCredito"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="Sí" />
+                <RadioButton
+                    android:id="@+id/negativoPagoDeCredito"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
+                    android:text="No" />
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/txtEspecificacionMontoCredito"
+                android:layout_below="@id/rgPagoDeCredito"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:layout_marginStart="30dp"
+                android:textSize="20sp"
+                android:padding="7dp"
+                android:background="@drawable/my_comment"
+                android:inputType="text"
+                android:alpha="0.5"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/comments" />
+
+            <TextView
+                android:id="@+id/lblInstitucion"
+                android:layout_below="@+id/txtEspecificacionMontoCredito"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/institucionLaboral" />
+
+            <EditText
+                android:id="@+id/txtInstitucion"
+                android:layout_below="@id/lblInstitucion"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:padding="7dp"
+                android:background="@drawable/my_comment"
+                android:inputType="text"
+                android:alpha="0.5"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/comments" />
+
+            <TextView
+                android:id="@+id/lblNombreJefeInmediato"
+                android:layout_below="@+id/txtInstitucion"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/nombreJefeInmediato"/>
+
+            <EditText
+                android:id="@+id/txtNombreJefeInmediato"
+                android:layout_below="@id/lblNombreJefeInmediato"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:padding="7dp"
+                android:background="@drawable/my_comment"
+                android:inputType="text"
+                android:alpha="0.5"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/comments" />
+
+            <TextView
+                android:id="@+id/lblAntiguedad"
+                android:layout_below="@+id/txtNombreJefeInmediato"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/antiguedadLaboral"/>
+
+            <EditText
+                android:id="@+id/txtAntiguedad"
+                android:layout_below="@id/lblAntiguedad"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:padding="7dp"
+                android:background="@drawable/my_comment"
+                android:inputType="text"
+                android:alpha="0.5"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/comments" />
+
+            <TextView
+                android:id="@+id/lblTelefonoOficina"
+                android:layout_below="@+id/txtAntiguedad"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/telefonoOficinaLaboral" />
+
+            <EditText
+                android:id="@+id/txtTelefonoOficina"
+                android:layout_below="@id/lblTelefonoOficina"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:padding="7dp"
+                android:background="@drawable/my_comment"
+                android:inputType="text"
+                android:alpha="0.5"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/comments" />
+
+            <TextView
+                android:id="@+id/lblExtension"
+                android:layout_below="@+id/txtTelefonoOficina"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/extensionLaboral" />
+
+            <EditText
+                android:id="@+id/txtExtension"
+                android:layout_below="@id/lblExtension"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:padding="7dp"
+                android:background="@drawable/my_comment"
+                android:inputType="text"
+                android:alpha="0.5"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/comments" />
+
+            <TextView
+                android:id="@+id/lblFax"
+                android:layout_below="@+id/txtExtension"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/faxLaboral" />
+
+            <EditText
+                android:id="@+id/txtFax"
+                android:layout_below="@id/lblFax"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:padding="7dp"
+                android:background="@drawable/my_comment"
+                android:inputType="text"
+                android:alpha="0.5"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/comments" />
+
+            <RadioGroup
+                android:id="@+id/rgPeriodicidad"
+                android:layout_below="@id/txtFax"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/mesualLaboral"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="mensual"/>
+                <RadioButton
+                    android:id="@+id/quicenal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
+                    android:text="quincenal" />
+                <RadioButton
+                    android:id="@+id/catorcenal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
+                    android:text="catorcenal" />
+                <RadioButton
+                    android:id="@+id/semanal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
+                    android:text="semanal"/>
+            </RadioGroup>
+
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

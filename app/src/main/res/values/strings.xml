@@ -1,0 +1,107 @@
+<resources>
+    <string name="app_name">Pruebas</string>
+    <string name="comments">Ingrese aquí...</string>
+    <string name="save">GUARDAR</string>
+
+    <string name="welcome">Bienvenido</string>
+    <string name="name">Nombre</string>
+    <string name="user">USUARIO</string>
+    <string name="prompt_user">Usuario</string>
+    <string name="prompt_password">Contraseña</string>
+    <string name="sign_in">ENTRAR</string>
+    <string name="sign_out">Cerrar sesión</string>
+    <string name="wifi">wifi</string>
+    <string name="autorizacion">Manifiesto que: 1.- Todos los datos anteriores son correctos y veridicos, que la información y documentación presentadas son verdaderas, que actuó por cuenta propia y que el origen de mis recursos es lícito. 2.- Por este medio autorizo a MIPYMEX SA DE CV SOFOM ENR, para que por conducto de sus funcionarios facultados lleve a cabo investigaciones sobre mi comportamiento e historial crediticio en las Sociedades de Información Crediticia que estime conveniente. Así mismo declaro que conozco la naturaleza y alcance de la información que solicitará, del uso que MIPYMEX SA DE CV SOFOM ENR hará de tal información y de que esta podrá realizar consultas periodicas de mi historial crediticio, consintiendo que esta autorización se encuentre vigente por un periodo de 3 años contados a partir de la fecha de su expedición yen todo caso durante el tiempo que mantengamos relación jurídica. Estoy conciente y acepto que este documento quede bajo propiedad de MIPYMEX SA DE CV SOFOM ENR para efectos de control y cumplimiento de los dispuestos en el artículo 28 de la Ley para regular a Las Sociedades de Infromación Crediticia. 3.- La presente solicitu está sujeta al procedimiento de aprobación crediticia y no garantiza que MIPYMEX SA DE CV SOFOM ENR me otorgue el crédito solicitado.</string>
+    <string name="firmaSolicitante">Firma del Solicitante</string>
+
+    <!--información del solicitante-->
+    <string name="apellidoPaternoSolicitante">Apellido Paterno:</string>
+    <string name="apellidoMaternoSolicitante">Apellido Materno:</string>
+    <string name="nombreSolicitante">Nombre(s):</string>
+    <string name="lugarFechaNacimientoSolicitante">Lugar y Fecha de Nacimiento:</string>
+    <string name="edadSolicitante">Edad:</string>
+    <string name="sexoSolicitante">Sexo:</string>
+    <string name="masculinoSolicitante">M</string>
+    <string name="femeninoSolicitante">F</string>
+    <string name="rfcSolicitante">RFC: </string>
+    <string name="curpSolicitante">CURP: </string>
+    <string name="folioIfeSolicitante">Folio IFE:</string>
+    <string name="estadoCivilSolicitante">Estado Civil:</string>
+    <string name="trabajoConyugeSolicitante">Trabaja su conjuge:</string>
+    <string name="afirmativoSolicitante">Sí</string>
+    <string name="negativoSolicintente">No</string>
+    <string name="ingresoConyugeSolicitante">Ingreso Conyuge:</string>
+    <string name="regimenConyugalSolicitante">Regimen Conyugal:</string>
+    <string name="dependientesConyugeSolicitante">Dependientes Economicos:</string>
+    <string name="afirmativoDependientesSolicitante">Sí</string>
+    <string name="negativoDependientesSolicitante">No</string>
+    <string name="numeroPersonasSolicitante">Cuantas personas:</string>
+    <string name="domicilioSolicitante">Domicilio:</string>
+    <string name="correoElectronicoSolicitante">Correo electrónico:</string>
+    <string name="celularSolicitante">Celular:</string>
+    <string name="telefonoCasaSolicitante">Telefono de casa:</string>
+    <string name="montoMensualSolicitante">Monto pago Mensual:</string>
+    <string name="creditoViviendaSolicitante">Crédito vivienda señale si con:</string>
+    <string name="tiempoResidenciaSolicitante">Tiempo de residencia:</string>
+    <string name="residenciaSolicitante">Recidencia:</string>
+    <string name="numeroInteriorSolicitante">Numero interior:</string>
+    <string name="numeroExteriorSolicitante">Numero Exterior:</string>
+    <string name="calleSolicitante">Calle:</string>
+    <string name="cargo_publico">¿Desempeña actualmente o desempeñó durante el año imendiato
+    anterior algún cargo público destacado a nivel federal, estatal, municipal o distrital en
+    México o algún país extranjero?</string>
+    <string name="cargo_publicoConyuge">¿Su cónyuge o algún pariente pro consaguinidado afinidad hasta el segundo
+    grado, desempeña actualmente o desempeñó durante el año inmendiato anterior a algún cargo público destacado
+    a nivel federal, estatal, municipal o distrital en México o en algún país extranjero?</string>
+    <string name="coloniaSolicitante">Colonia:</string>
+    <string name="cpSolicitante">CP:</string>
+    <string name="municipioSolicitante">Municipio:</string>
+    <string name="estadoSolicitante">Estado:</string>
+
+    <!--información laboral-->
+    <string name="nombreEmpresa">Nombre de la empresa donde labora:</string>
+    <string name="domicilioLaboral">Domicilio Calle:</string>
+    <string name="numeroExteriorLaboral">Numero Exterior:</string>
+    <string name="numeroInteriorLaboral">Numero interior: </string>
+    <string name="coloniaLaboral">Colonia:</string>
+    <string name="cpLaboral">CP:</string>
+    <string name="municipioLaboral">Municipio:</string>
+    <string name="estadoLaboral">Estado:</string>
+    <string name="departamentoLaboral">Departamento en que labora:</string>
+    <string name="puestoLaboral">Puesto:</string>
+    <string name="ingresoMensual">Ingreso Mensual neto:</string>
+    <string name="ingresoComprobable">Comprobable:</string>
+    <string name="pagandoCredito">Está pagando algún crédito:</string>
+    <string name="institucionLaboral">Institucion:</string>
+    <string name="nombreJefeInmediato">Nombre del jefe inmediato:</string>
+    <string name="antiguedadLaboral">Antigüedad:</string>
+    <string name="telefonoOficinaLaboral">Telefono de oficina:</string>
+    <string name="extensionLaboral">Extensión:</string>
+    <string name="faxLaboral">Fax:</string>
+    <string name="otrosIngresos">Cuenta con otros ingresos:</string>
+
+    <string name="external_dir">GetSignature</string>
+
+    <!--referenciasPersonalesFamiliares-->
+    <string name="apellidoPaternoReferencias">Apellido Paterno:</string>
+    <string name="apellidoMaternoReferencias">Apellido Materno:</string>
+    <string name="nombresReferencias">Nombre(s):</string>
+    <string name="calleReferencias">Calle:</string>
+    <string name="nInteriorReferencias">Numero Exterior:</string>
+    <string name="nExteriorReferencias">Numero Interior:</string>
+    <string name="coloniaReferencias">Colonia:</string>
+    <string name="cpReferencias">CP:</string>
+    <string name="municipioReferencias">Municipio:</string>
+    <string name="estadoReferencias">Estado:</string>
+    <string name="telefonoReferencias">Télefono de casa:</string>
+    <string name="celularReferencias">Celular:</string>
+    <string name="correoReferencias">Correo Electronico:</string>
+    <string name="parentescoReferencias">Parentesco:</string>
+
+    <!--Datos conyuge/familiares-->
+    <string name="nombreFamiliar">Nombre:</string>
+    <string name="edadFamiliar">Edad:</string>
+    <string name="parentescoFamiliar">Parentesco:</string>
+    <string name="telefonoFamiliar">Telefono:</string>
+    <string name="celularFamiliar">Celular:</string>
+</resources>
