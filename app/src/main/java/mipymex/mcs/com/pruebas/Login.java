@@ -17,15 +17,11 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-/*import mipymex.mcs.com.Connection;
-import mipymex.mcs.com.DBHelper;
-import mipymex.mcs.com.DataDB;
-import mipymex.mcs.com.GetWebServices;*/
 
 public class Login extends AppCompatActivity {
 
     //final static public String IPpublic = "http://187.162.74.131";
-    final static public String IPpublic = "https://masternoc.mx/wsmovil/api/";
+    final static public String IPpublic = "http://masternoc1.mx/wsmovil/api/";
 
     /***********************************************************************************************
      *                                      DECLARACIÓN DE OBJETOS                                 *
@@ -54,7 +50,7 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.content_login);
 
         connection = new Connection(this);
 
@@ -62,8 +58,8 @@ public class Login extends AppCompatActivity {
          *                            CREACION DE BASE DE DATOS LOCAL                              *
          ******************************************************************************************/
         //sqliteHelper = new DBHelper(this, DataDB.DB_NAME, null, DataDB.VERSION);
-        db = sqliteHelper.getWritableDatabase();
-        db.close();
+        //db = sqliteHelper.getWritableDatabase();
+        //db.close();
 
         /* ----------------------------------  Objetos Globales ----------------------------------*/
         usuario  = (EditText)  findViewById(R.id.txtUsuario);
@@ -116,8 +112,8 @@ public class Login extends AppCompatActivity {
                          * Si no existe una sesión verificar el estado de red, ya que para el primer
                          * Login es necesario acceder al recurso a traves de internet.
                          */
-                        if (connection.getConnection("No informar")) {
-                            strLogin = IPpublic + "usuario?v_cliente=1&v_usuario=" + user + "&v_contrasena=" + pass;
+                        if (connection.getConnection("No informar")) {//usuario?v_cliente=2&v_usuario=ORIGINACION&v_contrasena=12345678
+                            strLogin = IPpublic + "usuario?v_cliente=2&v_usuario=" + user + "&v_contrasena=" + pass;
                             new GetWebServices(Login.this).execute(strLogin, "login", user, pass);// Parámetros que recibe doInBackground
                         } else {
                             usuario.setVisibility(View.VISIBLE);
@@ -139,14 +135,14 @@ public class Login extends AppCompatActivity {
          * Revisar si existen los catalogs en la BD local, si no se encuentran verificar estado
          * de red. Se necesita internet la primera vez para descargar los catalogos.
          */
-        getSession();       // Revisar si tiene la sesion abierta
-        getConfigCamara();  // Revisar la configuración del fotos
-        getTipoFoto();      // Revisar si existen los tipos de fotos
+//        getSession();       // Revisar si tiene la sesion abierta
+//        getConfigCamara();  // Revisar la configuración del fotos
+  //      getTipoFoto();      // Revisar si existen los tipos de fotos
        // getParametros();
     }
     /*------------------------------- Verificar si existe una sesión -----------------------------*/
     public void getSession() {
-        db = sqliteHelper.getWritableDatabase();
+//        db = sqliteHelper.getWritableDatabase();
        // c = db.rawQuery("SELECT * FROM " + DataDB.TABLE_NAME_USERS, null);
         try {
             if (c.moveToFirst()) {
@@ -318,7 +314,7 @@ public class Login extends AppCompatActivity {
             Log.e("Error", ex.toString());
         } finally {
             System.out.println("Fragment actualizado: HOME");
-            db.close();
+//            db.close();
         }
         super.onStart();
     }

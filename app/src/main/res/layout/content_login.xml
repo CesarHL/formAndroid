@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/content_login"
     android:layout_width="match_parent"
@@ -10,7 +10,7 @@
     android:paddingRight="10dp"
     android:paddingBottom="0dp"
 
-    tools:context="mipymex.mcs.com.pruebas.InformacionSolicitante"
+    tools:context="mipymex.mcs.com.pruebas.Login"
     android:background="#F7F7F7" >
 
     <ProgressBar
@@ -41,7 +41,7 @@
                 android:layout_width="150dp"
                 android:layout_height="140dp"
                 android:layout_centerHorizontal="true"
-                android:src="@mipmap/ic_launcher"/>
+                android:src="@drawable/logo"/>
                <!-- android:src="@drawable/cfe_logo"
                 android:contentDescription="@string/logo"-->
 
