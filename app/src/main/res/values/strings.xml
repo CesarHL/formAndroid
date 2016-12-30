@@ -104,4 +104,5 @@
     <string name="parentescoFamiliar">Parentesco:</string>
     <string name="telefonoFamiliar">Telefono:</string>
     <string name="celularFamiliar">Celular:</string>
+    <string name="agreagarLista">AGREGAR</string>
 </resources>

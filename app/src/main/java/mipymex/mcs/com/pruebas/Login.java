@@ -53,15 +53,6 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.content_login);
 
         connection = new Connection(this);
-
-        /*******************************************************************************************
-         *                            CREACION DE BASE DE DATOS LOCAL                              *
-         ******************************************************************************************/
-        //sqliteHelper = new DBHelper(this, DataDB.DB_NAME, null, DataDB.VERSION);
-        //db = sqliteHelper.getWritableDatabase();
-        //db.close();
-
-        /* ----------------------------------  Objetos Globales ----------------------------------*/
         usuario  = (EditText)  findViewById(R.id.txtUsuario);
         password = (EditText)  findViewById(R.id.txtPassword);
         titulo   = (TextView)  findViewById(R.id.lblTitulo);

@@ -5,6 +5,16 @@
     android:paddingBottom="10dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <Button
+        android:id="@+id/btnGuardar"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/color_button"
+        android:textStyle="bold"
+        android:textColor="#FFF"
+        android:text="@string/save"
+        android:layout_alignParentBottom="true" />
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -35,7 +45,7 @@
                             android:text="@string/nombreFamiliar"/>
 
                         <EditText
-                            android:id="@+id/yourName"
+                            android:id="@+id/txtNombreC"
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
                             android:layout_weight="1">
@@ -55,7 +65,7 @@
                         android:layout_gravity="right"
                         android:text="@string/edadFamiliar"/>
                     <EditText
-                        android:id="@+id/txtView2"
+                        android:id="@+id/txtEdadC"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:layout_weight="1">
@@ -75,7 +85,7 @@
                         android:layout_gravity="right"
                         android:text="@string/parentescoFamiliar"/>
                     <EditText
-                        android:id="@+id/txtView3"
+                        android:id="@+id/txtParentescoC"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:layout_weight="1">
@@ -96,13 +106,12 @@
                         android:layout_gravity="right"
                         android:text="@string/telefonoFamiliar"/>
                     <EditText
-                        android:id="@+id/txtView4"
+                        android:id="@+id/txtTelefonoC"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:layout_weight="1">
                         <requestFocus />
                     </EditText>
-
                 </TableRow>
                 <TableRow
                     android:id="@+id/tableRow5"
@@ -118,13 +127,23 @@
                         android:text="@string/celularFamiliar"/>
 
                     <EditText
-                        android:id="@+id/txtView5"
+                        android:id="@+id/txttCelularC"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:layout_weight="1">
                         <requestFocus />
                     </EditText>
                 </TableRow>
+                <Button
+                    android:id="@+id/btnAgregarDatos"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/color_button"
+                    android:textStyle="bold"
+                    android:textColor="#FFF"
+                    android:text="@string/agreagarLista"
+                    android:layout_alignParentBottom="true" />
                 <ListView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

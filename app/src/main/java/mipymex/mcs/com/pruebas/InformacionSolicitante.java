@@ -1,14 +1,28 @@
 package mipymex.mcs.com.pruebas;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RadioGroup;
 
 public class InformacionSolicitante extends AppCompatActivity {
+
+    private ViewPager viewPager;
+
+    private LinearLayout page1;
+    private LinearLayout page2;
+    private ListView page3;
+    private LinearLayout page4;
 
     private EditText txtAp, txtAm, txtNombre, txtLYF, txtEdad, txtRfc, txtCurp, txtFolioIfe, txtInConyuge;
     private EditText txtRegimen, txtEstadoCivil, txtPersonas, txtCalle, txtNExt, txtNInt, txtColonia, txtCP, txtMun;
@@ -26,7 +40,7 @@ public class InformacionSolicitante extends AppCompatActivity {
         txtNombre = (EditText) findViewById(R.id.txtNombresSolicitante);
         txtLYF = (EditText) findViewById(R.id.txtLugarFechaNacimiento);
         txtEdad = (EditText) findViewById(R.id.txtEdadSolicitante);
-        rdSexo = (RadioGroup) findViewById(R.id.sexo);
+        rdSexo = (RadioGroup) findViewById(R.id.rgSexo);
         rdSexo.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -145,9 +159,40 @@ public class InformacionSolicitante extends AppCompatActivity {
         agregar =(Button)findViewById(R.id.btnGuardar);
         agregar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                System.out.println(txtAp.toString() + txtAm.toString() + txtNombre.toString() + txtLYF.toString());
-                Intent intent = new Intent(InformacionSolicitante.this, DatosConyugeHijos.class);
-                startActivityForResult(intent, 1);
+
+                Boolean v1 = txtAp.getText().toString().trim().equalsIgnoreCase("");
+                Boolean v2 = txtAm.getText().toString().trim().equalsIgnoreCase("");
+                Boolean v3 = txtNombre.getText().toString().trim().equalsIgnoreCase("");
+                Boolean v4 = txtLYF.getText().toString().trim().equalsIgnoreCase("");
+                Boolean v5 = txtEdad.getText().toString().trim().equalsIgnoreCase("");
+                Boolean v6 = txtRfc.getText().toString().trim().equalsIgnoreCase("");
+                Boolean v7 = txtCurp.getText().toString().trim().equalsIgnoreCase("");
+                Boolean v8 = txtFolioIfe.getText().toString().trim().equalsIgnoreCase("");
+                Boolean v9 = txtInConyuge.getText().toString().trim().equalsIgnoreCase("");
+                Boolean v10 = txtRegimen.getText().toString().trim().equalsIgnoreCase("");
+                Boolean v11 = txtEstadoCivil.getText().toString().trim().equalsIgnoreCase("");
+                Boolean v12 = txtPersonas.getText().toString().trim().equalsIgnoreCase("");
+                Boolean v13 = txtCalle.getText().toString().trim().equalsIgnoreCase("");
+                Boolean v14 = txtNExt.getText().toString().trim().equalsIgnoreCase("");
+                Boolean v15 = txtNInt.getText().toString().trim().equalsIgnoreCase("");
+                Boolean v16 = txtColonia.getText().toString().trim().equalsIgnoreCase("");
+                Boolean v17 = txtCP.getText().toString().trim().equalsIgnoreCase("");
+                Boolean v18 = txtEstado.getText().toString().trim().equalsIgnoreCase("");
+                Boolean v19 = txtMontoCred.getText().toString().trim().equalsIgnoreCase("");
+                Boolean v20 = txtTelCasa.getText().toString().trim().equalsIgnoreCase("");
+                Boolean v21 = txtCelular.getText().toString().trim().equalsIgnoreCase("");
+                Boolean v22 = txtCorreo.getText().toString().trim().equalsIgnoreCase("");
+                Boolean v23 = txtEspCargoPublico.getText().toString().trim().equalsIgnoreCase("");
+
+                if (v1 || v2 || v3||v4||v5||v6||v7||v8||v9||v10||v11 || v12||v13||v14||v15||v16||
+                        v17||v18||v19||v20||v21||v22||v23) {
+                    txtNombre.setError("Este campo no puede estar vacio");
+                    txtNombre.setText("");
+                } else {
+                    System.out.println("===================================" + txtAp.getText().toString());
+                    Intent intent = new Intent(InformacionSolicitante.this, DatosConyugeHijos.class);
+                    startActivityForResult(intent, 1);
+                }
             }
         });
     }

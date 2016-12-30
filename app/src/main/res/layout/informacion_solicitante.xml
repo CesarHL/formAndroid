@@ -164,7 +164,7 @@
                 android:text="@string/sexoSolicitante" />
 
             <RadioGroup
-                android:id="@+id/sexo"
+                android:id="@+id/rgSexo"
                 android:layout_below="@id/lblSexoSolicitante"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -190,7 +190,7 @@
 
             <TextView
                 android:id="@+id/lblRfcSolicitante"
-                android:layout_below="@+id/sexo"
+                android:layout_below="@+id/rgSexo"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
