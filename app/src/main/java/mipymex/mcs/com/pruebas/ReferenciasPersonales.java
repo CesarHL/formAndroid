@@ -13,7 +13,7 @@ public class ReferenciasPersonales extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.referencias_personales);
+        setContentView(R.layout.referencias_personalesfamiliares);
 
         txtApaternoRef = (EditText) findViewById(R.id.txtApellidoPaternoReferencias);
         txtAMaternoRef = (EditText) findViewById(R.id.txtApellidoMaternoReferencias);

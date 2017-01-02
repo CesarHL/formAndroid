@@ -103,7 +103,7 @@ public class CaptureSignature extends Activity {
                 Intent intent = new Intent();
                 intent.putExtras(b);
                 setResult(RESULT_OK,intent);
-                finish();
+               // finish();
             }
         });
     }

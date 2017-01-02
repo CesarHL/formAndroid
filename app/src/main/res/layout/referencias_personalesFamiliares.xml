@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingBottom="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/btnGuardar"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/color_button"
+        android:textStyle="bold"
+        android:textColor="#FFF"
+        android:text="@string/save"
+        android:layout_alignParentBottom="true" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btnGuardar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/lblApellidoPaternoReferencias"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/apellidoPaternoReferencias" />
+
+            <EditText
+                android:id="@+id/txtApellidoPaternoReferencias"
+                android:layout_below="@id/lblApellidoPaternoReferencias"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:padding="7dp"
+                android:background="@drawable/my_comment"
+                android:inputType="text"
+                android:alpha="0.5"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/comments"/>
+
+            <TextView
+                android:id="@+id/lblApellidoMaternoReferencias"
+                android:layout_below="@+id/txtApellidoPaternoReferencias"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/apellidoMaternoReferencias"/>
+
+            <EditText
+                android:id="@+id/txtApellidoMaternoReferencias"
+                android:layout_below="@id/lblApellidoMaternoReferencias"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:padding="7dp"
+                android:background="@drawable/my_comment"
+                android:inputType="text"
+                android:alpha="0.5"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/comments"/>
+
+            <TextView
+                android:id="@+id/lblNombresReferencias"
+                android:layout_below="@+id/txtApellidoMaternoReferencias"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/nombresReferencias" />
+
+            <EditText
+                android:id="@+id/txtNombresReferencias"
+                android:layout_below="@id/lblNombresReferencias"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:padding="7dp"
+                android:background="@drawable/my_comment"
+                android:inputType="text"
+                android:alpha="0.5"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/comments"/>
+
+            <TextView
+                android:id="@+id/lblCalleReferencias"
+                android:layout_below="@+id/txtNombresReferencias"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/calleReferencias" />
+
+            <EditText
+                android:id="@+id/txtCalleReferencias"
+                android:layout_below="@id/lblCalleReferencias"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:padding="7dp"
+                android:background="@drawable/my_comment"
+                android:inputType="text"
+                android:alpha="0.5"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/comments"/>
+
+            <TextView
+                android:id="@+id/lblExteriorReferencias"
+                android:layout_below="@+id/txtCalleReferencias"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/nExteriorReferencias"/>
+
+            <EditText
+                android:id="@+id/txtExteriorReferencias"
+                android:layout_below="@id/lblExteriorReferencias"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:padding="7dp"
+                android:background="@drawable/my_comment"
+                android:inputType="text"
+                android:alpha="0.5"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/comments"/>
+
+            <TextView
+                android:id="@+id/lblInteriorReferencias"
+                android:layout_below="@+id/txtExteriorReferencias"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/nInteriorReferencias" />
+
+            <EditText
+                android:id="@+id/txtInteriorReferencias"
+                android:layout_below="@id/lblInteriorReferencias"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:padding="7dp"
+                android:background="@drawable/my_comment"
+                android:inputType="text"
+                android:alpha="0.5"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/comments"/>
+
+            <TextView
+                android:id="@+id/lblColoniaReferencias"
+                android:layout_below="@+id/txtInteriorReferencias"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/coloniaReferencias"/>
+
+            <EditText
+                android:id="@+id/txtColoniaReferencias"
+                android:layout_below="@id/lblColoniaReferencias"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:padding="7dp"
+                android:background="@drawable/my_comment"
+                android:inputType="text"
+                android:alpha="0.5"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/comments"/>
+
+            <TextView
+                android:id="@+id/lblCpReferencias"
+                android:layout_below="@+id/txtColoniaReferencias"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/cpReferencias"/>
+
+            <EditText
+                android:id="@+id/txtCpReferencias"
+                android:layout_below="@id/lblCpReferencias"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:padding="7dp"
+                android:background="@drawable/my_comment"
+                android:inputType="text"
+                android:alpha="0.5"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/comments"/>
+
+            <TextView
+                android:id="@+id/lblMunicipioReferencias"
+                android:layout_below="@+id/txtCpReferencias"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/municipioReferencias"/>
+
+            <EditText
+                android:id="@+id/txtMunicipioReferencias"
+                android:layout_below="@id/lblMunicipioReferencias"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:padding="7dp"
+                android:background="@drawable/my_comment"
+                android:inputType="text"
+                android:alpha="0.5"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/comments"/>
+
+            <TextView
+                android:id="@+id/lblEstadoReferencias"
+                android:layout_below="@+id/txtMunicipioReferencias"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/estadoReferencias"/>
+
+            <EditText
+                android:id="@+id/txtEstadoReferencias"
+                android:layout_below="@id/lblEstadoReferencias"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:padding="7dp"
+                android:background="@drawable/my_comment"
+                android:inputType="text"
+                android:alpha="0.5"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/comments"/>
+
+            <TextView
+                android:id="@+id/lblTelefonoReferencias"
+                android:layout_below="@+id/txtEstadoReferencias"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/telefonoReferencias"/>
+
+            <EditText
+                android:id="@+id/txtTelefonoReferencias"
+                android:layout_below="@id/lblTelefonoReferencias"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:padding="7dp"
+                android:background="@drawable/my_comment"
+                android:inputType="text"
+                android:alpha="0.5"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/comments"/>
+
+
+            <TextView
+                android:id="@+id/lblCelularReferencias"
+                android:layout_below="@+id/txtTelefonoReferencias"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/celularReferencias"/>
+
+            <EditText
+                android:id="@+id/txtCelularReferencias"
+                android:layout_below="@id/lblCelularReferencias"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:padding="7dp"
+                android:background="@drawable/my_comment"
+                android:inputType="text"
+                android:alpha="0.5"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/comments"/>
+
+            <TextView
+                android:id="@+id/lblCorreoReferencias"
+                android:layout_below="@+id/txtCelularReferencias"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/correoReferencias" />
+
+            <EditText
+                android:id="@+id/txtCorreoReferencias"
+                android:layout_below="@id/lblCorreoReferencias"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:padding="7dp"
+                android:background="@drawable/my_comment"
+                android:inputType="text"
+                android:alpha="0.5"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/comments"/>
+
+            <TextView
+                android:id="@+id/lblParentescoReferencias"
+                android:layout_below="@+id/txtCorreoReferencias"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/parentescoReferencias"/>
+
+            <EditText
+                android:id="@+id/txtParentescoReferencias"
+                android:layout_below="@id/lblParentescoReferencias"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:padding="7dp"
+                android:background="@drawable/my_comment"
+                android:inputType="text"
+                android:alpha="0.5"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/comments"/>
+
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

@@ -119,6 +119,7 @@ public class GetWebServices extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPreExecute() {
+
         super.onPreExecute();
     }
 
@@ -129,13 +130,10 @@ public class GetWebServices extends AsyncTask<String, Void, String> {
                 /* --------------------------------- CASO PARA EL LOGIN --------------------------*/
             case "login":
                 if (flagLogin) {
-                    // Si los datos de Login son correctos consumir servicio de sus Cuentas
-                    // Guardamos el usuario y la contraseña en la base de datos local
 
 
-                    // Abrimos el Activity Catalogo
-                    Intent intentCatalogo = new Intent(context, InformacionSolicitante.class);
-                    context.startActivity(intentCatalogo);
+                    Intent intentVentanaPrincipal = new Intent(context, VentanaPrincipal.class);
+                    context.startActivity(intentVentanaPrincipal);
                     ((Activity)context).finish();
 
                 } else {

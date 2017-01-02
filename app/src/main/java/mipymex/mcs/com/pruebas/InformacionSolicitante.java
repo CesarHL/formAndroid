@@ -1,34 +1,21 @@
 package mipymex.mcs.com.pruebas;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 public class InformacionSolicitante extends AppCompatActivity {
 
-    private ViewPager viewPager;
-
-    private LinearLayout page1;
-    private LinearLayout page2;
-    private ListView page3;
-    private LinearLayout page4;
-
     private EditText txtAp, txtAm, txtNombre, txtLYF, txtEdad, txtRfc, txtCurp, txtFolioIfe, txtInConyuge;
     private EditText txtRegimen, txtEstadoCivil, txtPersonas, txtCalle, txtNExt, txtNInt, txtColonia, txtCP, txtMun;
-    private EditText txtEstado, txtMontoCred, txtTelCasa, txtCelular, txtCorreo, txtEspCargoPublico;
+    private EditText txtEstado, txtMontoCred, txtTelCasa, txtCelular, txtCorreo, txtCargoPublicSolicitante, txtEspCargoPublico;
     private Button agregar;
     private RadioGroup rdSexo, rdTConyuge, rdDep, rdRes, rdTRes, rdCVivienda, rdCPublico, rdCConyuge;
+    private TextView lblMontoCred, lblInConyuge, lblDependientes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,32 +45,46 @@ public class InformacionSolicitante extends AppCompatActivity {
         txtFolioIfe = (EditText) findViewById(R.id.txtFolioCurp);
         txtEstadoCivil = (EditText) findViewById(R.id.txtEstadoCivil);
         rdTConyuge = (RadioGroup) findViewById(R.id.rgTrabajaConyuge);
+
+        lblInConyuge = (TextView) findViewById(R.id.lblIngresoConyuge);
+        lblInConyuge.setVisibility(View.GONE);
+        txtInConyuge = (EditText) findViewById(R.id.txtIngresoConyuge);
+        txtInConyuge.setVisibility(View.GONE);
         rdTConyuge.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.afirmativo){
-
+                    txtInConyuge.setVisibility(View.VISIBLE);
+                    txtInConyuge.requestFocus();
                 }else if (checkedId == R.id.negativo){
-
+                    lblInConyuge.setVisibility(View.GONE);
+                    txtInConyuge.setVisibility(View.GONE);
                 }
             }
         });
-
-        txtInConyuge = (EditText) findViewById(R.id.txtIngresoConyuge);
         txtRegimen = (EditText) findViewById(R.id.txtRegimen);
+
+
+        lblDependientes = (TextView) findViewById(R.id.lblNumeroPersonas);
+        lblDependientes.setVisibility(View.GONE);
+        txtPersonas = (EditText) findViewById(R.id.txtNumeroPersonas);
+        txtPersonas.setVisibility(View.GONE);
+
         rdDep = (RadioGroup) findViewById(R.id.rgDependientes);
         rdDep.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.afirmativoDependientes){
-
+                    lblDependientes.setVisibility(View.VISIBLE);
+                    txtPersonas.setVisibility(View.VISIBLE);
+                    txtPersonas.requestFocus();
                 }else if (checkedId == R.id.negativoDependientes){
-
+                    lblDependientes.setVisibility(View.GONE);
+                    txtPersonas.setVisibility(View.GONE);
                 }
             }
         });
 
-        txtPersonas = (EditText) findViewById(R.id.txtNumeroPersonas);
         txtCalle = (EditText) findViewById(R.id.txtCalle);
         txtNExt = (EditText) findViewById(R.id.txtExterior);
         txtNInt = (EditText) findViewById(R.id.txtInterior);
@@ -117,29 +118,41 @@ public class InformacionSolicitante extends AppCompatActivity {
             }
         });
 
+
+        lblMontoCred = (TextView) findViewById(R.id.txtMontoMesual);
+        lblMontoCred.setVisibility(View.GONE);
+        txtMontoCred = (EditText) findViewById(R.id.txtMontoMesual);
+        txtMontoCred.setVisibility(View.GONE);
+
         rdCVivienda =(RadioGroup) findViewById(R.id.rgCreditoVivienda);
         rdCVivienda.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.infonavit){
-
+                    lblMontoCred.setVisibility(View.VISIBLE);
+                    txtMontoCred.setVisibility(View.VISIBLE);
                 }
             }
         });
 
-        txtMontoCred = (EditText) findViewById(R.id.txtMontoMesual);
+
         txtTelCasa = (EditText) findViewById(R.id.txtTelefono);
         txtCelular = (EditText) findViewById(R.id.txtCelular);
         txtCorreo = (EditText) findViewById(R.id.txtCorreo);
+        txtCargoPublicSolicitante = (EditText) findViewById(R.id.txtEspecificarSolicitante);
+        txtCargoPublicSolicitante.setVisibility(View.GONE);
         txtEspCargoPublico = (EditText) findViewById(R.id.txtEspecificarCargoPublicoConyuge);
+        txtEspCargoPublico.setVisibility(View.GONE);
         rdCPublico =(RadioGroup) findViewById(R.id.grpBtnCargoPublico);
+
         rdCPublico.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.afirmativoCargoPublico){
-
+                    txtCargoPublicSolicitante.setVisibility(View.VISIBLE);
+                    txtCargoPublicSolicitante.requestFocus();
                 } else if (checkedId == R.id.negativoCargoPublico){
-
+                    txtCargoPublicSolicitante.setVisibility(View.GONE);
                 }
             }
         });
@@ -149,9 +162,10 @@ public class InformacionSolicitante extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.afirmativoCargoPublicoConyugeo){
-
+                    txtEspCargoPublico.setVisibility(View.VISIBLE);
+                    txtEspCargoPublico.requestFocus();
                 } else if (checkedId == R.id.negativoCargoPublicoConyuge){
-
+                    txtEspCargoPublico.setVisibility(View.GONE);
                 }
             }
         });
@@ -159,7 +173,6 @@ public class InformacionSolicitante extends AppCompatActivity {
         agregar =(Button)findViewById(R.id.btnGuardar);
         agregar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
                 Boolean v1 = txtAp.getText().toString().trim().equalsIgnoreCase("");
                 Boolean v2 = txtAm.getText().toString().trim().equalsIgnoreCase("");
                 Boolean v3 = txtNombre.getText().toString().trim().equalsIgnoreCase("");
@@ -184,15 +197,77 @@ public class InformacionSolicitante extends AppCompatActivity {
                 Boolean v22 = txtCorreo.getText().toString().trim().equalsIgnoreCase("");
                 Boolean v23 = txtEspCargoPublico.getText().toString().trim().equalsIgnoreCase("");
 
-                if (v1 || v2 || v3||v4||v5||v6||v7||v8||v9||v10||v11 || v12||v13||v14||v15||v16||
-                        v17||v18||v19||v20||v21||v22||v23) {
+                if(v1) {
+                    txtAp.setError("Este campo no puede estar vacio");
+                    txtAp.setText("");
+                } else if(v2) {
+                    txtAm.setError("Este campo no puede estar vacio");
+                    txtAm.setText("");
+                } else if(v3){
                     txtNombre.setError("Este campo no puede estar vacio");
                     txtNombre.setText("");
-                } else {
-                    System.out.println("===================================" + txtAp.getText().toString());
-                    Intent intent = new Intent(InformacionSolicitante.this, DatosConyugeHijos.class);
-                    startActivityForResult(intent, 1);
+                } else if(v4) {
+                    txtLYF.setError("Este campo no puede estar vacio");
+                    txtLYF.setText("");
+                } else if(v5) {
+                    txtEdad.setError("Este campo no puede estar vacio");
+                    txtEdad.setText("");
+                } else if(v6){
+                    txtRfc.setError("Este campo no puede estar vacio");
+                    txtRfc.setText("");
+                } else if(v7){
+                    txtCurp.setError("Este campo no puede estar vacio");
+                    txtCurp.setText("");
+                } else if(v8){
+                    txtFolioIfe.setError("Este campo no puede estar vacio");
+                    txtFolioIfe.setText("");
+                } else if(v9){
+                    txtInConyuge.setError("Este campo no puede estar vacio");
+                    txtInConyuge.setText("");
+                } else if(v10){
+                    txtRegimen.setError("Este campo no puede estar vacio");
+                    txtRegimen.setText("");
+                } else if(v11){
+                    txtEstadoCivil.setError("Este campo no puede estar vacio");
+                    txtEstadoCivil.setText("");
+                } else if(v12){
+                    txtPersonas.setError("Este campo no puede estar vacio");
+                    txtPersonas.setText("");
+                } else if ( v13) {
+                    txtCalle.setError("Este campo no puede estar vacio");
+                    txtCalle.setText("");
+                } else if ( v14) {
+                    txtNExt.setError("Este campo no puede estar vacio");
+                    txtNExt.setText("");
+                } else if ( v15) {
+                    txtNInt.setError("Este campo no puede estar vacio");
+                    txtNInt.setText("");
+                } else if ( v16) {
+                    txtColonia.setError("Este campo no puede estar vacio");
+                    txtColonia.setText("");
+                } else if ( v17) {
+                    txtCP.setError("Este campo no puede estar vacio");
+                    txtCP.setText("");
+                } else if ( v18) {
+                    txtEstado.setError("Este campo no puede estar vacio");
+                    txtEstado.setText("");
+                } else if ( v19) {
+                    txtMontoCred.setError("Este campo no puede estar vacio");
+                    txtMontoCred.setText("");
+                } else if ( v20) {
+                    txtTelCasa.setError("Este campo no puede estar vacio");
+                    txtTelCasa.setText("");
+                } else if ( v21) {
+                    txtCelular.setError("Este campo no puede estar vacio");
+                    txtCelular.setText("");
+                } else if ( v22) {
+                    txtCorreo.setError("Este campo no puede estar vacio");
+                    txtCorreo.setText("");
+                } else if ( v23) {
+                    txtEspCargoPublico.setError("Este campo no puede estar vacio");
+                    txtEspCargoPublico.setText("");
                 }
+
             }
         });
     }

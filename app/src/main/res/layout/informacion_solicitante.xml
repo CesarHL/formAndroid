@@ -209,6 +209,7 @@
                 android:background="@drawable/my_comment"
                 android:inputType="text"
                 android:alpha="0.5"
+                android:maxLength="13"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:hint="@string/comments"/>
@@ -231,6 +232,7 @@
                 android:layout_height="match_parent"
                 android:textSize="20sp"
                 android:padding="7dp"
+                android:maxLength="18"
                 android:background="@drawable/my_comment"
                 android:inputType="text"
                 android:alpha="0.5"
@@ -429,7 +431,7 @@
                 android:alpha="0.5"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:hint="@string/comments"/>
+                android:hint="Indique el numero de personas"/>
 
             <TextView
                 android:id="@+id/lblCalle"
@@ -620,10 +622,7 @@
                 android:layout_below="@id/lblResidencia"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="vertical">
                 <RadioButton
                     android:id="@+id/propia"
                     android:layout_width="wrap_content"
@@ -645,8 +644,6 @@
                     android:id="@+id/Pagandose"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginStart="30dp"
                     android:text="Pagandose" />
             </RadioGroup>
 
@@ -707,11 +704,12 @@
                     android:id="@+id/infonavit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Infonavit" />
+                    android:text="Infonavit"
+                    android:checked="false"/>
             </RadioGroup>
 
             <TextView
-                android:id="@+id/lblMontoMensual"
+                android:id="@+id/txtMontoMensual"
                 android:layout_below="@+id/rgCreditoVivienda"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
@@ -721,7 +719,7 @@
 
             <EditText
                 android:id="@+id/txtMontoMesual"
-                android:layout_below="@id/lblMontoMensual"
+                android:layout_below="@id/txtMontoMensual"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
@@ -787,6 +785,7 @@
 
             <TextView
                 android:id="@+id/lblCorreo"
+                android:inputType="textEmailAddress"
                 android:layout_below="@+id/txtCelular"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
@@ -849,7 +848,7 @@
                         android:text="No" />
                 </RadioGroup>
                 <EditText
-                    android:id="@+id/txtEspecificar"
+                    android:id="@+id/txtEspecificarSolicitante"
                     android:layout_below="@+id/grpBtnCargoPublico"
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"

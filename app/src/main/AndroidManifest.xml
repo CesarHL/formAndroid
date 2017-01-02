@@ -37,17 +37,26 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".VentanaPrincipal"
+            android:label="main"/>
+
         <activity android:name=".CaptureSignature"
-            android:label="Signature Confirmation"/>
+            android:label="Autorización"/>
 
         <activity android:name=".InformacionSolicitante"
-            android:label="informacion solicitante"/>
-
-        <activity android:name=".Table"
-            android:label="Confirmation"/>
+            android:label="Informacion solicitante"/>
 
         <activity android:name=".DatosConyugeHijos"
-            android:label="Confirmation"/>
+            android:label="Datos Conyuge"/>
+
+        <activity android:name=".InformacionLaboral"
+            android:label="Información Laboral"/>
+
+        <activity android:name=".ReferenciaPersonalFamiliar"
+            android:label="Referencias personales"/>
+
+        <activity android:name=".ReferenciasPersonalesDistintoDomicilio"
+            android:label="Referencias personales Distinto Domicilio"/>
     </application>
 
 </manifest>
