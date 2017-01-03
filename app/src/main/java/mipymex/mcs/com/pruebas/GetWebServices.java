@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -15,7 +14,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedInputStream;
@@ -31,25 +29,18 @@ public class GetWebServices extends AsyncTask<String, Void, String> {
 
     private String IPpublic = Login.IPpublic;
     private Context context;
-    private String credito; // Variable para delete from clientes,cuentas
 
     public GetWebServices(Context context){
         this.context = context;
         connection = new Connection(this.context);
     }
 
-    private SQLiteDatabase db = null;      // Objeto para usar la Base de Datos Local
-    private Connection connection; // Objeto para saber si estamos conectados (wifi/datos)
-
-    /***********************************************************************************************
-     *                                        VARIABLES GLOBALES                                   *
-     **********************************************************************************************/
-    private String usuario;     // Recuperar el usuario
-    private String password;    // Recuperar el password
-    private int num_agencia;            // Recuperra el numero de agencia
-    private boolean flagLogin = false;  // Bandera para saber si existe usuario o no
-    private boolean flagSend = false;   // Bandera para saber si se envio el cliente o no
-    private String flagOnPostExcecute = ""; // Bandera pasa saber que executar despues de consumir el servicio
+    private SQLiteDatabase db = null;
+    private Connection connection;
+    private String usuario;
+    private String password;
+    private boolean flagLogin = false;
+    private String flagOnPostExcecute = "";
 
     @Override
     protected String doInBackground(String... params) {
@@ -58,18 +49,15 @@ public class GetWebServices extends AsyncTask<String, Void, String> {
 
         HttpURLConnection conn;
         JSONObject respuestaJSON;
-
-        String cadena = params[0];      // Recuperar la dirección del HOST
+        String cadena = params[0];
         System.out.println(cadena);
-        flagOnPostExcecute = params[1]; // Recuperar bandera de solicitud de servicio
-        usuario  = params[2];   // Guardar el usuario
-        password = params[3];   // Guardar el password
-
-        URL url; // URL de donde queremos obtener información
+        flagOnPostExcecute = params[1];
+        usuario  = params[2];
+        password = params[3];
+        URL url;
         String devuelve = "";
 
         switch (params[1]) {
-                /*--------------------------------- Web Service Usuario --------------------------*/
             case "login":
                 try {
                     url = new URL(cadena);
@@ -86,17 +74,12 @@ public class GetWebServices extends AsyncTask<String, Void, String> {
 
                         String line;
                         while ((line = reader.readLine()) != null) {
-                            result.append(line); // Pasar todas las entradas al StringBuilder
+                            result.append(line);
                         }
 
                         respuestaJSON = new JSONObject(result.toString());
-
-
-                        System.out.println("========================================================" + respuestaJSON.toString());
                         String resultJSON = respuestaJSON.getString("Acceso");
-                        System.out.println("resultJSON ========================================== " + resultJSON);
                         flagLogin = resultJSON.contains("Correcto");
-                        System.out.println("flagLogin ===============================================0 " + resultJSON);
                     }
                 } catch (MalformedURLException e) {
                     devuelve = devuelve + "eMAL: " + e.toString();
@@ -113,13 +96,12 @@ public class GetWebServices extends AsyncTask<String, Void, String> {
             default:
                 break;
         }
+
         return devuelve;
     }
 
-
     @Override
     protected void onPreExecute() {
-
         super.onPreExecute();
     }
 
@@ -127,10 +109,15 @@ public class GetWebServices extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String s){
 
         switch (flagOnPostExcecute) {
-                /* --------------------------------- CASO PARA EL LOGIN --------------------------*/
+
             case "login":
                 if (flagLogin) {
 
+                    if (saveUser(usuario, password) > 0) {
+                        Toast.makeText(context, "Usuario guardado ", Toast.LENGTH_SHORT).show();
+                        getCuentas();
+                    }else
+                        Toast.makeText(context, "Usuario NO guardado ", Toast.LENGTH_SHORT).show();
 
                     Intent intentVentanaPrincipal = new Intent(context, VentanaPrincipal.class);
                     context.startActivity(intentVentanaPrincipal);
@@ -162,27 +149,18 @@ public class GetWebServices extends AsyncTask<String, Void, String> {
     }
 
     @Override
-    protected void onProgressUpdate(Void... values) {
-        super.onProgressUpdate(values);
-    }
-
-    /*
-    @Override
-    protected void onCancelled(String s) {
-        super.onCancelled(s);
-    }
+    protected void onProgressUpdate(Void... values) {super.onProgressUpdate(values); }
 
     private int saveUser(String nom, String pass) {
         int idSave = 0;
-        db = context.openOrCreateDatabase(DataDB.DB_NAME, Context.MODE_PRIVATE ,null);
+        db = context.openOrCreateDatabase(DataDB.DB_NAME,android.content.Context.MODE_PRIVATE ,null);
         if (db != null) {
             ContentValues values = new ContentValues();
-            values.put("_id",1);
-            values.put(DataDB.NUM_AGENCIA, num_agencia);
             values.put(DataDB.NAME, nom);
             values.put(DataDB.PASSWORD, pass);
-            idSave = (int) db.insert(DataDB.TABLE_NAME_USERS, null, values);
+            idSave = (int) db.insert(DataDB.TABLE_NAME_USUARIOS, null, values);
         }
+
         if (db != null) {
             db.close();
         }
@@ -190,20 +168,16 @@ public class GetWebServices extends AsyncTask<String, Void, String> {
         return idSave;
     }
 
-    */
-
     private void getCuentas() {
-
-        db = context.openOrCreateDatabase(DataDB.DB_NAME, Context.MODE_PRIVATE, null);
-        Cursor c = db.rawQuery("SELECT " + DataDB.NAME + " FROM " + DataDB.TABLE_NAME_USERS, null);
+        db = context.openOrCreateDatabase(DataDB.DB_NAME, android.content.Context.MODE_PRIVATE, null);
+        Cursor c = db.rawQuery("SELECT " + DataDB.NAME + " FROM " + DataDB.TABLE_NAME_USUARIOS, null);
         try {
             if (c.moveToFirst()) {
                 System.out.println("Usuario: " + c.getString(0));
-
                 String user = c.getString(0);
 
                 if (connection.getConnection("No informar")) {
-                    String IPCuentas = IPpublic + "InfoGral?v_cliente=1";
+                    String IPCuentas = IPpublic + "usuario?v_cliente=2";
                     String strCuenta = IPCuentas + "&v_usuario=" + user;
                     new GetWebServices(context).execute(strCuenta, "cuentas", user, null);
                 }
@@ -216,4 +190,5 @@ public class GetWebServices extends AsyncTask<String, Void, String> {
             db.close();
         }
     }
+
 }
