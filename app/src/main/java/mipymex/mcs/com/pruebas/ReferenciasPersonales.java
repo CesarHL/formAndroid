@@ -58,7 +58,7 @@ public class ReferenciasPersonales extends AppCompatActivity {
             values.put(DataDB.PR_SO_TEL_CEL_REF,txtCelRef.getText().toString());
             values.put(DataDB.PR_SO_CORREO_REF,txtCorreoRef.getText().toString());
 
-            db.insert(DataDB.TABLE_NAME_SOLICITUD, null, values);
+            db.insert(DataDB.TABLE_NAME_INFO_REF, null, values);
             System.out.println("Insertado");
         } catch (SQLException ex) {
             System.out.println("Error al insertar solicitud: " + ex);

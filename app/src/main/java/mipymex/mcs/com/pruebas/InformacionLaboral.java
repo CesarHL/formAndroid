@@ -9,10 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 
-/**
- * Created by Erick on 27/12/2016.
- */
-
 public class InformacionLaboral extends AppCompatActivity {
 
     private EditText txtNEmp, txtDCalle, txtNInt, txtNExtm, txtCol, txtCp, txtMun, txtEdo, txtDepLab, txtPuesto;
@@ -147,7 +143,7 @@ public class InformacionLaboral extends AppCompatActivity {
             values.put(DataDB.PR_SO_PERIODICIDAD_COBRO,txtIngreso.getText().toString());//rg
             //values.put(DataDB.PR_SO_PAGA_INS,txtAp.getText().toString());
 
-                db.insert(DataDB.TABLE_NAME_SOLICITUD, null, values);
+                db.insert(DataDB.TABLE_NAME_INFO_LABORAL, null, values);
                 System.out.println("Insertado");
         } catch (SQLException ex) {
             System.out.println("Error al insertar solicitud: " + ex);

@@ -22,7 +22,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         Log.i(DataDB.TABLE_NAME_USUARIOS," TABLA USUARIOS CREADA");
 
-        db.execSQL("CREATE TABLE IF NOT EXISTS " + DataDB.TABLE_NAME_INFORMACION_SOLICITANTE + "( " +
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + DataDB.TABLE_NAME_INFO_SOLICITANTE + "( " +
                 "_id INTEGER PRIMARY KEY, " +
                 DataDB.PR_SO_NUMSOLICITUD + " TEXT, " +
                 DataDB.PR_SO_MTO_PRESTAMO + " TEXT, " +
@@ -67,11 +67,10 @@ public class DBHelper extends SQLiteOpenHelper {
                 DataDB.PR_SO_CONYUGE_PUBLICO + " TEXT);"
         );
 
-        Log.i(DataDB.TABLE_NAME_INFORMACION_SOLICITANTE, " TABLA USUARIOS CREADA");
+        Log.i(DataDB.TABLE_NAME_INFO_SOLICITANTE, " TABLA INFORMACION SOLICITANTE");
 
 
-
-        db.execSQL("CREATE TABLE IF NOT EXISTS " + DataDB.TABLE_NAME_SOLICITUD + "( " +
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + DataDB.TABLE_NAME_INFO_LABORAL + "( " +
                 "_id INTEGER PRIMARY KEY, " +
 
                 DataDB.PR_SO_NOM_EMPRESA + " TEXT, " +
@@ -97,8 +96,13 @@ public class DBHelper extends SQLiteOpenHelper {
                 DataDB.PR_SO_TEL_EMP + " TEXT, " +
                 DataDB.PR_SO_EXTENSION_EMP + " TEXT, " +
                 DataDB.PR_SO_FAX_EMP + " TEXT, " +
-                DataDB.PR_SO_PERIODICIDAD_COBRO + " TEXT, " +
+                DataDB.PR_SO_PERIODICIDAD_COBRO + " TEXT);"
 
+        );
+        Log.i(DataDB.TABLE_NAME_INFO_LABORAL, " TABLA INFORMACION LABORAL");
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + DataDB.TABLE_NAME_INFO_CONYUGE + "( " +
+                "_id INTEGER PRIMARY KEY, " +
                 DataDB.PR_SO_NOMBRE1_CONY + " TEXT, " +
                 DataDB.PR_SO_EDAD1_CONY + " TEXT, " +
                 DataDB.PR_SO_PARENTESCO1_CONY + " TEXT, " +
@@ -113,8 +117,13 @@ public class DBHelper extends SQLiteOpenHelper {
                 DataDB.PR_SO_EDAD3_CONY + " TEXT, " +
                 DataDB.PR_SO_PARENTESCO3_CONY + " TEXT, " +
                 DataDB.PR_SO_TEL3_CONY + " TEXT, " +
-                DataDB.PR_SO_CEL3_CONY + " TEXT, " +
+                DataDB.PR_SO_CEL3_CONY + " TEXT);"
 
+        );
+        Log.i(DataDB.TABLE_NAME_INFO_CONYUGE, " TABLA DATOS CONYUGE CREADA");
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + DataDB.TABLE_NAME_INFO_REF + "( " +
+                "_id INTEGER PRIMARY KEY, " +
                 DataDB.PR_SO_APATERNO_REF + " TEXT, " +
                 DataDB.PR_SO_AMATERNO_REF + " TEXT, " +
                 DataDB.PR_SO_NOMBRE_REF + " TEXT, " +
@@ -127,8 +136,13 @@ public class DBHelper extends SQLiteOpenHelper {
                 DataDB.PR_SO_ESTADO_REF + " TEXT, " +
                 DataDB.PR_SO_TEL_CASA_REF + " TEXT, " +
                 DataDB.PR_SO_TEL_CEL_REF + " TEXT, " +
-                DataDB.PR_SO_CORREO_REF + " TEXT, " +
+                DataDB.PR_SO_CORREO_REF + " TEXT);"
 
+        );
+        Log.i(DataDB.TABLE_NAME_INFO_REF, " TABLA REFERENCIAS PERSONALES");
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + DataDB.TABLE_NAME_INFO_REF_P + "( " +
+                "_id INTEGER PRIMARY KEY, " +
                 DataDB.PR_SO_APATERNO_REF_P + " TEXT, " +
                 DataDB.PR_SO_AMATERNO_REF_P + " TEXT, " +
                 DataDB.PR_SO_NOMBRE_REF_P + " TEXT, " +
@@ -142,6 +156,14 @@ public class DBHelper extends SQLiteOpenHelper {
                 DataDB.PR_SO_TEL_CASA_REF_P + " TEXT, " +
                 DataDB.PR_SO_TEL_CEL_REF_P + " TEXT, " +
                 DataDB.PR_SO_CORREO_REF_P + " TEXT, " +
+
+                DataDB.PR_SO_FOLIO + " TEXT);"
+
+        );
+        Log.i(DataDB.TABLE_NAME_INFO_REF_P, " TABLA REFERENCIA USUARIOS DISTINTO DOMICILIO CREADA");
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + DataDB.TABLE_NAME_SOLICITUD + "( " +
+                "_id INTEGER PRIMARY KEY, " +
 
                 DataDB.PR_SO_FOLIO + " TEXT);"
         );

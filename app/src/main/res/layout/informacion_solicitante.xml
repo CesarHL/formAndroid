@@ -431,7 +431,7 @@
                 android:alpha="0.5"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:hint="Indique el numero de personas"/>
+                android:hint=""/>
 
             <TextView
                 android:id="@+id/lblCalle"
@@ -818,10 +818,9 @@
                     android:id="@+id/lblCargoPublico"
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:textColor="#000"
                     android:textSize="17sp"
-                    android:textAlignment="center"
                     android:text="@string/cargo_publico" />
                 <RadioGroup
                     android:id="@+id/grpBtnCargoPublico"

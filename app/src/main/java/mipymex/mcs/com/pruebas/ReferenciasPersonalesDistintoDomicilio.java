@@ -119,7 +119,7 @@ public class ReferenciasPersonalesDistintoDomicilio extends AppCompatActivity {
             values.put(DataDB.PR_SO_TEL_CEL_REF_P, txtCelRefP.getText().toString());
             values.put(DataDB.PR_SO_CORREO_REF_P, txtCorreoRefP.getText().toString());
 
-            db.insert(DataDB.TABLE_NAME_SOLICITUD, null, values);
+            db.insert(DataDB.TABLE_NAME_INFO_REF_P, null, values);
             System.out.println("Insertado");
         } catch (SQLException ex) {
             System.out.println("Error al insertar solicitud: " + ex);

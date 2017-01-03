@@ -302,7 +302,7 @@ public class InformacionSolicitante extends AppCompatActivity {
             values.put(DataDB.PR_SO_APATERNO, txtAp.getText().toString());
             values.put(DataDB.PR_SO_AMATERNO, txtAm.getText().toString());
             values.put(DataDB.PR_SO_NOMBRE, txtNombre.getText().toString());
-            values.put(DataDB.PR_SO_DTE_NACIMIENTO, txtLYF.getText().toString());// dividir lugar y fecha de naciento
+            //values.put(DataDB.PR_SO_DTE_NACIMIENTO, txtLYF.getText().toString());// dividir lugar y fecha de naciento
             values.put(DataDB.PR_SO_LUGAR, txtAp.getText().toString());// dividir lugar y fecha de naciento
             values.put(DataDB.PR_SO_EDAD, txtEdad.getText().toString());
             values.put(DataDB.PR_SO_SEXO, txtAp.getText().toString()); //sacar de rg
@@ -334,81 +334,7 @@ public class InformacionSolicitante extends AppCompatActivity {
             values.put(DataDB.PR_SO_CONYUGE_P_PUBLICO, txtAp.getText().toString());//rg
             values.put(DataDB.PR_SO_CONYUGE_PUBLICO, txtAp.getText().toString());//rg
 
-            values.put(DataDB.PR_SO_NOM_EMPRESA,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_IMSS,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_CALLE_EMP,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_CALLE_EMP,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_NUM_EXT_EMP,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_NUM_INT_EMP,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_COLONIA_EMP,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_CP_EMP,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_MUNICIPIO_EMP,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_ESTADO_EMP,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_DEPARTAMENTO_EMP,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_PUESTO_EMP,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_INGRESO_EMP,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_OTROS_ING_EMP,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_OTRO_ING_C_EMP,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_ING_COM,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_PAGA_CRED_INS,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_PAGA_IMPORTE_INS,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_PAGA_INS,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_NOMBRE_JEFE,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_ANTIGUEDAD_EMP,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_TEL_EMP,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_EXTENSION_EMP,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_FAX_EMP,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_PERIODICIDAD_COBRO,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_PAGA_INS,txtAp.getText().toString());
-
-            values.put(DataDB.PR_SO_NOMBRE1_CONY,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_EDAD1_CONY,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_PARENTESCO1_CONY,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_TEL1_CONY,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_CEL1_CONY,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_NOMBRE2_CONY,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_EDAD2_CONY,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_PARENTESCO2_CONY,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_TEL2_CONY,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_CEL2_CONY,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_NOMBRE3_CONY,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_EDAD3_CONY,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_PARENTESCO3_CONY,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_TEL3_CONY,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_CEL3_CONY,txtAp.getText().toString());
-
-            values.put(DataDB.PR_SO_APATERNO_REF,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_AMATERNO_REF,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_NOMBRE_REF,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_CALLE_REF,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_NUM_EXT_REF,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_NUM_INT_REF,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_COLONIA_REF,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_CP_REF,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_MUNICIPIO_REF,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_ESTADO_REF,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_TEL_CASA_REF,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_TEL_CEL_REF,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_CORREO_REF,txtAp.getText().toString());
-            //values.put(DataDB.PR_SO_CORREO_REF_P,txtAp.getText().toString());falta en la base parentesco
-
-            values.put(DataDB.PR_SO_APATERNO_REF_P,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_AMATERNO_REF_P,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_NOMBRE_REF_P,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_CALLE_REF_P,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_NUM_EXT_REF_P,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_NUM_INT_REF_P,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_COLONIA_REF_P,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_CP_REF_P,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_MUNICIPIO_REF_P,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_ESTADO_REF_P,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_TEL_CASA_REF_P,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_TEL_CEL_REF_P,txtAp.getText().toString());
-            values.put(DataDB.PR_SO_CORREO_REF_P,txtAp.getText().toString());
-
-            values.put(DataDB.PR_SO_FOLIO, txtAp.getText().toString());
-
-            db.insert(DataDB.TABLE_NAME_SOLICITUD, null, values);
+            db.insert(DataDB.TABLE_NAME_INFO_SOLICITANTE, null, values);
             System.out.println("Insertado");
         } catch (SQLException ex) {
             System.out.println("Error al insertar solicitud: " + ex);
@@ -421,21 +347,19 @@ public class InformacionSolicitante extends AppCompatActivity {
 
         db = getApplicationContext().openOrCreateDatabase(DataDB.DB_NAME,android.content.Context.MODE_PRIVATE ,null);
         try {
-
-
             String[] valores_recuperar = {
                     DataDB.PR_SO_APATERNO,
                     DataDB.PR_SO_AMATERNO,
                     DataDB.PR_SO_CALLE
             };
 
-            c = db.rawQuery("SELECT * FROM " + DataDB.TABLE_NAME_SOLICITUD, null);
+            c = db.rawQuery("SELECT * FROM " + DataDB.TABLE_NAME_INFO_SOLICITANTE, null);
 
             if (c.moveToFirst()) {
                 do {
 
-                    for(int i = 0; i<50; i++) {
-                        System.out.println(c.getString(i));
+                    for(int i = 1; i<23; i++) {
+                        System.out.println("Dato: " + c.getString(i));
                     }
 
                 } while (c.moveToNext());

@@ -57,6 +57,9 @@
 
         <activity android:name=".ReferenciasPersonalesDistintoDomicilio"
             android:label="Referencias personales Distinto Domicilio"/>
+
+        <activity android:name=".CatalogoImagenes"
+            android:label="Catalogo Imagenes"/>
     </application>
 
 </manifest>

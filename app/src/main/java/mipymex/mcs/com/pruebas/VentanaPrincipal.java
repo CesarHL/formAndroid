@@ -46,7 +46,8 @@ public class VentanaPrincipal extends TabActivity {
         host.addTab(host.newTabSpec("tab6").setIndicator("Firma").setContent(
                 new Intent(this, CaptureSignature.class)));
 
-        //tab7 catalogo imagenes
+        host.addTab(host.newTabSpec("tab7").setIndicator("Imagenes").setContent(
+                new Intent(this, CatalogoImagenes.class)));
 
     }
 

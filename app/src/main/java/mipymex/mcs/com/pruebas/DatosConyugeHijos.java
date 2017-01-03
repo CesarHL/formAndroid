@@ -77,7 +77,7 @@ public class DatosConyugeHijos extends Activity {
             values.put(DataDB.PR_SO_TEL3_CONY,txtAp.getText().toString());
             values.put(DataDB.PR_SO_CEL3_CONY,txtAp.getText().toString());*/
 
-            db.insert(DataDB.TABLE_NAME_SOLICITUD, null, values);
+            db.insert(DataDB.TABLE_NAME_INFO_CONYUGE, null, values);
             System.out.println("Insertado");
         } catch (SQLException ex) {
             System.out.println("Error al insertar solicitud: " + ex);
