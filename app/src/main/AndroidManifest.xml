@@ -52,8 +52,8 @@
         <activity android:name=".InformacionLaboral"
             android:label="Información Laboral"/>
 
-        <activity android:name=".ReferenciaPersonalFamiliar"
-            android:label="Referencias personales"/>
+        <activity android:name=".ReferenciasPersonales"
+            android:label="Referencias Personales"/>
 
         <activity android:name=".ReferenciasPersonalesDistintoDomicilio"
             android:label="Referencias personales Distinto Domicilio"/>

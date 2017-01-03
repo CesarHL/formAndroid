@@ -22,8 +22,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         Log.i(DataDB.TABLE_NAME_USUARIOS," TABLA USUARIOS CREADA");
 
-
-        db.execSQL("CREATE TABLE IF NOT EXISTS " + DataDB.TABLE_NAME_SOLICITUD + "( " +
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + DataDB.TABLE_NAME_INFORMACION_SOLICITANTE + "( " +
                 "_id INTEGER PRIMARY KEY, " +
                 DataDB.PR_SO_NUMSOLICITUD + " TEXT, " +
                 DataDB.PR_SO_MTO_PRESTAMO + " TEXT, " +
@@ -65,7 +64,15 @@ public class DBHelper extends SQLiteOpenHelper {
                 DataDB.PR_SO_CARGO_P_PUBLICO + " TEXT, " +
                 DataDB.PR_SO_CARGO_PUBLICO + " TEXT, " +
                 DataDB.PR_SO_CONYUGE_P_PUBLICO + " TEXT, " +
-                DataDB.PR_SO_CONYUGE_PUBLICO + " TEXT, " +
+                DataDB.PR_SO_CONYUGE_PUBLICO + " TEXT);"
+        );
+
+        Log.i(DataDB.TABLE_NAME_INFORMACION_SOLICITANTE, " TABLA USUARIOS CREADA");
+
+
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + DataDB.TABLE_NAME_SOLICITUD + "( " +
+                "_id INTEGER PRIMARY KEY, " +
 
                 DataDB.PR_SO_NOM_EMPRESA + " TEXT, " +
                 DataDB.PR_SO_IMSS + " TEXT, " +

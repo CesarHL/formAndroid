@@ -1,6 +1,10 @@
 package mipymex.mcs.com.pruebas;
 
 import android.app.Activity;
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -17,6 +21,8 @@ public class DatosConyugeHijos extends Activity {
     private ArrayAdapter<String> adaptador;
     private Button agregarLista;
     private EditText txtNombreC, txtEdadC, txtParentescoC, txtTelefonoC, txtCelularC;
+    private SQLiteDatabase db = null;
+    private Cursor c = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,5 +52,38 @@ public class DatosConyugeHijos extends Activity {
                 adaptador.notifyDataSetChanged();
             }
         });
+    }
+
+    public void guardarDatosConyugeEHijos() {
+
+        db = getApplicationContext().openOrCreateDatabase(DataDB.DB_NAME, android.content.Context.MODE_PRIVATE, null);
+
+        try {
+            ContentValues values = new ContentValues();
+
+            values.put(DataDB.PR_SO_NOMBRE1_CONY,txtNombreC.getText().toString());
+            values.put(DataDB.PR_SO_EDAD1_CONY,txtEdadC.getText().toString());
+            values.put(DataDB.PR_SO_PARENTESCO1_CONY,txtParentescoC.getText().toString());
+            values.put(DataDB.PR_SO_TEL1_CONY,txtTelefonoC.getText().toString());
+            values.put(DataDB.PR_SO_CEL1_CONY,txtCelularC.getText().toString());
+            /*values.put(DataDB.PR_SO_NOMBRE2_CONY,txtAp.getText().toString());
+            values.put(DataDB.PR_SO_EDAD2_CONY,txtAp.getText().toString());
+            values.put(DataDB.PR_SO_PARENTESCO2_CONY,txtAp.getText().toString());
+            values.put(DataDB.PR_SO_TEL2_CONY,txtAp.getText().toString());
+            values.put(DataDB.PR_SO_CEL2_CONY,txtAp.getText().toString());
+            values.put(DataDB.PR_SO_NOMBRE3_CONY,txtAp.getText().toString());
+            values.put(DataDB.PR_SO_EDAD3_CONY,txtAp.getText().toString());
+            values.put(DataDB.PR_SO_PARENTESCO3_CONY,txtAp.getText().toString());
+            values.put(DataDB.PR_SO_TEL3_CONY,txtAp.getText().toString());
+            values.put(DataDB.PR_SO_CEL3_CONY,txtAp.getText().toString());*/
+
+            db.insert(DataDB.TABLE_NAME_SOLICITUD, null, values);
+            System.out.println("Insertado");
+        } catch (SQLException ex) {
+            System.out.println("Error al insertar solicitud: " + ex);
+        } finally {
+            db.close();
+        }
+
     }
 }

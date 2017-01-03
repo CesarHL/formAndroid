@@ -1,5 +1,9 @@
 package mipymex.mcs.com.pruebas;
 
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
@@ -12,8 +16,10 @@ import android.widget.RadioGroup;
 public class InformacionLaboral extends AppCompatActivity {
 
     private EditText txtNEmp, txtDCalle, txtNInt, txtNExtm, txtCol, txtCp, txtMun, txtEdo, txtDepLab, txtPuesto;
-    private EditText txtIngreso, txtEMonto, txtEMontoCred, txtInst, txtNJefe, txtAntig, txtTel, txtExt, txtFax;
+    private EditText txtIngreso, txtEMontoCred, txtInst, txtNJefe, txtAntig, txtTel, txtExt, txtFax;
     private RadioGroup rgRegistroIms, rgOtrosIngresos, rgComprobable, rgCredito, rgPeriodicidad;
+    private SQLiteDatabase db = null;
+    private Cursor c = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +63,6 @@ public class InformacionLaboral extends AppCompatActivity {
 
         });
 
-        txtEMonto = (EditText) findViewById(R.id.txtEspecificacionMonto);
         rgComprobable = (RadioGroup) findViewById(R.id.rgComprobable);
         rgComprobable.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -107,5 +112,47 @@ public class InformacionLaboral extends AppCompatActivity {
         });
 
 
+    }
+
+    public void guardar() {
+
+        db = getApplicationContext().openOrCreateDatabase(DataDB.DB_NAME, android.content.Context.MODE_PRIVATE, null);
+
+        try {
+            ContentValues values = new ContentValues();
+
+            values.put(DataDB.PR_SO_NOM_EMPRESA, txtNEmp.getText().toString());
+            values.put(DataDB.PR_SO_IMSS,txtEMontoCred.getText().toString());//rg
+            values.put(DataDB.PR_SO_CALLE_EMP,txtDCalle.getText().toString());
+            values.put(DataDB.PR_SO_NUM_EXT_EMP,txtNExtm.getText().toString());
+            values.put(DataDB.PR_SO_NUM_INT_EMP,txtNInt.getText().toString());
+            values.put(DataDB.PR_SO_COLONIA_EMP,txtCol.getText().toString());
+            values.put(DataDB.PR_SO_CP_EMP,txtCp.getText().toString());
+            values.put(DataDB.PR_SO_MUNICIPIO_EMP,txtMun.getText().toString());
+            values.put(DataDB.PR_SO_ESTADO_EMP,txtEdo.getText().toString());
+            values.put(DataDB.PR_SO_DEPARTAMENTO_EMP,txtDepLab.getText().toString());
+            values.put(DataDB.PR_SO_PUESTO_EMP,txtPuesto.getText().toString());
+            values.put(DataDB.PR_SO_INGRESO_EMP,txtIngreso.getText().toString());
+            values.put(DataDB.PR_SO_OTROS_ING_EMP,txtIngreso.getText().toString());//rg
+            values.put(DataDB.PR_SO_OTRO_ING_C_EMP,txtIngreso.getText().toString());
+            values.put(DataDB.PR_SO_ING_COM,txtIngreso.getText().toString());//rg
+            values.put(DataDB.PR_SO_PAGA_CRED_INS,txtIngreso.getText().toString());//rg
+            values.put(DataDB.PR_SO_PAGA_IMPORTE_INS,txtEMontoCred.getText().toString());
+            values.put(DataDB.PR_SO_PAGA_INS,txtInst.getText().toString());
+            values.put(DataDB.PR_SO_NOMBRE_JEFE,txtNJefe.getText().toString());
+            values.put(DataDB.PR_SO_ANTIGUEDAD_EMP,txtAntig.getText().toString());
+            values.put(DataDB.PR_SO_TEL_EMP,txtTel.getText().toString());
+            values.put(DataDB.PR_SO_EXTENSION_EMP,txtExt.getText().toString());
+            values.put(DataDB.PR_SO_FAX_EMP,txtFax.getText().toString());
+            values.put(DataDB.PR_SO_PERIODICIDAD_COBRO,txtIngreso.getText().toString());//rg
+            //values.put(DataDB.PR_SO_PAGA_INS,txtAp.getText().toString());
+
+                db.insert(DataDB.TABLE_NAME_SOLICITUD, null, values);
+                System.out.println("Insertado");
+        } catch (SQLException ex) {
+            System.out.println("Error al insertar solicitud: " + ex);
+        } finally {
+            db.close();
+        }
     }
 }

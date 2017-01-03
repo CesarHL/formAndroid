@@ -38,7 +38,7 @@
                 android:text="@string/apellidoPaternoReferencias" />
 
             <EditText
-                android:id="@+id/txtApellidoPaternoReferencias"
+                android:id="@+id/txtApellidoPaternoReferenciasP"
                 android:layout_below="@id/lblApellidoPaternoReferencias"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
@@ -55,7 +55,7 @@
 
             <TextView
                 android:id="@+id/lblApellidoMaternoReferencias"
-                android:layout_below="@+id/txtApellidoPaternoReferencias"
+                android:layout_below="@+id/txtApellidoPaternoReferenciasP"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
                 android:text="@string/apellidoMaternoReferencias"/>
 
             <EditText
-                android:id="@+id/txtApellidoMaternoReferencias"
+                android:id="@+id/txtApellidoMaternoReferenciasP"
                 android:layout_below="@id/lblApellidoMaternoReferencias"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
@@ -80,7 +80,7 @@
 
             <TextView
                 android:id="@+id/lblNombresReferencias"
-                android:layout_below="@+id/txtApellidoMaternoReferencias"
+                android:layout_below="@+id/txtApellidoMaternoReferenciasP"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
                 android:text="@string/nombresReferencias" />
 
             <EditText
-                android:id="@+id/txtNombresReferencias"
+                android:id="@+id/txtNombresReferenciasP"
                 android:layout_below="@id/lblNombresReferencias"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
@@ -105,7 +105,7 @@
 
             <TextView
                 android:id="@+id/lblCalleReferencias"
-                android:layout_below="@+id/txtNombresReferencias"
+                android:layout_below="@+id/txtNombresReferenciasP"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -113,7 +113,7 @@
                 android:text="@string/calleReferencias" />
 
             <EditText
-                android:id="@+id/txtCalleReferencias"
+                android:id="@+id/txtCalleReferenciasP"
                 android:layout_below="@id/lblCalleReferencias"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
@@ -130,7 +130,7 @@
 
             <TextView
                 android:id="@+id/lblExteriorReferencias"
-                android:layout_below="@+id/txtCalleReferencias"
+                android:layout_below="@+id/txtCalleReferenciasP"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -138,7 +138,7 @@
                 android:text="@string/nExteriorReferencias"/>
 
             <EditText
-                android:id="@+id/txtExteriorReferencias"
+                android:id="@+id/txtExteriorReferenciasP"
                 android:layout_below="@id/lblExteriorReferencias"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
@@ -155,7 +155,7 @@
 
             <TextView
                 android:id="@+id/lblInteriorReferencias"
-                android:layout_below="@+id/txtExteriorReferencias"
+                android:layout_below="@+id/txtExteriorReferenciasP"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -163,7 +163,7 @@
                 android:text="@string/nInteriorReferencias" />
 
             <EditText
-                android:id="@+id/txtInteriorReferencias"
+                android:id="@+id/txtInteriorReferenciasP"
                 android:layout_below="@id/lblInteriorReferencias"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
@@ -180,7 +180,7 @@
 
             <TextView
                 android:id="@+id/lblColoniaReferencias"
-                android:layout_below="@+id/txtInteriorReferencias"
+                android:layout_below="@+id/txtInteriorReferenciasP"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -188,7 +188,7 @@
                 android:text="@string/coloniaReferencias"/>
 
             <EditText
-                android:id="@+id/txtColoniaReferencias"
+                android:id="@+id/txtColoniaReferenciasP"
                 android:layout_below="@id/lblColoniaReferencias"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
@@ -205,7 +205,7 @@
 
             <TextView
                 android:id="@+id/lblCpReferencias"
-                android:layout_below="@+id/txtColoniaReferencias"
+                android:layout_below="@+id/txtColoniaReferenciasP"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -213,7 +213,7 @@
                 android:text="@string/cpReferencias"/>
 
             <EditText
-                android:id="@+id/txtCpReferencias"
+                android:id="@+id/txtCpReferenciasP"
                 android:layout_below="@id/lblCpReferencias"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
@@ -230,7 +230,7 @@
 
             <TextView
                 android:id="@+id/lblMunicipioReferencias"
-                android:layout_below="@+id/txtCpReferencias"
+                android:layout_below="@+id/txtCpReferenciasP"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -238,7 +238,7 @@
                 android:text="@string/municipioReferencias"/>
 
             <EditText
-                android:id="@+id/txtMunicipioReferencias"
+                android:id="@+id/txtMunicipioReferenciasP"
                 android:layout_below="@id/lblMunicipioReferencias"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
@@ -255,7 +255,7 @@
 
             <TextView
                 android:id="@+id/lblEstadoReferencias"
-                android:layout_below="@+id/txtMunicipioReferencias"
+                android:layout_below="@+id/txtMunicipioReferenciasP"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -263,7 +263,7 @@
                 android:text="@string/estadoReferencias"/>
 
             <EditText
-                android:id="@+id/txtEstadoReferencias"
+                android:id="@+id/txtEstadoReferenciasP"
                 android:layout_below="@id/lblEstadoReferencias"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
@@ -280,7 +280,7 @@
 
             <TextView
                 android:id="@+id/lblTelefonoReferencias"
-                android:layout_below="@+id/txtEstadoReferencias"
+                android:layout_below="@+id/txtEstadoReferenciasP"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -288,7 +288,7 @@
                 android:text="@string/telefonoReferencias"/>
 
             <EditText
-                android:id="@+id/txtTelefonoReferencias"
+                android:id="@+id/txtTelefonoReferenciasP"
                 android:layout_below="@id/lblTelefonoReferencias"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
@@ -306,7 +306,7 @@
 
             <TextView
                 android:id="@+id/lblCelularReferencias"
-                android:layout_below="@+id/txtTelefonoReferencias"
+                android:layout_below="@+id/txtTelefonoReferenciasP"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -314,7 +314,7 @@
                 android:text="@string/celularReferencias"/>
 
             <EditText
-                android:id="@+id/txtCelularReferencias"
+                android:id="@+id/txtCelularReferenciasP"
                 android:layout_below="@id/lblCelularReferencias"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
@@ -331,7 +331,7 @@
 
             <TextView
                 android:id="@+id/lblCorreoReferencias"
-                android:layout_below="@+id/txtCelularReferencias"
+                android:layout_below="@+id/txtCelularReferenciasP"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -339,7 +339,7 @@
                 android:text="@string/correoReferencias" />
 
             <EditText
-                android:id="@+id/txtCorreoReferencias"
+                android:id="@+id/txtCorreoReferenciasP"
                 android:layout_below="@id/lblCorreoReferencias"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
@@ -356,7 +356,7 @@
 
             <TextView
                 android:id="@+id/lblParentescoReferencias"
-                android:layout_below="@+id/txtCorreoReferencias"
+                android:layout_below="@+id/txtCorreoReferenciasP"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -364,7 +364,7 @@
                 android:text="@string/parentescoReferencias"/>
 
             <EditText
-                android:id="@+id/txtParentescoReferencias"
+                android:id="@+id/txtParentescoReferenciasP"
                 android:layout_below="@id/lblParentescoReferencias"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"

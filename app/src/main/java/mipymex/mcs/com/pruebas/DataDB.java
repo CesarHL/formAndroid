@@ -8,6 +8,9 @@ public class DataDB {
     public static final String DB_NAME = "database";
     public static final String TABLE_NAME_USUARIOS = "usuarios";
     public static final String TABLE_NAME_SOLICITUD = "solicitud";
+    public static final String TABLE_NAME_INFORMACION_SOLICITANTE = "informacionSolicitante";
+    public static final String TABLE_NAME_INFROMACION_LABORAL = "informacionLaboral";
+    public static final String TABLE_NAME_INFORMACION_CONYUGE = "informacionLaboral";
 
     // Datos de la tabla Usuarios
     public static final String NAME = "nombre";

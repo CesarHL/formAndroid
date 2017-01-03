@@ -38,7 +38,7 @@ public class VentanaPrincipal extends TabActivity {
                 new Intent(this, DatosConyugeHijos.class)));
 
         host.addTab(host.newTabSpec("tab4").setIndicator("Referencias").setContent(
-                new Intent(this, ReferenciaPersonalFamiliar.class)));
+                new Intent(this, ReferenciasPersonales.class)));
 
         host.addTab(host.newTabSpec("tab5").setIndicator("Referencias F").setContent(
                 new Intent(this, ReferenciasPersonalesDistintoDomicilio.class)));
