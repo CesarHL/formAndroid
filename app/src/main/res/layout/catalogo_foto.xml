@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <ImageView
+  <ImageView
         android:id="@+id/imgCheckPhoto"
         android:layout_width="30dp"
         android:layout_height="wrap_content"
@@ -30,6 +30,6 @@
             android:layout_marginBottom="10dp"
             android:textSize="17sp"
             android:textColor="#000"
-            android:text="@string/name" />
+            android:text="IFE(Click)" />
     </RelativeLayout>
 </RelativeLayout>
