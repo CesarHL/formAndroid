@@ -105,17 +105,17 @@
                 android:hint="@string/comments"/>
 
             <TextView
-                android:id="@+id/lblLugarFechaNacimiento"
+                android:id="@+id/lblLugarNacimiento"
                 android:layout_below="@+id/txtNombresSolicitante"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:text="@string/lugarFechaNacimientoSolicitante" />
+                android:text="Lugar Nacimeinto:" />
 
             <EditText
-                android:id="@+id/txtLugarFechaNacimiento"
-                android:layout_below="@id/lblLugarFechaNacimiento"
+                android:id="@+id/txtLugarNacimiento"
+                android:layout_below="@id/lblLugarNacimiento"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
@@ -130,8 +130,33 @@
                 android:hint="@string/comments"/>
 
             <TextView
+                android:id="@+id/lblFechaNacimiento"
+                android:layout_below="@+id/txtLugarNacimiento"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="Fecha Nacimiento: " />
+
+            <EditText
+                android:id="@+id/txtFechaNacimiento"
+                android:layout_below="@id/lblFechaNacimiento"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:padding="7dp"
+                android:background="@drawable/my_comment"
+                android:inputType="date"
+                android:alpha="0.5"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/comments"/>
+
+            <TextView
                 android:id="@+id/lblEdadSolicitante"
-                android:layout_below="@+id/txtLugarFechaNacimiento"
+                android:layout_below="@+id/txtFechaNacimiento"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -148,7 +173,7 @@
                 android:textSize="20sp"
                 android:padding="7dp"
                 android:background="@drawable/my_comment"
-                android:inputType="text"
+                android:inputType="numberDecimal"
                 android:alpha="0.5"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
@@ -183,7 +208,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
                     android:layout_marginStart="30dp"
-                    android:checked="true"
                     android:text="@string/femeninoSolicitante"
                     android:textColorLink="@android:color/white" />
             </RadioGroup>
@@ -319,7 +343,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
                     android:layout_marginStart="30dp"
-                    android:checked="true"
                     android:text="@string/negativoSolicintente"
                     android:textColorLink="@android:color/white" />
             </RadioGroup>
@@ -331,7 +354,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:text="@string/ingresoConyugeSolicitante" />
+                android:text="Especifique el ingreso conyuge" />
 
             <EditText
                 android:id="@+id/txtIngresoConyuge"
@@ -343,7 +366,7 @@
                 android:textSize="20sp"
                 android:padding="7dp"
                 android:background="@drawable/my_comment"
-                android:inputType="text"
+                android:inputType="numberDecimal"
                 android:alpha="0.5"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
@@ -403,7 +426,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
                     android:layout_marginStart="30dp"
-                    android:checked="true"
                     android:text="@string/negativoDependientesSolicitante"
                     android:textColorLink="@android:color/white" />
             </RadioGroup>
@@ -427,7 +449,7 @@
                 android:textSize="20sp"
                 android:padding="7dp"
                 android:background="@drawable/my_comment"
-                android:inputType="text"
+                android:inputType="numberDecimal"
                 android:alpha="0.5"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
@@ -627,7 +649,6 @@
                     android:id="@+id/propia"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true"
                     android:text="Propia" />
                 <RadioButton
                     android:id="@+id/pagandose"
@@ -640,11 +661,6 @@
                     android:layout_height="wrap_content"
                     android:text="Vive con familiares"
                     android:textColorLink="@android:color/white"/>
-                <RadioButton
-                    android:id="@+id/Pagandose"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Pagandose" />
             </RadioGroup>
 
             <TextView
@@ -676,7 +692,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
                     android:layout_marginStart="30dp"
-                    android:checked="true"
                     android:text="Meses"
                     android:textColorLink="@android:color/white" />
             </RadioGroup>
@@ -700,16 +715,16 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <RadioButton
+                <CheckBox
                     android:id="@+id/infonavit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Infonavit"
-                    android:checked="false"/>
+                    />
             </RadioGroup>
 
             <TextView
-                android:id="@+id/txtMontoMensual"
+                android:id="@+id/lblMontoMensual"
                 android:layout_below="@+id/rgCreditoVivienda"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
@@ -719,7 +734,7 @@
 
             <EditText
                 android:id="@+id/txtMontoMesual"
-                android:layout_below="@id/txtMontoMensual"
+                android:layout_below="@id/lblMontoMensual"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
@@ -727,11 +742,11 @@
                 android:textSize="20sp"
                 android:padding="7dp"
                 android:background="@drawable/my_comment"
-                android:inputType="text"
+                android:inputType="number"
                 android:alpha="0.5"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:hint="@string/comments" />
+                android:hint="Especifíque monto pago mensual" />
 
             <TextView
                 android:id="@+id/lblTelefono"
@@ -777,7 +792,7 @@
                 android:textSize="20sp"
                 android:padding="7dp"
                 android:background="@drawable/my_comment"
-                android:inputType="text"
+                android:inputType="number"
                 android:alpha="0.5"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"

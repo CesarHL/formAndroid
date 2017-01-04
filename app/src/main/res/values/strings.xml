@@ -39,13 +39,13 @@
     <string name="domicilioSolicitante">Domicilio:</string>
     <string name="correoElectronicoSolicitante">Correo electrónico:</string>
     <string name="celularSolicitante">Celular:</string>
-    <string name="telefonoCasaSolicitante">Telefono de casa:</string>
+    <string name="telefonoCasaSolicitante">Teléfono de casa:</string>
     <string name="montoMensualSolicitante">Monto pago Mensual:</string>
     <string name="creditoViviendaSolicitante">Crédito vivienda señale si con:</string>
     <string name="tiempoResidenciaSolicitante">Tiempo de residencia:</string>
     <string name="residenciaSolicitante">Recidencia:</string>
-    <string name="numeroInteriorSolicitante">Numero interior:</string>
-    <string name="numeroExteriorSolicitante">Numero Exterior:</string>
+    <string name="numeroInteriorSolicitante">Número interior:</string>
+    <string name="numeroExteriorSolicitante">Número Exterior:</string>
     <string name="calleSolicitante">Calle:</string>
     <string name="cargo_publico">¿Desempeña actualmente o desempeñó durante el año imendiato
     anterior algún cargo público destacado a nivel federal, estatal, municipal o distrital en
@@ -61,8 +61,8 @@
     <!--información laboral-->
     <string name="nombreEmpresa">Nombre de la empresa donde labora:</string>
     <string name="domicilioLaboral">Domicilio Calle:</string>
-    <string name="numeroExteriorLaboral">Numero Exterior:</string>
-    <string name="numeroInteriorLaboral">Numero interior: </string>
+    <string name="numeroExteriorLaboral">Número Exterior:</string>
+    <string name="numeroInteriorLaboral">Número interior: </string>
     <string name="coloniaLaboral">Colonia:</string>
     <string name="cpLaboral">CP:</string>
     <string name="municipioLaboral">Municipio:</string>
@@ -72,10 +72,10 @@
     <string name="ingresoMensual">Ingreso Mensual neto:</string>
     <string name="ingresoComprobable">Comprobable:</string>
     <string name="pagandoCredito">Está pagando algún crédito:</string>
-    <string name="institucionLaboral">Institucion:</string>
+    <string name="institucionLaboral">Institución:</string>
     <string name="nombreJefeInmediato">Nombre del jefe inmediato:</string>
     <string name="antiguedadLaboral">Antigüedad:</string>
-    <string name="telefonoOficinaLaboral">Telefono de oficina:</string>
+    <string name="telefonoOficinaLaboral">Teléfono de oficina:</string>
     <string name="extensionLaboral">Extensión:</string>
     <string name="faxLaboral">Fax:</string>
     <string name="otrosIngresos">Cuenta con otros ingresos:</string>
@@ -87,15 +87,15 @@
     <string name="apellidoMaternoReferencias">Apellido Materno:</string>
     <string name="nombresReferencias">Nombre(s):</string>
     <string name="calleReferencias">Calle:</string>
-    <string name="nInteriorReferencias">Numero Exterior:</string>
-    <string name="nExteriorReferencias">Numero Interior:</string>
+    <string name="nInteriorReferencias">Número Exterior:</string>
+    <string name="nExteriorReferencias">Número Interior:</string>
     <string name="coloniaReferencias">Colonia:</string>
     <string name="cpReferencias">CP:</string>
     <string name="municipioReferencias">Municipio:</string>
     <string name="estadoReferencias">Estado:</string>
     <string name="telefonoReferencias">Télefono de casa:</string>
     <string name="celularReferencias">Celular:</string>
-    <string name="correoReferencias">Correo Electronico:</string>
+    <string name="correoReferencias">Correo Electrónico:</string>
     <string name="parentescoReferencias">Parentesco:</string>
 
     <!--Datos conyuge/familiares-->

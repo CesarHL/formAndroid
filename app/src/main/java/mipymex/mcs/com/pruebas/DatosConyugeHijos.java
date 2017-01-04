@@ -29,29 +29,7 @@ public class DatosConyugeHijos extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.datos_conyuge);
 
-        txtNombreC = (EditText) findViewById(R.id.txtNombreC);
-        txtEdadC = (EditText) findViewById(R.id.txtEdadC);
-        txtParentescoC = (EditText) findViewById(R.id.txtParentescoC);
-        txtTelefonoC = (EditText) findViewById(R.id.txtTelefonoC);
-        txtCelularC = (EditText) findViewById(R.id.txttCelularC);
 
-        lista = (ListView)findViewById(R.id.listView);
-        arrayList = new ArrayList<String>();
-        adaptador = new ArrayAdapter<String>(getApplicationContext(), R.layout.list_item, arrayList);
-        lista.setAdapter(adaptador);
-
-        agregarLista = (Button) findViewById(R.id.btnAgregarDatos);
-        agregarLista.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                arrayList.add(txtNombreC.getText().toString()
-                            + txtEdadC.getText().toString()
-                            + txtParentescoC.getText().toString()
-                            + txtTelefonoC.getText().toString()
-                            + txtCelularC.getText().toString());
-                adaptador.notifyDataSetChanged();
-            }
-        });
     }
 
     public void guardarDatosConyugeEHijos() {
@@ -59,14 +37,14 @@ public class DatosConyugeHijos extends Activity {
         db = getApplicationContext().openOrCreateDatabase(DataDB.DB_NAME, android.content.Context.MODE_PRIVATE, null);
 
         try {
-            ContentValues values = new ContentValues();
+          /*  ContentValues values = new ContentValues();
 
             values.put(DataDB.PR_SO_NOMBRE1_CONY,txtNombreC.getText().toString());
             values.put(DataDB.PR_SO_EDAD1_CONY,txtEdadC.getText().toString());
             values.put(DataDB.PR_SO_PARENTESCO1_CONY,txtParentescoC.getText().toString());
             values.put(DataDB.PR_SO_TEL1_CONY,txtTelefonoC.getText().toString());
             values.put(DataDB.PR_SO_CEL1_CONY,txtCelularC.getText().toString());
-            /*values.put(DataDB.PR_SO_NOMBRE2_CONY,txtAp.getText().toString());
+            values.put(DataDB.PR_SO_NOMBRE2_CONY,txtAp.getText().toString());
             values.put(DataDB.PR_SO_EDAD2_CONY,txtAp.getText().toString());
             values.put(DataDB.PR_SO_PARENTESCO2_CONY,txtAp.getText().toString());
             values.put(DataDB.PR_SO_TEL2_CONY,txtAp.getText().toString());
@@ -77,12 +55,12 @@ public class DatosConyugeHijos extends Activity {
             values.put(DataDB.PR_SO_TEL3_CONY,txtAp.getText().toString());
             values.put(DataDB.PR_SO_CEL3_CONY,txtAp.getText().toString());*/
 
-            db.insert(DataDB.TABLE_NAME_INFO_CONYUGE, null, values);
+           // db.insert(DataDB.TABLE_NAME_INFO_CONYUGE, null, values);
             System.out.println("Insertado");
         } catch (SQLException ex) {
             System.out.println("Error al insertar solicitud: " + ex);
         } finally {
-            db.close();
+           // db.close();
         }
 
     }

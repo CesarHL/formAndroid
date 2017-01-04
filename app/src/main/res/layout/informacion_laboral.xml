@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/btnGuardar"
+        android:id="@+id/btnGuardarLaboral"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/btnGuardar"
+        android:layout_above="@+id/btnGuardarLaboral"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
@@ -75,7 +75,6 @@
                     android:id="@+id/afirmativoRegistroImss"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true"
                     android:text="Sí" />
                 <RadioButton
                     android:id="@+id/negativoRegistroImss"
@@ -330,11 +329,11 @@
                 android:textSize="20sp"
                 android:padding="7dp"
                 android:background="@drawable/my_comment"
-                android:inputType="text"
+                android:inputType="number"
                 android:alpha="0.5"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:hint="@string/comments" />
+                android:hint="Especifíque monto"/>
 
             <TextView
                 android:id="@+id/lblOtrosIngresos"
@@ -358,7 +357,6 @@
                     android:id="@+id/afirmativoOtrosIngresos"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true"
                     android:text="Sí" />
                 <RadioButton
                     android:id="@+id/negativoOtrosIngresos"
@@ -379,11 +377,11 @@
                 android:textSize="20sp"
                 android:padding="7dp"
                 android:background="@drawable/my_comment"
-                android:inputType="text"
+                android:inputType="number"
                 android:alpha="0.5"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:hint="@string/comments" />
+                android:hint="Especifíque monto" />
 
             <TextView
                 android:id="@+id/lblLaboralComprobable"
@@ -407,7 +405,6 @@
                     android:id="@+id/afirmativoComprobable"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true"
                     android:text="Sí" />
                 <RadioButton
                     android:id="@+id/negativoComprobable"
@@ -440,7 +437,6 @@
                     android:id="@+id/afirmativoPagoDeCredito"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true"
                     android:text="Sí" />
                 <RadioButton
                     android:id="@+id/negativoPagoDeCredito"
@@ -458,16 +454,14 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="30dp"
-                android:layout_marginStart="30dp"
                 android:textSize="20sp"
                 android:padding="7dp"
                 android:background="@drawable/my_comment"
-                android:inputType="text"
+                android:inputType="number"
                 android:alpha="0.5"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:hint="@string/comments" />
+                android:hint="Especifíque monto de crédito"/>
 
             <TextView
                 android:id="@+id/lblInstitucion"
@@ -563,7 +557,7 @@
                 android:textSize="20sp"
                 android:padding="7dp"
                 android:background="@drawable/my_comment"
-                android:inputType="text"
+                android:inputType="number"
                 android:alpha="0.5"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
@@ -588,7 +582,7 @@
                 android:textSize="20sp"
                 android:padding="7dp"
                 android:background="@drawable/my_comment"
-                android:inputType="text"
+                android:inputType="number"
                 android:alpha="0.5"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
@@ -640,7 +634,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
                     android:layout_marginStart="30dp"
-                    android:checked="true"
                     android:text="mensual"/>
                 <RadioButton
                     android:id="@+id/quicenal"
