@@ -45,8 +45,8 @@ public class DatosConyugeHijos extends Activity {
         agregar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 validarDatosConyuge();
-                //guardarInformacionSolicitante();
-                //mostraDatos();
+                guardarDatosConyugeEHijos();
+               // mostraDatos();
             }
         });
     }
@@ -63,11 +63,12 @@ public class DatosConyugeHijos extends Activity {
         Boolean v8 = txtParentescoC2.getText().toString().trim().equalsIgnoreCase("");
         Boolean v9 = txtTelefonoC2.getText().toString().trim().equalsIgnoreCase("");
         Boolean v10 = txtCelularC2.getText().toString().trim().equalsIgnoreCase("");
-        Boolean v11 = txtNombreC2.getText().toString().trim().equalsIgnoreCase("");
-        Boolean v12 = txtEdadC2.getText().toString().trim().equalsIgnoreCase("");
-        Boolean v13 = txtParentescoC2.getText().toString().trim().equalsIgnoreCase("");
-        Boolean v14 = txtTelefonoC2.getText().toString().trim().equalsIgnoreCase("");
-        Boolean v15 = txtCelularC2.getText().toString().trim().equalsIgnoreCase("");
+
+        Boolean v11 = txtNombreC3.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v12 = txtEdadC3.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v13 = txtParentescoC3.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v14 = txtTelefonoC3.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v15 = txtCelularC3.getText().toString().trim().equalsIgnoreCase("");
 
 
             if(v1) {

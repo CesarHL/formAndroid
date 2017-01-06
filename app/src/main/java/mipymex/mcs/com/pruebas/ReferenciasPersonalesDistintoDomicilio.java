@@ -42,7 +42,7 @@ public class ReferenciasPersonalesDistintoDomicilio extends AppCompatActivity {
         agregar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 validarReferenciasDistintoDomiciolio();
-                //guardarInformacionSolicitante();
+                guardarReferenciasPersonalesDistintoDomiciolio();
                 //mostraDatos();
             }
         });

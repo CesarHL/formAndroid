@@ -196,7 +196,7 @@ public class InformacionSolicitante extends AppCompatActivity {
         agregar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 validar();
-                //guardarInformacionSolicitante();
+                guardarInformacionSolicitante();
                 //mostraDatos();
             }
         });
