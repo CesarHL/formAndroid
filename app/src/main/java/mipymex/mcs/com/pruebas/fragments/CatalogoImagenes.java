@@ -1,25 +1,26 @@
-package mipymex.mcs.com.pruebas;
+package mipymex.mcs.com.pruebas.fragments;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-public class CatalogoImagenes extends Activity {
+import mipymex.mcs.com.pruebas.R;
+
+public class CatalogoImagenes extends Fragment {
 
     ImageView foto;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.catalogo_foto);
-
-        foto = (ImageView) findViewById(R.id.imgCheckPhoto);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.catalogo_foto, null);
+        foto = (ImageView) view.findViewById(R.id.imgCheckPhoto);
         foto.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -27,6 +28,7 @@ public class CatalogoImagenes extends Activity {
                 openCamera();
             }
         });
+        return view;
     }
 
     private void showOptions() {
@@ -48,7 +50,7 @@ public class CatalogoImagenes extends Activity {
     private void openCamera() {
         final int REQUEST_IMAGE_CAPTURE = 1;
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+        if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         }
     }

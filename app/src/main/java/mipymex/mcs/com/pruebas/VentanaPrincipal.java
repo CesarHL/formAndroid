@@ -12,6 +12,14 @@ import android.support.v7.widget.Toolbar;
 import java.util.ArrayList;
 import java.util.List;
 
+import mipymex.mcs.com.pruebas.fragments.CaptureSignature;
+import mipymex.mcs.com.pruebas.fragments.CatalogoImagenes;
+import mipymex.mcs.com.pruebas.fragments.DatosConyugeHijos;
+import mipymex.mcs.com.pruebas.fragments.InformacionLaboral;
+import mipymex.mcs.com.pruebas.fragments.InformacionSolicitante;
+import mipymex.mcs.com.pruebas.fragments.ReferenciasPersonales;
+import mipymex.mcs.com.pruebas.fragments.ReferenciasPersonalesDistintoDomicilio;
+
 
 /**
  * Created by Erick on 02/01/2017.
@@ -29,13 +37,13 @@ public class VentanaPrincipal extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
 
-        tabLayout.addTab(tabLayout.newTab().setText("Solicitante"));
-        tabLayout.addTab(tabLayout.newTab().setText("Laboral"));
-        tabLayout.addTab(tabLayout.newTab().setText("Cónyuge"));
-        tabLayout.addTab(tabLayout.newTab().setText("Referencias"));
-        tabLayout.addTab(tabLayout.newTab().setText("Referencias F"));
-        tabLayout.addTab(tabLayout.newTab().setText("Firma"));
-        tabLayout.addTab(tabLayout.newTab().setText("Imágenes"));
+        //tabLayout.addTab(tabLayout.newTab().setText("Solicitante"));
+        //tabLayout.addTab(tabLayout.newTab().setText("Laboral"));
+        //tabLayout.addTab(tabLayout.newTab().setText("Cónyuge"));
+        //tabLayout.addTab(tabLayout.newTab().setText("Referencias"));
+        //tabLayout.addTab(tabLayout.newTab().setText("Referencias F"));
+        //tabLayout.addTab(tabLayout.newTab().setText("Firma"));
+        //tabLayout.addTab(tabLayout.newTab().setText("Imágenes"));
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -49,7 +57,14 @@ public class VentanaPrincipal extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        //adapter.addFragment(new ListContentFragment(), "List");
+        adapter.addFragment(new InformacionSolicitante(), "Solicitante");
+        adapter.addFragment(new InformacionLaboral(), "Laboral");
+        adapter.addFragment(new DatosConyugeHijos(), "Cónyuge");
+        adapter.addFragment(new ReferenciasPersonales(), "Referencias");
+        adapter.addFragment(new ReferenciasPersonalesDistintoDomicilio(), "Referencias F");
+        adapter.addFragment(new CaptureSignature(), "Firma");
+        adapter.addFragment(new CatalogoImagenes(), "Imágenes");
+
         viewPager.setAdapter(adapter);
     }
 

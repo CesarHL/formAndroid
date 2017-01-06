@@ -1,54 +1,60 @@
-package mipymex.mcs.com.pruebas;
+package mipymex.mcs.com.pruebas.fragments;
 
-import android.app.Activity;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import mipymex.mcs.com.pruebas.DataDB;
+import mipymex.mcs.com.pruebas.R;
 
-public class DatosConyugeHijos extends Activity {
+
+public class DatosConyugeHijos extends Fragment {
 
     private EditText txtNombreC, txtEdadC, txtParentescoC, txtTelefonoC, txtCelularC,txtNombreC2, txtEdadC2, txtParentescoC2, txtTelefonoC2, txtCelularC2,txtNombreC3, txtEdadC3, txtParentescoC3, txtTelefonoC3, txtCelularC3;
     private SQLiteDatabase db = null;
     private Cursor c = null;
     private Button agregar;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.datos_conyuge);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.datos_conyuge, null);
+        txtNombreC = (EditText) view.findViewById(R.id.txtNombreCompletoCony);
+        txtEdadC = (EditText) view.findViewById(R.id.txtEdadConyuge);
+        txtParentescoC = (EditText) view.findViewById(R.id.txtParentesco1);
+        txtTelefonoC = (EditText) view.findViewById(R.id.txtTelefonoConyuge);
+        txtCelularC = (EditText) view.findViewById(R.id.txtCelularConyuge);
 
-        txtNombreC = (EditText) findViewById(R.id.txtNombreCompletoCony);
-        txtEdadC = (EditText) findViewById(R.id.txtEdadConyuge);
-        txtParentescoC = (EditText) findViewById(R.id.txtParentesco1);
-        txtTelefonoC = (EditText) findViewById(R.id.txtTelefonoConyuge);
-        txtCelularC = (EditText) findViewById(R.id.txtCelularConyuge);
+        txtNombreC2 = (EditText) view.findViewById(R.id.txtNombreCompletoCony2);
+        txtEdadC2 = (EditText) view.findViewById(R.id.txtEdadConyuge2);
+        txtParentescoC2 = (EditText) view.findViewById(R.id.txtParentescoConyuge2);
+        txtTelefonoC2 = (EditText) view.findViewById(R.id.txtTelefonoConyuge2);
+        txtCelularC2 = (EditText) view.findViewById(R.id.txtCelularConyuge2);
 
-        txtNombreC2 = (EditText) findViewById(R.id.txtNombreCompletoCony2);
-        txtEdadC2 = (EditText) findViewById(R.id.txtEdadConyuge2);
-        txtParentescoC2 = (EditText) findViewById(R.id.txtParentescoConyuge2);
-        txtTelefonoC2 = (EditText) findViewById(R.id.txtTelefonoConyuge2);
-        txtCelularC2 = (EditText) findViewById(R.id.txtCelularConyuge2);
+        txtNombreC3 = (EditText) view.findViewById(R.id.txtNombreCompletoCony3);
+        txtEdadC3 = (EditText) view.findViewById(R.id.txtEdadConyuge3);
+        txtParentescoC3 = (EditText) view.findViewById(R.id.txtParentescoConyuge3);
+        txtTelefonoC3 = (EditText) view.findViewById(R.id.txtTelefonoConyuge3);
+        txtCelularC3 = (EditText) view.findViewById(R.id.txtCelularConyuge3);
 
-        txtNombreC3 = (EditText) findViewById(R.id.txtNombreCompletoCony3);
-        txtEdadC3 = (EditText) findViewById(R.id.txtEdadConyuge3);
-        txtParentescoC3 = (EditText) findViewById(R.id.txtParentescoConyuge3);
-        txtTelefonoC3 = (EditText) findViewById(R.id.txtTelefonoConyuge3);
-        txtCelularC3 = (EditText) findViewById(R.id.txtCelularConyuge3);
-
-        agregar =(Button)findViewById(R.id.btnGuardarDatosConyuge);
+        agregar =(Button) view.findViewById(R.id.btnGuardarDatosConyuge);
         agregar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 validarDatosConyuge();
                 guardarDatosConyugeEHijos();
-               // mostraDatos();
+                // mostraDatos();
             }
         });
+        return view;
     }
 
     public void validarDatosConyuge() {
@@ -136,7 +142,7 @@ public class DatosConyugeHijos extends Activity {
 
     public void guardarDatosConyugeEHijos() {
 
-        db = getApplicationContext().openOrCreateDatabase(DataDB.DB_NAME, android.content.Context.MODE_PRIVATE, null);
+        db = getActivity().getApplicationContext().openOrCreateDatabase(DataDB.DB_NAME, android.content.Context.MODE_PRIVATE, null);
 
         try {
             ContentValues values = new ContentValues();

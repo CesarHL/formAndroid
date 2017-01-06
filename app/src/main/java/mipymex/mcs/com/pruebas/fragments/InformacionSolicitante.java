@@ -1,19 +1,25 @@
-package mipymex.mcs.com.pruebas;
+package mipymex.mcs.com.pruebas.fragments;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-public class InformacionSolicitante extends AppCompatActivity {
+import mipymex.mcs.com.pruebas.DataDB;
+import mipymex.mcs.com.pruebas.R;
+
+public class InformacionSolicitante extends Fragment {
 
     private EditText txtAp, txtAm, txtNombre, txtLugarNacimiento, txtFechaNacimiento, txtEdad, txtRfc, txtCurp, txtFolioIfe, txtInConyuge;
     private EditText txtRegimen, txtEstadoCivil, txtPersonas, txtCalle, txtNExt, txtNInt, txtColonia, txtCP, txtMun;
@@ -26,20 +32,19 @@ public class InformacionSolicitante extends AppCompatActivity {
     private Cursor c = null;
     private String sexo , estadoPropiedad, tiempoResidencia;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.informacion_solicitante);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.informacion_solicitante, null);
 
-
-        txtAp = (EditText) findViewById(R.id.txtApellidoPaterno);
+        txtAp = (EditText) view.findViewById(R.id.txtApellidoPaterno);
         txtAp.requestFocus();
-        txtAm = (EditText) findViewById(R.id.txtApellidoMaterno);
-        txtNombre = (EditText) findViewById(R.id.txtNombresSolicitante);
-        txtLugarNacimiento = (EditText) findViewById(R.id.txtLugarNacimiento);
-        txtFechaNacimiento = (EditText) findViewById(R.id.txtFechaNacimiento);
-        txtEdad = (EditText) findViewById(R.id.txtEdadSolicitante);
-        rdSexo = (RadioGroup) findViewById(R.id.rgSexo);
+        txtAm = (EditText) view.findViewById(R.id.txtApellidoMaterno);
+        txtNombre = (EditText) view.findViewById(R.id.txtNombresSolicitante);
+        txtLugarNacimiento = (EditText) view.findViewById(R.id.txtLugarNacimiento);
+        txtFechaNacimiento = (EditText) view.findViewById(R.id.txtFechaNacimiento);
+        txtEdad = (EditText) view.findViewById(R.id.txtEdadSolicitante);
+        rdSexo = (RadioGroup) view.findViewById(R.id.rgSexo);
         rdSexo.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -52,15 +57,15 @@ public class InformacionSolicitante extends AppCompatActivity {
 
         });
 
-        txtRfc = (EditText) findViewById(R.id.txtRfcSolicitante);
-        txtCurp = (EditText) findViewById(R.id.txtCurp);
-        txtFolioIfe = (EditText) findViewById(R.id.txtFolioCurp);
-        txtEstadoCivil = (EditText) findViewById(R.id.txtEstadoCivil);
-        rdTConyuge = (RadioGroup) findViewById(R.id.rgTrabajaConyuge);
+        txtRfc = (EditText) view.findViewById(R.id.txtRfcSolicitante);
+        txtCurp = (EditText) view.findViewById(R.id.txtCurp);
+        txtFolioIfe = (EditText) view.findViewById(R.id.txtFolioCurp);
+        txtEstadoCivil = (EditText) view.findViewById(R.id.txtEstadoCivil);
+        rdTConyuge = (RadioGroup) view.findViewById(R.id.rgTrabajaConyuge);
 
-        lblInConyuge = (TextView) findViewById(R.id.lblIngresoConyuge);
+        lblInConyuge = (TextView) view.findViewById(R.id.lblIngresoConyuge);
         lblInConyuge.setVisibility(View.GONE);
-        txtInConyuge = (EditText) findViewById(R.id.txtIngresoConyuge);
+        txtInConyuge = (EditText) view.findViewById(R.id.txtIngresoConyuge);
         txtInConyuge.setVisibility(View.GONE);
         rdTConyuge.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             @Override
@@ -75,15 +80,15 @@ public class InformacionSolicitante extends AppCompatActivity {
                 }
             }
         });
-        txtRegimen = (EditText) findViewById(R.id.txtRegimen);
+        txtRegimen = (EditText) view.findViewById(R.id.txtRegimen);
 
 
-        lblDependientes = (TextView) findViewById(R.id.lblNumeroPersonas);
+        lblDependientes = (TextView) view.findViewById(R.id.lblNumeroPersonas);
         lblDependientes.setVisibility(View.GONE);
-        txtPersonas = (EditText) findViewById(R.id.txtNumeroPersonas);
+        txtPersonas = (EditText) view.findViewById(R.id.txtNumeroPersonas);
         txtPersonas.setVisibility(View.GONE);
 
-        rdDep = (RadioGroup) findViewById(R.id.rgDependientes);
+        rdDep = (RadioGroup) view.findViewById(R.id.rgDependientes);
         rdDep.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -98,14 +103,14 @@ public class InformacionSolicitante extends AppCompatActivity {
             }
         });
 
-        txtCalle = (EditText) findViewById(R.id.txtCalle);
-        txtNExt = (EditText) findViewById(R.id.txtExterior);
-        txtNInt = (EditText) findViewById(R.id.txtInterior);
-        txtColonia = (EditText) findViewById(R.id.txtColoniaSolicitante);
-        txtCP = (EditText) findViewById(R.id.txtCpSolicitante);
-        txtMun = (EditText) findViewById(R.id.txtMunicipioSolicitante);
-        txtEstado = (EditText) findViewById(R.id.txtEstadoSolicitante);
-        rdRes =(RadioGroup) findViewById(R.id.rgResidencia);
+        txtCalle = (EditText) view.findViewById(R.id.txtCalle);
+        txtNExt = (EditText) view.findViewById(R.id.txtExterior);
+        txtNInt = (EditText) view.findViewById(R.id.txtInterior);
+        txtColonia = (EditText) view.findViewById(R.id.txtColoniaSolicitante);
+        txtCP = (EditText) view.findViewById(R.id.txtCpSolicitante);
+        txtMun = (EditText) view.findViewById(R.id.txtMunicipioSolicitante);
+        txtEstado = (EditText) view.findViewById(R.id.txtEstadoSolicitante);
+        rdRes =(RadioGroup) view.findViewById(R.id.rgResidencia);
         rdRes.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -124,7 +129,7 @@ public class InformacionSolicitante extends AppCompatActivity {
                 System.out.println("================================ =============" + tipoResidencia);
         * */
 
-        rdTRes =(RadioGroup) findViewById(R.id.rgTiempoResidencia);
+        rdTRes =(RadioGroup) view.findViewById(R.id.rgTiempoResidencia);
         rdTRes.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -137,11 +142,11 @@ public class InformacionSolicitante extends AppCompatActivity {
         });
 
 
-        lblMontoCred = (TextView) findViewById(R.id.lblMontoMensual);
+        lblMontoCred = (TextView) view.findViewById(R.id.lblMontoMensual);
         lblMontoCred.setVisibility(View.GONE);
-        txtMontoCred = (EditText) findViewById(R.id.txtMontoMesual);
+        txtMontoCred = (EditText) view.findViewById(R.id.txtMontoMesual);
         txtMontoCred.setVisibility(View.GONE);
-        checkVivienda =(CheckBox) findViewById(R.id.infonavit);
+        checkVivienda =(CheckBox) view.findViewById(R.id.infonavit);
         checkVivienda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -158,14 +163,14 @@ public class InformacionSolicitante extends AppCompatActivity {
 
 
 
-        txtTelCasa = (EditText) findViewById(R.id.txtTelefono);
-        txtCelular = (EditText) findViewById(R.id.txtCelular);
-        txtCorreo = (EditText) findViewById(R.id.txtCorreo);
-        txtCargoPublicSolicitante = (EditText) findViewById(R.id.txtEspecificarSolicitante);
+        txtTelCasa = (EditText) view.findViewById(R.id.txtTelefono);
+        txtCelular = (EditText) view.findViewById(R.id.txtCelular);
+        txtCorreo = (EditText) view.findViewById(R.id.txtCorreo);
+        txtCargoPublicSolicitante = (EditText) view.findViewById(R.id.txtEspecificarSolicitante);
         txtCargoPublicSolicitante.setVisibility(View.GONE);
-        txtEspCargoPublico = (EditText) findViewById(R.id.txtEspecificarCargoPublicoConyuge);
+        txtEspCargoPublico = (EditText) view.findViewById(R.id.txtEspecificarCargoPublicoConyuge);
         txtEspCargoPublico.setVisibility(View.GONE);
-        rdCPublico =(RadioGroup) findViewById(R.id.grpBtnCargoPublico);
+        rdCPublico =(RadioGroup) view.findViewById(R.id.grpBtnCargoPublico);
 
         rdCPublico.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             @Override
@@ -179,7 +184,7 @@ public class InformacionSolicitante extends AppCompatActivity {
             }
         });
 
-        rdCConyuge =(RadioGroup) findViewById(R.id.grpBtnCargoPublicoConyuge);
+        rdCConyuge =(RadioGroup) view.findViewById(R.id.grpBtnCargoPublicoConyuge);
         rdCConyuge.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -192,7 +197,7 @@ public class InformacionSolicitante extends AppCompatActivity {
             }
         });
 
-        agregar =(Button)findViewById(R.id.btnGuardar);
+        agregar =(Button)view.findViewById(R.id.btnGuardar);
         agregar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 validar();
@@ -200,6 +205,7 @@ public class InformacionSolicitante extends AppCompatActivity {
                 //mostraDatos();
             }
         });
+        return view;
     }
 
     public void validar(){
@@ -328,7 +334,7 @@ public class InformacionSolicitante extends AppCompatActivity {
     }
 
     public void guardarInformacionSolicitante() {
-        db = getApplicationContext().openOrCreateDatabase(DataDB.DB_NAME, android.content.Context.MODE_PRIVATE, null);
+        db = getActivity().getApplicationContext().openOrCreateDatabase(DataDB.DB_NAME, android.content.Context.MODE_PRIVATE, null);
 
         try {
             ContentValues values = new ContentValues();
@@ -386,7 +392,7 @@ public class InformacionSolicitante extends AppCompatActivity {
 
     public void mostraDatos() {
 
-        db = getApplicationContext().openOrCreateDatabase(DataDB.DB_NAME,android.content.Context.MODE_PRIVATE ,null);
+        db = getActivity().getApplicationContext().openOrCreateDatabase(DataDB.DB_NAME,android.content.Context.MODE_PRIVATE ,null);
         try {
             String[] valores_recuperar = {
                     DataDB.PR_SO_APATERNO,

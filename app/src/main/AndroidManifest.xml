@@ -39,25 +39,25 @@
         <activity android:name=".VentanaPrincipal"
             android:label="main"/>
 
-        <activity android:name=".CaptureSignature"
+        <activity android:name=".fragments.CaptureSignature"
             android:label="Autorización"/>
 
-        <activity android:name=".InformacionSolicitante"
+        <activity android:name=".fragments.InformacionSolicitante"
             android:label="Informacion solicitante"/>
 
-        <activity android:name=".DatosConyugeHijos"
+        <activity android:name=".fragments.DatosConyugeHijos"
             android:label="Datos Conyuge"/>
 
-        <activity android:name=".InformacionLaboral"
+        <activity android:name=".fragments.InformacionLaboral"
             android:label="Información Laboral"/>
 
-        <activity android:name=".ReferenciasPersonales"
+        <activity android:name=".fragments.ReferenciasPersonales"
             android:label="Referencias Personales"/>
 
-        <activity android:name=".ReferenciasPersonalesDistintoDomicilio"
+        <activity android:name=".fragments.ReferenciasPersonalesDistintoDomicilio"
             android:label="Referencias personales Distinto Domicilio"/>
 
-        <activity android:name=".CatalogoImagenes"
+        <activity android:name=".fragments.CatalogoImagenes"
             android:label="Catalogo Imagenes"/>
     </application>
 

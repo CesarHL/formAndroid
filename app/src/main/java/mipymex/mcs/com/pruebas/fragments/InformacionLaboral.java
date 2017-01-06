@@ -1,18 +1,23 @@
-package mipymex.mcs.com.pruebas;
+package mipymex.mcs.com.pruebas.fragments;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 
-public class InformacionLaboral extends AppCompatActivity {
+import mipymex.mcs.com.pruebas.DataDB;
+import mipymex.mcs.com.pruebas.R;
+
+public class InformacionLaboral extends Fragment {
 
     private EditText txtNEmp, txtDCalle, txtNInt, txtNExtm, txtCol, txtCp, txtMun, txtEdo, txtDepLab, txtPuesto;
     private EditText txtIngreso, txtEMontoCred, txtInst, txtNJefe, txtAntig, txtTel, txtExt, txtFax, txtOtros;
@@ -22,11 +27,10 @@ public class InformacionLaboral extends AppCompatActivity {
     private Cursor c = null;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.informacion_laboral);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.informacion_laboral, null);
 
-        btnLaboral = (Button) findViewById(R.id.btnGuardarLaboral);
+        btnLaboral = (Button) view.findViewById(R.id.btnGuardarLaboral);
         btnLaboral.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 validar();
@@ -35,8 +39,8 @@ public class InformacionLaboral extends AppCompatActivity {
         });
 
 
-        txtNEmp = (EditText) findViewById(R.id.txtNombreEmpresa);
-        rgRegistroIms = (RadioGroup) findViewById(R.id.rgRegistroIMSS);
+        txtNEmp = (EditText) view.findViewById(R.id.txtNombreEmpresa);
+        rgRegistroIms = (RadioGroup) view.findViewById(R.id.rgRegistroIMSS);
         rgRegistroIms.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -49,20 +53,20 @@ public class InformacionLaboral extends AppCompatActivity {
 
         });
 
-        txtDCalle = (EditText) findViewById(R.id.txtLaboralDomicilioCalle);
-        txtNInt = (EditText) findViewById(R.id.txtLaboralInterior);
-        txtNExtm = (EditText) findViewById(R.id.txtLaboralExterior);
-        txtCol = (EditText) findViewById(R.id.txtLaboralColonia);
-        txtCp = (EditText) findViewById(R.id.txtLaboralCP);
-        txtMun= (EditText) findViewById(R.id.txtLaboralMunicipio);
-        txtEdo = (EditText) findViewById(R.id.txtLaboralEstado);
-        txtDepLab = (EditText) findViewById(R.id.txtLaboralDepartamento);
-        txtPuesto = (EditText)findViewById(R.id.txtLaboralPuesto);
-        txtIngreso = (EditText)findViewById(R.id.txtLaboralIngreso);
+        txtDCalle = (EditText) view.findViewById(R.id.txtLaboralDomicilioCalle);
+        txtNInt = (EditText) view.findViewById(R.id.txtLaboralInterior);
+        txtNExtm = (EditText) view.findViewById(R.id.txtLaboralExterior);
+        txtCol = (EditText) view.findViewById(R.id.txtLaboralColonia);
+        txtCp = (EditText) view.findViewById(R.id.txtLaboralCP);
+        txtMun= (EditText) view.findViewById(R.id.txtLaboralMunicipio);
+        txtEdo = (EditText) view.findViewById(R.id.txtLaboralEstado);
+        txtDepLab = (EditText) view.findViewById(R.id.txtLaboralDepartamento);
+        txtPuesto = (EditText)view.findViewById(R.id.txtLaboralPuesto);
+        txtIngreso = (EditText)view.findViewById(R.id.txtLaboralIngreso);
 
 
-        rgOtrosIngresos = (RadioGroup) findViewById(R.id.rgOtrosIngresos);
-        txtOtros = (EditText) findViewById(R.id.txtEspecificacionMonto);
+        rgOtrosIngresos = (RadioGroup) view.findViewById(R.id.rgOtrosIngresos);
+        txtOtros = (EditText) view.findViewById(R.id.txtEspecificacionMonto);
         txtOtros.setVisibility(View.GONE);
 
         rgOtrosIngresos.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -77,7 +81,7 @@ public class InformacionLaboral extends AppCompatActivity {
 
         });
 
-        rgComprobable = (RadioGroup) findViewById(R.id.rgComprobable);
+        rgComprobable = (RadioGroup) view.findViewById(R.id.rgComprobable);
         rgComprobable.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -90,9 +94,9 @@ public class InformacionLaboral extends AppCompatActivity {
 
         });
 
-        txtEMontoCred = (EditText) findViewById(R.id.txtEspecificacionMontoCredito);
+        txtEMontoCred = (EditText) view.findViewById(R.id.txtEspecificacionMontoCredito);
         txtEMontoCred.setVisibility(View.GONE);
-        rgCredito = (RadioGroup) findViewById(R.id.rgPagoDeCredito);
+        rgCredito = (RadioGroup) view.findViewById(R.id.rgPagoDeCredito);
         rgCredito.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -104,13 +108,13 @@ public class InformacionLaboral extends AppCompatActivity {
             }
         });
 
-        txtInst = (EditText) findViewById(R.id.txtInstitucion);
-        txtNJefe = (EditText) findViewById(R.id.txtNombreJefeInmediato);
-        txtAntig = (EditText) findViewById(R.id.txtAntiguedad);
-        txtTel = (EditText) findViewById(R.id.txtTelefonoOficina);
-        txtExt = (EditText) findViewById(R.id.txtExtension);
-        txtFax = (EditText) findViewById(R.id.txtFax);
-        rgPeriodicidad = (RadioGroup) findViewById(R.id.rgPeriodicidad);
+        txtInst = (EditText) view.findViewById(R.id.txtInstitucion);
+        txtNJefe = (EditText) view.findViewById(R.id.txtNombreJefeInmediato);
+        txtAntig = (EditText) view.findViewById(R.id.txtAntiguedad);
+        txtTel = (EditText) view.findViewById(R.id.txtTelefonoOficina);
+        txtExt = (EditText) view.findViewById(R.id.txtExtension);
+        txtFax = (EditText) view.findViewById(R.id.txtFax);
+        rgPeriodicidad = (RadioGroup) view.findViewById(R.id.rgPeriodicidad);
         rgPeriodicidad.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -126,7 +130,7 @@ public class InformacionLaboral extends AppCompatActivity {
             }
         });
 
-
+        return view;
     }
 
     public void validar() {
@@ -243,7 +247,7 @@ public class InformacionLaboral extends AppCompatActivity {
 
     public void guardarInformacionLaboral() {
 
-        db = getApplicationContext().openOrCreateDatabase(DataDB.DB_NAME, android.content.Context.MODE_PRIVATE, null);
+        db = getActivity().getApplicationContext().openOrCreateDatabase(DataDB.DB_NAME, android.content.Context.MODE_PRIVATE, null);
 
         try {
             ContentValues values = new ContentValues();
