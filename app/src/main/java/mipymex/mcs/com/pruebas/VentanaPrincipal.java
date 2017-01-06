@@ -2,8 +2,15 @@ package mipymex.mcs.com.pruebas;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -30,46 +37,51 @@ public class VentanaPrincipal extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("Firma"));
         tabLayout.addTab(tabLayout.newTab().setText("Imágenes"));
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        setTitle("MiPYMEX");
 
-
-//        host.addTab(host.newTabSpec("tab1").setIndicator("Solicitante").setContent(
-//                new Intent(this, InformacionSolicitante.class)));
-//
-//        host.addTab(host.newTabSpec("tab2").setIndicator("Laboral").setContent(
-//                new Intent(this, InformacionLaboral.class)));
-//
-//        host.addTab(host.newTabSpec("tab3").setIndicator("Conyuge").setContent(
-//                new Intent(this, DatosConyugeHijos.class)));
-//
-//        host.addTab(host.newTabSpec("tab4").setIndicator("Referencias").setContent(
-//                new Intent(this, ReferenciasPersonales.class)));
-//
-//        host.addTab(host.newTabSpec("tab5").setIndicator("Referencias F").setContent(
-//                new Intent(this, ReferenciasPersonalesDistintoDomicilio.class)));
-//
-//        host.addTab(host.newTabSpec("tab6").setIndicator("Firma").setContent(
-//                new Intent(this, CaptureSignature.class)));
-//
-//        host.addTab(host.newTabSpec("tab7").setIndicator("Imagenes").setContent(
-//                new Intent(this, CatalogoImagenes.class)));
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        setupViewPager(viewPager);
+        tabLayout.setupWithViewPager(viewPager);
 
     }
 
-//    public class FakeContent implements TabHost.TabContentFactory{
-//
-//        Context context;
-//
-//        public FakeContent(Context context){
-//            this.context = context;
-//        }
-//        @Override
-//        public View createTabContent(String tag) {
-//            View fakeView = new View(context);
-//            fakeView.setMinimumWidth(0);
-//            fakeView.setMinimumHeight(0);
-//            return fakeView;
-//        }
-//    }
+    private void setupViewPager(ViewPager viewPager) {
+        Adapter adapter = new Adapter(getSupportFragmentManager());
+        //adapter.addFragment(new ListContentFragment(), "List");
+        viewPager.setAdapter(adapter);
+    }
+
+    static class Adapter extends FragmentPagerAdapter {
+        private final List<Fragment> fragmentList = new ArrayList<>();
+        private final List<String> fragmentTitleList = new ArrayList<>();
+
+        public Adapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return fragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return fragmentList.size();
+        }
+
+        public void addFragment(Fragment fragment, String title) {
+            fragmentList.add(fragment);
+            fragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return fragmentTitleList.get(position);
+        }
+    }
+
 
 }
 
