@@ -6,6 +6,8 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 
@@ -15,6 +17,7 @@ public class ReferenciasPersonales extends AppCompatActivity {
     private EditText txtTelRef, txtCelRef, txtCorreoRef, txtParentescoRef;
     private SQLiteDatabase db = null;
     private Cursor c = null;
+    private Button agregar ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +37,94 @@ public class ReferenciasPersonales extends AppCompatActivity {
         txtTelRef = (EditText) findViewById(R.id.txtTelefonoReferencias);
         txtCelRef = (EditText) findViewById(R.id.txtCelularReferencias);
         txtCorreoRef = (EditText) findViewById(R.id.txtCorreoReferencias);
-        //txtParentescoRef = (EditText) findViewById(R.id.txtParentescoReferencias);
+        txtParentescoRef = (EditText) findViewById(R.id.txtParentescoReferencias);
+
+        agregar =(Button)findViewById(R.id.btnGuardarReferencias);
+        agregar.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                validarReferenciasPersonales();
+                //guardarInformacionSolicitante();
+                //mostraDatos();
+            }
+        });
     }
+
+
+    public void validarReferenciasPersonales(){
+        Boolean v1 = txtApaternoRef.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v2 = txtAMaternoRef.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v3 = txtNombresRef.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v4 = txtCalleRef.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v5 = txtExtRef.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v6 = txtIntRef.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v7 = txtColRef.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v8 = txtCpRef.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v9 = txtMunRef.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v10 = txtEdoRef.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v11 = txtTelRef.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v12 = txtCelRef.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v13 = txtCorreoRef.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v14 = txtParentescoRef.getText().toString().trim().equalsIgnoreCase("");
+
+        if(v1) {
+            txtApaternoRef.setError("Este campo no puede estar vacio");
+            txtApaternoRef.setText("");
+            txtApaternoRef.requestFocus();
+        } else if(v2) {
+            txtAMaternoRef.setError("Este campo no puede estar vacio");
+            txtAMaternoRef.setText("");
+            txtAMaternoRef.requestFocus();
+        } else if(v3){
+            txtNombresRef.setError("Este campo no puede estar vacio");
+            txtNombresRef.setText("");
+            txtNombresRef.requestFocus();
+        } else if(v4) {
+            txtCalleRef.setError("Este campo no puede estar vacio");
+            txtCalleRef.setText("");
+            txtCalleRef.requestFocus();
+        } else if(v5) {
+            txtExtRef.setError("Este campo no puede estar vacio");
+            txtExtRef.setText("");
+            txtExtRef.requestFocus();
+        } else if(v6){
+            txtIntRef.setError("Este campo no puede estar vacio");
+            txtIntRef.setText("");
+            txtIntRef.requestFocus();
+        } else if(v7){
+            txtColRef.setError("Este campo no puede estar vacio");
+            txtColRef.setText("");
+            txtColRef.requestFocus();
+        } else if(v8){
+            txtCpRef.setError("Este campo no puede estar vacio");
+            txtCpRef.setText("");
+            txtCpRef.requestFocus();
+        } else if(v9){
+            txtMunRef.setError("Este campo no puede estar vacio");
+            txtMunRef.setText("");
+            txtMunRef.requestFocus();
+        } else if(v10){
+            txtEdoRef.setError("Este campo no puede estar vacio");
+            txtEdoRef.setText("");
+            txtExtRef.requestFocus();
+        } else if(v11){
+            txtTelRef.setError("Este campo no puede estar vacio");
+            txtTelRef.setText("");
+            txtTelRef.requestFocus();
+        } else if(v12){
+            txtCelRef.setError("Este campo no puede estar vacio");
+            txtCelRef.setText("");
+            txtCelRef.requestFocus();
+        } else if ( v13) {
+            txtCorreoRef.setError("Este campo no puede estar vacio");
+            txtCorreoRef.setText("");
+            txtCorreoRef.requestFocus();
+        } else if ( v14) {
+            txtParentescoRef.setError("Este campo no puede estar vacio");
+            txtParentescoRef.setText("");
+            txtParentescoRef.requestFocus();
+        }
+    }
+
 
     public void guardarReferenciasPersonales() {
 

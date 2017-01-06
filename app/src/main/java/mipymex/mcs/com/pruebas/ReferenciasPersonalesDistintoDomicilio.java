@@ -6,6 +6,8 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 public class ReferenciasPersonalesDistintoDomicilio extends AppCompatActivity {
@@ -14,6 +16,7 @@ public class ReferenciasPersonalesDistintoDomicilio extends AppCompatActivity {
     private EditText txtTelRefP, txtCelRefP, txtCorreoRefP, txtParentescoRefP;
     private SQLiteDatabase db = null;
     private Cursor c = null;
+    private  Button agregar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +37,18 @@ public class ReferenciasPersonalesDistintoDomicilio extends AppCompatActivity {
         txtCelRefP = (EditText) findViewById(R.id.txtCelularReferenciasP);
         txtCorreoRefP = (EditText) findViewById(R.id.txtCorreoReferenciasP);
         txtParentescoRefP = (EditText) findViewById(R.id.txtParentescoReferenciasP);
+
+        agregar =(Button)findViewById(R.id.btnGuardarReferenciasDistintoDomicilio);
+        agregar.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                validarReferenciasDistintoDomiciolio();
+                //guardarInformacionSolicitante();
+                //mostraDatos();
+            }
+        });
     }
 
-    public void validar(){
+    public void validarReferenciasDistintoDomiciolio(){
         Boolean v1 = txtApaternoRefP.getText().toString().trim().equalsIgnoreCase("");
         Boolean v2 = txtAMaternoRefP.getText().toString().trim().equalsIgnoreCase("");
         Boolean v3 = txtNombresRefP.getText().toString().trim().equalsIgnoreCase("");
@@ -55,47 +67,60 @@ public class ReferenciasPersonalesDistintoDomicilio extends AppCompatActivity {
         if(v1) {
             txtApaternoRefP.setError("Este campo no puede estar vacio");
             txtApaternoRefP.setText("");
+            txtApaternoRefP.requestFocus();
         } else if(v2) {
             txtAMaternoRefP.setError("Este campo no puede estar vacio");
             txtAMaternoRefP.setText("");
+            txtAMaternoRefP.requestFocus();
         } else if(v3){
             txtNombresRefP.setError("Este campo no puede estar vacio");
             txtNombresRefP.setText("");
+            txtNombresRefP.requestFocus();
         } else if(v4) {
             txtCalleRefP.setError("Este campo no puede estar vacio");
             txtCalleRefP.setText("");
+            txtCalleRefP.requestFocus();
         } else if(v5) {
             txtExtRefP.setError("Este campo no puede estar vacio");
             txtExtRefP.setText("");
+            txtExtRefP.requestFocus();
         } else if(v6){
             txtIntRefP.setError("Este campo no puede estar vacio");
             txtIntRefP.setText("");
+            txtIntRefP.requestFocus();
         } else if(v7){
             txtColRefP.setError("Este campo no puede estar vacio");
             txtColRefP.setText("");
+            txtColRefP.requestFocus();
         } else if(v8){
             txtCpRefP.setError("Este campo no puede estar vacio");
             txtCpRefP.setText("");
+            txtCpRefP.requestFocus();
         } else if(v9){
             txtMunRefP.setError("Este campo no puede estar vacio");
             txtMunRefP.setText("");
+            txtMunRefP.requestFocus();
         } else if(v10){
             txtEdoRefP.setError("Este campo no puede estar vacio");
             txtEdoRefP.setText("");
+            txtExtRefP.requestFocus();
         } else if(v11){
             txtTelRefP.setError("Este campo no puede estar vacio");
             txtTelRefP.setText("");
+            txtTelRefP.requestFocus();
         } else if(v12){
             txtCelRefP.setError("Este campo no puede estar vacio");
             txtCelRefP.setText("");
+            txtCelRefP.requestFocus();
         } else if ( v13) {
             txtCorreoRefP.setError("Este campo no puede estar vacio");
             txtCorreoRefP.setText("");
+            txtCorreoRefP.requestFocus();
         } else if ( v14) {
             txtParentescoRefP.setError("Este campo no puede estar vacio");
             txtParentescoRefP.setText("");
+            txtParentescoRefP.requestFocus();
         }
-
     }
 
     public void guardarReferenciasPersonalesDistintoDomiciolio() {
