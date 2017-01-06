@@ -43,7 +43,7 @@ public class ReferenciasPersonales extends AppCompatActivity {
         agregar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 validarReferenciasPersonales();
-                //guardarInformacionSolicitante();
+                guardarReferenciasPersonales();
                 //mostraDatos();
             }
         });

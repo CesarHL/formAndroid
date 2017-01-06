@@ -30,6 +30,7 @@ public class InformacionLaboral extends AppCompatActivity {
         btnLaboral.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 validar();
+                guardarInformacionLaboral();
             }
         });
 
