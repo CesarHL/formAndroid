@@ -240,7 +240,7 @@ public class InformacionLaboral extends AppCompatActivity {
     }
 
 
-    public void guardar() {
+    public void guardarInformacionLaboral() {
 
         db = getApplicationContext().openOrCreateDatabase(DataDB.DB_NAME, android.content.Context.MODE_PRIVATE, null);
 

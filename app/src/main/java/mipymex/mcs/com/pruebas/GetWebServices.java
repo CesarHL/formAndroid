@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -14,6 +15,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedInputStream;
@@ -80,6 +83,68 @@ public class GetWebServices extends AsyncTask<String, Void, String> {
                         respuestaJSON = new JSONObject(result.toString());
                         String resultJSON = respuestaJSON.getString("Acceso");
                         flagLogin = resultJSON.contains("Correcto");
+                    }
+                } catch (MalformedURLException e) {
+                    devuelve = devuelve + "eMAL: " + e.toString();
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    devuelve = devuelve + "eIO: " + e.toString();
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    devuelve = devuelve + "eJSON: " + e.toString();
+                    e.printStackTrace();
+                }
+                break;
+
+            case "fotos":
+                try {
+                    String IPConfig = IPpublic + "TipoFoto?v_cliente=1";
+                    url = new URL(IPConfig);
+                    conn = (HttpURLConnection) url.openConnection();
+                    conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Linux; Android 1.5; es-ES) Ejemplo HTTP");
+
+                    int respuesta = conn.getResponseCode();
+                    StringBuilder result = new StringBuilder();
+
+                    if (respuesta == HttpURLConnection.HTTP_OK) {
+
+                        InputStream in = new BufferedInputStream(conn.getInputStream());
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            result.append(line); // Pasar todas las entradas al StringBuilder
+                        }
+
+                        respuestaJSON = new JSONObject(result.toString());
+                        JSONArray fotos = respuestaJSON.getJSONArray("TipoFoto");
+
+                        String cat_pa_id;
+                        String cat_pa_descripcion;
+
+                        db = context.openOrCreateDatabase(DataDB.DB_NAME,android.content.Context.MODE_PRIVATE ,null);
+                        for (int i = 0; i < fotos.length(); i++) {
+
+                            cat_pa_id = fotos.getJSONObject(i).getString("CAT_PA_ID");
+                            cat_pa_descripcion = fotos.getJSONObject(i).getString("CAT_PA_PARENTESCO");
+
+                            System.out.println("cat_pa_id:" + cat_pa_id);
+                            System.out.println("cat_pa_descripcion:" + cat_pa_descripcion);
+
+                            /*try {
+                                ContentValues values = new ContentValues();
+                                values.put("_id", i + 1);
+                                values.put(DataDB.CAT_CM_ID, cat_pa_id);
+                                values.put(DataDB.CAT_CM_DESCRIPCION, cat_pa_descripcion);
+                                db.insert(DataDB.TABLE_NAME_TIPO_FOTO, null, values);
+                            } catch (SQLException ex) {
+                                System.out.println("Error al insertar tipo de fotos " + ex);
+                                break;
+                            } finally {
+                                System.out.println("tipo de fotos agregadas correctamente");
+                            }*/
+                        }
+                        db.close();
                     }
                 } catch (MalformedURLException e) {
                     devuelve = devuelve + "eMAL: " + e.toString();

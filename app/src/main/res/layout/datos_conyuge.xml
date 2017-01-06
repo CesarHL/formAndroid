@@ -88,7 +88,7 @@
                 android:text="Parentesco1" />
 
             <EditText
-                android:id="@+id/txtNombresReferencias"
+                android:id="@+id/txtParentesco1"
                 android:layout_below="@id/lblParentescoConyuge"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
@@ -105,7 +105,7 @@
 
             <TextView
                 android:id="@+id/lblTelefonoConyuge"
-                android:layout_below="@+id/txtNombresReferencias"
+                android:layout_below="@+id/txtParentesco1"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -213,7 +213,7 @@
                 android:text="Parentesco2" />
 
             <EditText
-                android:id="@+id/txtNombresReferencias2"
+                android:id="@+id/txtParentescoConyuge2"
                 android:layout_below="@id/lblParentescoConyuge2"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
@@ -230,7 +230,7 @@
 
             <TextView
                 android:id="@+id/lblTelefonoConyuge2"
-                android:layout_below="@+id/txtNombresReferencias2"
+                android:layout_below="@+id/txtParentescoConyuge2"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -338,7 +338,7 @@
                 android:text="Parentesco3" />
 
             <EditText
-                android:id="@+id/txtNombresReferencias3"
+                android:id="@+id/txtParentescoConyuge3"
                 android:layout_below="@id/lblParentescoConyuge3"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
@@ -355,7 +355,7 @@
 
             <TextView
                 android:id="@+id/lblTelefonoConyuge3"
-                android:layout_below="@+id/txtNombresReferencias3"
+                android:layout_below="@+id/txtParentescoConyuge3"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

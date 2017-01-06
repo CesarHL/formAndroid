@@ -34,7 +34,7 @@ public class ReferenciasPersonales extends AppCompatActivity {
         txtTelRef = (EditText) findViewById(R.id.txtTelefonoReferencias);
         txtCelRef = (EditText) findViewById(R.id.txtCelularReferencias);
         txtCorreoRef = (EditText) findViewById(R.id.txtCorreoReferencias);
-        txtParentescoRef = (EditText) findViewById(R.id.txtParentescoReferencias);
+        //txtParentescoRef = (EditText) findViewById(R.id.txtParentescoReferencias);
     }
 
     public void guardarReferenciasPersonales() {
