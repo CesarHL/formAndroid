@@ -6,6 +6,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -25,6 +26,7 @@ public class InformacionSolicitante extends AppCompatActivity {
     private SQLiteDatabase db = null;
     private Cursor c = null;
     private String sexo , estadoPropiedad, tiempoResidencia;
+    public static int tamDatos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -195,9 +197,9 @@ public class InformacionSolicitante extends AppCompatActivity {
         agregar =(Button)findViewById(R.id.btnGuardar);
         agregar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                validar();
+               // validar();
                 guardarInformacionSolicitante();
-                //mostraDatos();
+                mostraDatos();
             }
         });
     }
@@ -386,30 +388,67 @@ public class InformacionSolicitante extends AppCompatActivity {
 
     public void mostraDatos() {
 
-        db = getApplicationContext().openOrCreateDatabase(DataDB.DB_NAME,android.content.Context.MODE_PRIVATE ,null);
+        db = getApplicationContext().openOrCreateDatabase(DataDB.DB_NAME, android.content.Context.MODE_PRIVATE, null);
         try {
-            String[] valores_recuperar = {
+            String[] valores_recuperar = {"_id",
                     DataDB.PR_SO_APATERNO,
                     DataDB.PR_SO_AMATERNO,
-                    DataDB.PR_SO_CALLE
+                    DataDB.PR_SO_NOMBRE,
+                    DataDB.PR_SO_DTE_NACIMIENTO,
+                    DataDB.PR_SO_LUGAR,
+                    DataDB.PR_SO_EDAD,
+                    DataDB.PR_SO_SEXO,
+                    DataDB.PR_SO_RFC,
+                    DataDB.PR_SO_CURP,
+                    DataDB.PR_SO_INE,
+                    DataDB.PR_SO_EDO_CIVIL,
+                    DataDB.PR_SO_CONYUGE_TRABAJA,
+                    DataDB.PR_SO_INGRESO_CONYUGE,
+                    DataDB.PR_SO_DEPENDIENTES,
+                    DataDB.PR_SO_NUMDEPENDIENTES,
+                    DataDB.PR_SO_CALLE,
+                    DataDB.PR_SO_NUM_EXT,
+                    DataDB.PR_SO_NUM_INT,
+                    DataDB.PR_SO_COLONIA,
+                    DataDB.PR_SO_CP,
+                    DataDB.PR_SO_MUNICIPIO,
+                    DataDB.PR_SO_ESTADO,
+                    DataDB.PR_SO_TIPO_RECIDENCIA,
+                    DataDB.PR_SO_TIEMPO_RESIDENCIA_A,
+                    DataDB.PR_SO_TIEMPO_RESIDENCIA_M,
+                    DataDB.PR_SO_CREDITO_VI,
+                    DataDB.PR_SO_PAGO_VIVIENDA,
+                    DataDB.PR_SO_TEL_CASA,
+                    DataDB.PR_SO_TEL_CEL,
+                    DataDB.PR_SO_CORREO,
+                    DataDB.PR_SO_CARGO_P_PUBLICO,
+                    DataDB.PR_SO_CARGO_PUBLICO,
+                    DataDB.PR_SO_CONYUGE_P_PUBLICO,
+                    DataDB.PR_SO_CONYUGE_PUBLICO
             };
-
-            c = db.rawQuery("SELECT * FROM " + DataDB.TABLE_NAME_INFO_SOLICITANTE, null);
-
+            Cursor c = db.query(DataDB.TABLE_NAME_INFO_SOLICITANTE, valores_recuperar,null,null,null,null,null,null);
+            tamDatos = c.getCount();
+            //getApplicationContext().setTitle("Sincronizar: " + tamDatos); // Cambiar el titulo de la pantalla
             if (c.moveToFirst()) {
                 do {
+                    System.out.println("=============================================" + tamDatos);
+                    System.out.println("id:" + c.getString(0) + "\n" + c.getString(1) + "\nPaterno: " + c.getString(2) + "\nMaterno" + c.getString(3)+ "\n" +
+                            c.getString(4) + "\n" + c.getString(5) + "\n" + c.getString(6) + "\n" + c.getString(7) + "\n" + c.getString(8) + "\n"
+                            + c.getString(9) + "\n" + c.getString(10) + "\n: " + c.getString(11)+ "\n" + c.getString(12) + "\n" + c.getString(13) +
+                            "\n" + c.getString(14) + "\n" + c.getString(15) + "\n" + c.getString(16) + "\n" + c.getString(17) + "\n" + c.getString(18) +
+                            "\n" + c.getString(19) + "\n" + c.getString(20) + "\n" + c.getString(21) + "\n" + c.getString(22));
 
-                    for(int i = 1; i<23; i++) {
-                        System.out.println("Dato: " + c.getString(i));
-                    }
-
+                  /*  items.add(new Item(c.getString(1), c.getString(2), Integer.parseInt(c.getString(3)),c.getString(4), c.getString(5), c.getString(6),
+                            c.getString(7), c.getString(8), c.getString(9),c.getString(10), c.getString(11), c.getString(12),c.getString(13),c.getString(14),
+                            c.getString(15), c.getString(16), c.getString(17),c.getString(18),c.getString(19), c.getString(20),c.getString(21),c.getString(22),c.getString(23),1));
+                */
                 } while (c.moveToNext());
-                    c.close();
+                c.close();
             } else {
-                System.out.println("No existe información");
+                System.out.println("No existen cuentas a sincronizar");
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            Log.e("Error", ex.toString());
         } finally {
             db.close();
         }

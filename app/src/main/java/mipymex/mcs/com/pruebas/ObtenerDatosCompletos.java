@@ -2,6 +2,7 @@ package mipymex.mcs.com.pruebas;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.database.Cursor;
@@ -15,13 +16,14 @@ import android.widget.Button;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
-public class ObtenerDatosCompletos extends AppCompatActivity {
+public class ObtenerDatosCompletos extends Fragment {
 
     private SQLiteDatabase db = null;
     private Cursor c = null;
-/*
+    public static int tamDatos;
+
     public void datosSincronizar() {
-        db = getApplicationContext().openOrCreateDatabase(DataDB.DB_NAME, android.content.Context.MODE_PRIVATE, null);
+        db = getActivity().openOrCreateDatabase(DataDB.DB_NAME, android.content.Context.MODE_PRIVATE, null);
         try {
             String[] valores_recuperar = {"_id",
                     DataDB.PR_SO_APATERNO,
@@ -59,20 +61,20 @@ public class ObtenerDatosCompletos extends AppCompatActivity {
                     DataDB.PR_SO_CONYUGE_P_PUBLICO,
                     DataDB.PR_SO_CONYUGE_PUBLICO
             };
-            Cursor c = db.query(DataDB.TABLE_NAME_INFO_SOLICITANTE, valores_recuperar,null,null,null,null,DataDB.PR_CD_NOMBRE,null);
+            Cursor c = db.query(DataDB.TABLE_NAME_INFO_SOLICITANTE, valores_recuperar,null,null,null,null,DataDB.PR_SO_APATERNO,null);
             tamDatos = c.getCount();
             getActivity().setTitle("Sincronizar: " + tamDatos); // Cambiar el titulo de la pantalla
             if (c.moveToFirst()) {
                 do {
-                    System.out.println("id:" + c.getString(0) + "\n" + c.getString(1) + "\n" + c.getString(2) + "\np" + c.getString(3)+ "\n" +
-                            c.getString(4) + "\ncodD" + c.getString(5) + "\n" + c.getString(6) + "\n" + c.getString(7) + "\n" + c.getString(8) + "\n"
-                            + c.getString(9) + "\n" + c.getString(10) + "\nRPU: " + c.getString(11)+ "\n" + c.getString(12) + "\n" + c.getString(13) +
-                            "\n" + c.getString(14) + "\n" + c.getString(15) + "\n" + c.getString(16) + "\n" + c.getString(17) + "\n" + c.getString(18) +
-                            "\n" + c.getString(19) + "\n" + c.getString(20) + "\n" + c.getString(21) + "\n" + c.getString(22));
+                    System.out.println("id:" + c.getString(0) + "\nApellidoPaterno" + c.getString(1) + "\nAMaterno" + c.getString(2) + "\nNombre" + c.getString(3)+ "\n" +
+                            c.getString(4) + "\n" + c.getString(5) + "\n" + c.getString(6) + "\n" + c.getString(7));
 
-                    items.add(new Item(c.getString(1), c.getString(2), Integer.parseInt(c.getString(3)),c.getString(4), c.getString(5), c.getString(6),
+                  /*  items.add(new Item(c.getString(1), c.getString(2), Integer.parseInt(c.getString(3)),c.getString(4), c.getString(5), c.getString(6),
                             c.getString(7), c.getString(8), c.getString(9),c.getString(10), c.getString(11), c.getString(12),c.getString(13),c.getString(14),
                             c.getString(15), c.getString(16), c.getString(17),c.getString(18),c.getString(19), c.getString(20),c.getString(21),c.getString(22),c.getString(23),1));
+                */
+                    db.delete(DataDB.TABLE_NAME_INFO_LABORAL, null, null);
+                    System.out.println("Borrado");
                 } while (c.moveToNext());
                 c.close();
             } else {
@@ -83,7 +85,7 @@ public class ObtenerDatosCompletos extends AppCompatActivity {
         } finally {
             db.close();
         }
-    }*/
+    }
 /*
     public void sincronizar_datos(){
 
