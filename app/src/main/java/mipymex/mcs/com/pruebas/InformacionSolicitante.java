@@ -13,6 +13,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import java.util.ArrayList;
 import java.util.List;
 
 public class InformacionSolicitante extends AppCompatActivity {
@@ -28,7 +29,6 @@ public class InformacionSolicitante extends AppCompatActivity {
     private Cursor c = null;
     private String sexo , estadoPropiedad, tiempoResidenciaAnios, tiempoResidenciaMeses, tabajaConyuge, dependientes, creditoVivienda, cargoPublicoSolicitante, cargoPublicoConyuge ;
     public static int tamDatos;
-    public static List<Item> items = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -224,6 +224,12 @@ public class InformacionSolicitante extends AppCompatActivity {
                             + c.getString(31) + "\nInfonavit: " + c.getString(32) + "\nMonto Crédito: " + c.getString(33) + "\nTelefono: " + c.getString(34)+ "\nCelular: " + c.getString(35) + "\nCorreo: " + c.getString(36)
                             + "\nCargo G Solicitante: " + c.getString(37) + "\nEspecificacion Cargo: " + c.getString(38) + "\nCargo G Conyuge: " + c.getString(39)
                             + "\nEspecificación G Conyuge: " + c.getString(40));
+
+                    List datosA = new ArrayList();
+                    for (int n = 1; n<= tamDatos; n++) {
+                        datosA.add(c.getString(n));
+                        System.out.println(datosA.get(n));
+                    }
 
                 } while (c.moveToNext());
                 c.close();
