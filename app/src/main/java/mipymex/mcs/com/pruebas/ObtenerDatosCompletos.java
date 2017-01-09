@@ -15,66 +15,40 @@ import android.widget.Button;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.List;
 
-public class ObtenerDatosCompletos extends Fragment {
+public class ObtenerDatosCompletos extends AppCompatActivity  {
 
     private SQLiteDatabase db = null;
     private Cursor c = null;
+    private Connection connection;
     public static int tamDatos;
+    public static List<Item> items = null;
+    private String aux;
 
     public void datosSincronizar() {
-        db = getActivity().openOrCreateDatabase(DataDB.DB_NAME, android.content.Context.MODE_PRIVATE, null);
+        db = getApplicationContext().openOrCreateDatabase(DataDB.DB_NAME, android.content.Context.MODE_PRIVATE, null);
         try {
-            String[] valores_recuperar = {"_id",
-                    DataDB.PR_SO_APATERNO,
-                    DataDB.PR_SO_AMATERNO,
-                    DataDB.PR_SO_NOMBRE,
-                    DataDB.PR_SO_DTE_NACIMIENTO,
-                    DataDB.PR_SO_LUGAR,
-                    DataDB.PR_SO_EDAD,
-                    DataDB.PR_SO_SEXO,
-                    DataDB.PR_SO_RFC,
-                    DataDB.PR_SO_CURP,
-                    DataDB.PR_SO_INE,
-                    DataDB.PR_SO_EDO_CIVIL,
-                    DataDB.PR_SO_CONYUGE_TRABAJA,
-                    DataDB.PR_SO_INGRESO_CONYUGE,
-                    DataDB.PR_SO_DEPENDIENTES,
-                    DataDB.PR_SO_NUMDEPENDIENTES,
-                    DataDB.PR_SO_CALLE,
-                    DataDB.PR_SO_NUM_EXT,
-                    DataDB.PR_SO_NUM_INT,
-                    DataDB.PR_SO_COLONIA,
-                    DataDB.PR_SO_CP,
-                    DataDB.PR_SO_MUNICIPIO,
-                    DataDB.PR_SO_ESTADO,
-                    DataDB.PR_SO_TIPO_RECIDENCIA,
-                    DataDB.PR_SO_TIEMPO_RESIDENCIA_A,
-                    DataDB.PR_SO_TIEMPO_RESIDENCIA_M,
-                    DataDB.PR_SO_CREDITO_VI,
-                    DataDB.PR_SO_PAGO_VIVIENDA,
-                    DataDB.PR_SO_TEL_CASA,
-                    DataDB.PR_SO_TEL_CEL,
-                    DataDB.PR_SO_CORREO,
-                    DataDB.PR_SO_CARGO_P_PUBLICO,
-                    DataDB.PR_SO_CARGO_PUBLICO,
-                    DataDB.PR_SO_CONYUGE_P_PUBLICO,
-                    DataDB.PR_SO_CONYUGE_PUBLICO
-            };
-            Cursor c = db.query(DataDB.TABLE_NAME_INFO_SOLICITANTE, valores_recuperar,null,null,null,null,DataDB.PR_SO_APATERNO,null);
+
+           // Cursor c = db.query(DataDB.TABLE_NAME_INFO_SOLICITANTE, valores_recuperar,null,null,null,null,DataDB.PR_SO_APATERNO,null);
+            Cursor c = db.rawQuery("SELECT *  FROM " + DataDB.TABLE_NAME_SOLICITUD, null);
             tamDatos = c.getCount();
-            getActivity().setTitle("Sincronizar: " + tamDatos); // Cambiar el titulo de la pantalla
+            this.setTitle("Sincronizar: " + tamDatos); // Cambiar el titulo de la pantalla
             if (c.moveToFirst()) {
                 do {
-                    System.out.println("id:" + c.getString(0) + "\nApellidoPaterno" + c.getString(1) + "\nAMaterno" + c.getString(2) + "\nNombre" + c.getString(3)+ "\n" +
-                            c.getString(4) + "\n" + c.getString(5) + "\n" + c.getString(6) + "\n" + c.getString(7));
 
-                  /*  items.add(new Item(c.getString(1), c.getString(2), Integer.parseInt(c.getString(3)),c.getString(4), c.getString(5), c.getString(6),
+                    items.add(new Item(c.getString(1), c.getString(2), c.getString(3),c.getString(4), c.getString(5), c.getString(6),
                             c.getString(7), c.getString(8), c.getString(9),c.getString(10), c.getString(11), c.getString(12),c.getString(13),c.getString(14),
-                            c.getString(15), c.getString(16), c.getString(17),c.getString(18),c.getString(19), c.getString(20),c.getString(21),c.getString(22),c.getString(23),1));
-                */
-                    db.delete(DataDB.TABLE_NAME_INFO_LABORAL, null, null);
-                    System.out.println("Borrado");
+                            c.getString(15), c.getString(16), c.getString(17),c.getString(18),c.getString(19), c.getString(20),c.getString(21),c.getString(22),c.getString(23),
+                            c.getString(24),c.getString(25), c.getString(26),c.getString(27),c.getString(28),c.getString(29),c.getString(30),c.getString(31), c.getString(32),c.getString(33),c.getString(34),c.getString(35),
+                            c.getString(36),c.getString(37), c.getString(38),c.getString(39),c.getString(40),c.getString(41),c.getString(42), c.getString(43), c.getString(44),c.getString(45), c.getString(46),
+                            c.getString(47),c.getString(48),c.getString(49),
+                            c.getString(50), c.getString(51), c.getString(52),c.getString(53),c.getString(54), c.getString(55),c.getString(56),c.getString(57),c.getString(58),
+                            c.getString(59),c.getString(60)));
+                    for (int n = 0; n<= items.size(); n++) {
+                        System.out.println(items.get(n));
+                    }
+
                 } while (c.moveToNext());
                 c.close();
             } else {
@@ -86,8 +60,8 @@ public class ObtenerDatosCompletos extends Fragment {
             db.close();
         }
     }
-/*
-    public void sincronizar_datos(){
+
+   /* public void sincronizar_datos(){
 
         if(connection.getConnection("No informar")) {
 
@@ -101,8 +75,8 @@ public class ObtenerDatosCompletos extends Fragment {
                 public void onClick(DialogInterface dialog, int id) {
 
 
-                    sincronizar_fotos();
-                    for (int i = 0; i < Service_sincronizar.items.size(); i++) {
+                  //  sincronizar_fotos();
+                   for (int i = 0; i < Service_sincronizar.items.size(); i++) {
                         String strSend = null;
                         try {
                             strSend = Login.IPpublic + "RecibeDatos?v_cliente=1" +
@@ -150,37 +124,5 @@ public class ObtenerDatosCompletos extends Fragment {
             bn.setTextColor(Color.GRAY);
         }
     }*/
-/*
-    public void sincronizar_fotos(){
 
-        if(connection.getConnection("No informar")) {
-
-            db = openOrCreateDatabase(DataDB.DB_NAME,android.content.Context.MODE_PRIVATE ,null);
-            Cursor c = db.rawQuery("SELECT * FROM " + DataDB.TABLE_NAME_IMAGEN, null);
-            try {
-                String strSendFotos;
-                System.out.println("Imagenes encontradas: " + c.getCount());
-                if (c.moveToFirst()) {
-                    do{
-                        strSendFotos = Login.IPpublic + "RecibeImagen" +
-                                "?v_cliente=1" +
-                                "&v_pr_cf_credito=" + c.getString(0) +
-                                "&v_fecha_visita=" + URLEncoder.encode(c.getString(1), "UTF-8") +
-                                "&v_tipo=" + c.getString(2) +
-                                "&v_id="+ URLEncoder.encode(c.getString(4), "UTF-8") +
-                                "&v_imagen=" + URLEncoder.encode(c.getString(3),"UTF-8");
-
-                        new GetWebServicesFotos(Catalogo.this).execute(strSendFotos, "enviar_fotos",c.getString(0),c.getString(2));
-                    }while(c.moveToNext());
-                } else {
-                    System.out.println("No existen imagenes en BD local");
-                }
-            } catch (Exception ex) {
-                Log.e("Error", ex.toString());
-            }finally {
-                db.close();
-            }
-        }
-    }
-    */
 }

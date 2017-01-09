@@ -13,6 +13,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import java.util.List;
 
 public class InformacionSolicitante extends AppCompatActivity {
 
@@ -27,12 +28,12 @@ public class InformacionSolicitante extends AppCompatActivity {
     private Cursor c = null;
     private String sexo , estadoPropiedad, tiempoResidenciaAnios, tiempoResidenciaMeses, tabajaConyuge, dependientes, creditoVivienda, cargoPublicoSolicitante, cargoPublicoConyuge ;
     public static int tamDatos;
+    public static List<Item> items = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.informacion_solicitante);
-
 
         txtAp = (EditText) findViewById(R.id.txtApellidoPaterno);
         txtAp.requestFocus();
@@ -198,11 +199,42 @@ public class InformacionSolicitante extends AppCompatActivity {
         agregar =(Button)findViewById(R.id.btnGuardar);
         agregar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                validar();
+              //  validar();
                 guardarInformacionSolicitante();
                 mostraDatos();
+
             }
         });
+    }
+
+    public void mostraDatos() {
+        db = getApplicationContext().openOrCreateDatabase(DataDB.DB_NAME, android.content.Context.MODE_PRIVATE, null);
+        try {
+            Cursor c = db.rawQuery("SELECT *  FROM " + DataDB.TABLE_NAME_INFO_SOLICITANTE, null);
+            tamDatos = c.getCount();
+            if (c.moveToFirst()) {
+                do {
+                    System.out.println("===============================================================================");
+                    System.out.println("id:" + c.getString(0) + "\n" + c.getString(1) + "\n" + c.getString(2) + "\n" + c.getString(3)+ "\n" + c.getString(4) + "\n"
+                            + c.getString(5) + "\nFecha Nacimiento: " + c.getString(6) + "\nApellido Paterno: " + c.getString(7) + "\n" + c.getString(8) + "\nNombre: " + c.getString(9) + "\nLugar Nacimiento: "
+                            + c.getString(10) + "\n: " + c.getString(11)+ "\nEdad: " + c.getString(12) + "\n" + c.getString(13) + "\n" + c.getString(14) + "\n"
+                            + c.getString(15) + "\n" + c.getString(16) + "\nEstado Civil: " + c.getString(17) + "\n" + c.getString(18) + "\n" + c.getString(19) + "\n"
+                            + c.getString(20) + "\n" + c.getString(21) + "\n" + c.getString(22) + c.getString(23)  + c.getString(24) + "\n" + c.getString(25)
+                            + "\n" + c.getString(26) + "\nMunicipio: " + c.getString(27) + "\n" + c.getString(28) + "\n" + c.getString(29) + "\n" + c.getString(30) + "\n"
+                            + c.getString(31) + "\nInfonavit: " + c.getString(32) + "\nMonto Crédito: " + c.getString(33) + "\nTelefono: " + c.getString(34)+ "\nCelular: " + c.getString(35) + "\nCorreo: " + c.getString(36)
+                            + "\nCargo G Solicitante: " + c.getString(37) + "\nEspecificacion Cargo: " + c.getString(38) + "\nCargo G Conyuge: " + c.getString(39)
+                            + "\nEspecificación G Conyuge: " + c.getString(40));
+
+                } while (c.moveToNext());
+                c.close();
+            } else {
+                System.out.println("No existen cuentas a sincronizar");
+            }
+        } catch (Exception ex) {
+            Log.e("Error", ex.toString());
+        } finally {
+            db.close();
+        }
     }
 
     public void validar(){
@@ -388,36 +420,6 @@ public class InformacionSolicitante extends AppCompatActivity {
             System.out.println("Insertado");
         } catch (SQLException ex) {
             System.out.println("Error al insertar solicitud: " + ex);
-        } finally {
-            db.close();
-        }
-    }
-
-    public void mostraDatos() {
-        db = getApplicationContext().openOrCreateDatabase(DataDB.DB_NAME, android.content.Context.MODE_PRIVATE, null);
-        try {
-            Cursor c = db.rawQuery("SELECT *  FROM " + DataDB.TABLE_NAME_INFO_SOLICITANTE, null);
-            tamDatos = c.getCount();
-            if (c.moveToFirst()) {
-                do {
-                    System.out.println("===============================================================================");
-                    System.out.println("id:" + c.getString(0) + "\n" + c.getString(1) + "\n" + c.getString(2) + "\n" + c.getString(3)+ "\n" + c.getString(4) + "\n"
-                            + c.getString(5) + "\nFecha Nacimiento: " + c.getString(6) + "\nApellido Paterno: " + c.getString(7) + "\n" + c.getString(8) + "\nNombre: " + c.getString(9) + "\nLugar Nacimiento: "
-                            + c.getString(10) + "\n: " + c.getString(11)+ "\nEdad: " + c.getString(12) + "\n" + c.getString(13) + "\n" + c.getString(14) + "\n"
-                            + c.getString(15) + "\n" + c.getString(16) + "\nEstado Civil: " + c.getString(17) + "\n" + c.getString(18) + "\n" + c.getString(19) + "\n"
-                            + c.getString(20) + "\n" + c.getString(21) + "\n" + c.getString(22) + c.getString(23)  + c.getString(24) + "\n" + c.getString(25)
-                            + "\n" + c.getString(26) + "\nMunicipio: " + c.getString(27) + "\n" + c.getString(28) + "\n" + c.getString(29) + "\n" + c.getString(30) + "\n"
-                            + c.getString(31) + "\nInfonavit: " + c.getString(32) + "\nMonto Crédito: " + c.getString(33) + "\nTelefono: " + c.getString(34)+ "\nCelular: " + c.getString(35) + "\nCorreo: " + c.getString(36)
-                            + "\nCargo G Solicitante: " + c.getString(37) + "\nEspecificacion Cargo: " + c.getString(38) + "\nCargo G Conyuge: " + c.getString(39)
-                            + "\nEspecificación G Conyuge: " + c.getString(40));
-
-                } while (c.moveToNext());
-                c.close();
-            } else {
-                System.out.println("No existen cuentas a sincronizar");
-            }
-        } catch (Exception ex) {
-            Log.e("Error", ex.toString());
         } finally {
             db.close();
         }
