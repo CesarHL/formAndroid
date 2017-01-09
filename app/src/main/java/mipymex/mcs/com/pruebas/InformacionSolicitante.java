@@ -18,14 +18,14 @@ public class InformacionSolicitante extends AppCompatActivity {
 
     private EditText txtAp, txtAm, txtNombre, txtLugarNacimiento, txtFechaNacimiento, txtEdad, txtRfc, txtCurp, txtFolioIfe, txtInConyuge;
     private EditText txtRegimen, txtEstadoCivil, txtPersonas, txtCalle, txtNExt, txtNInt, txtColonia, txtCP, txtMun;
-    private EditText txtEstado, txtMontoCred, txtTelCasa, txtCelular, txtCorreo, txtCargoPublicSolicitante, txtEspCargoPublico;
+    private EditText txtEstado, txtMontoCred, txtTelCasa, txtCelular, txtCorreo, txtCargoPublicSolicitante, txtEspCargoPublicoConyuge;
     private Button agregar;
     private RadioGroup rdSexo, rdTConyuge, rdDep, rdRes, rdTRes, rdCPublico, rdCConyuge;
     private TextView lblMontoCred, lblInConyuge, lblDependientes;
     private CheckBox checkVivienda;
     private SQLiteDatabase db = null;
     private Cursor c = null;
-    private String sexo , estadoPropiedad, tiempoResidencia;
+    private String sexo , estadoPropiedad, tiempoResidenciaAnios, tiempoResidenciaMeses, tabajaConyuge, dependientes, creditoVivienda, cargoPublicoSolicitante, cargoPublicoConyuge ;
     public static int tamDatos;
 
     @Override
@@ -68,10 +68,12 @@ public class InformacionSolicitante extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.afirmativo){
+                    tabajaConyuge = "Sí";
                     lblInConyuge.setVisibility(View.VISIBLE);
                     txtInConyuge.setVisibility(View.VISIBLE);
                     txtInConyuge.requestFocus();
                 }else if (checkedId == R.id.negativo){
+                    tabajaConyuge = "No";
                     lblInConyuge.setVisibility(View.GONE);
                     txtInConyuge.setVisibility(View.GONE);
                 }
@@ -90,10 +92,12 @@ public class InformacionSolicitante extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.afirmativoDependientes){
+                    dependientes = "Sí";
                     lblDependientes.setVisibility(View.VISIBLE);
                     txtPersonas.setVisibility(View.VISIBLE);
                     txtPersonas.requestFocus();
                 }else if (checkedId == R.id.negativoDependientes){
+                    dependientes = "No";
                     lblDependientes.setVisibility(View.GONE);
                     txtPersonas.setVisibility(View.GONE);
                 }
@@ -121,23 +125,17 @@ public class InformacionSolicitante extends AppCompatActivity {
             }
         });
 
-        /*
-        * String tipoResidencia = rdTRes.isActivated() ? "meses" : "años";
-                System.out.println("================================ =============" + tipoResidencia);
-        * */
-
         rdTRes =(RadioGroup) findViewById(R.id.rgTiempoResidencia);
         rdTRes.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.anios){
-                    tiempoResidencia = "años";
+                    tiempoResidenciaAnios = "años";
                 } else if (checkedId == R.id.meses){
-                    tiempoResidencia = "menses";
+                    tiempoResidenciaMeses = "menses";
                 }
             }
         });
-
 
         lblMontoCred = (TextView) findViewById(R.id.lblMontoMensual);
         lblMontoCred.setVisibility(View.GONE);
@@ -148,9 +146,11 @@ public class InformacionSolicitante extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (((CheckBox) v).isChecked()) {
+                    creditoVivienda = "Sí";
                     lblMontoCred.setVisibility(View.VISIBLE);
                     txtMontoCred.setVisibility(View.VISIBLE);
                 } else {
+                    creditoVivienda = "No";
                     lblMontoCred.setVisibility(View.GONE);
                     txtMontoCred.setVisibility(View.GONE);
                 }
@@ -158,24 +158,23 @@ public class InformacionSolicitante extends AppCompatActivity {
             }
         });
 
-
-
         txtTelCasa = (EditText) findViewById(R.id.txtTelefono);
         txtCelular = (EditText) findViewById(R.id.txtCelular);
         txtCorreo = (EditText) findViewById(R.id.txtCorreo);
         txtCargoPublicSolicitante = (EditText) findViewById(R.id.txtEspecificarSolicitante);
         txtCargoPublicSolicitante.setVisibility(View.GONE);
-        txtEspCargoPublico = (EditText) findViewById(R.id.txtEspecificarCargoPublicoConyuge);
-        txtEspCargoPublico.setVisibility(View.GONE);
+        txtEspCargoPublicoConyuge = (EditText) findViewById(R.id.txtEspecificarCargoPublicoConyuge);
+        txtEspCargoPublicoConyuge.setVisibility(View.GONE);
         rdCPublico =(RadioGroup) findViewById(R.id.grpBtnCargoPublico);
-
         rdCPublico.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.afirmativoCargoPublico){
+                    cargoPublicoSolicitante = "Sí";
                     txtCargoPublicSolicitante.setVisibility(View.VISIBLE);
                     txtCargoPublicSolicitante.requestFocus();
-                } else if (checkedId == R.id.negativoCargoPublico){
+                } else {
+                    cargoPublicoSolicitante = "No";
                     txtCargoPublicSolicitante.setVisibility(View.GONE);
                 }
             }
@@ -186,10 +185,12 @@ public class InformacionSolicitante extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.afirmativoCargoPublicoConyugeo){
-                    txtEspCargoPublico.setVisibility(View.VISIBLE);
-                    txtEspCargoPublico.requestFocus();
-                } else if (checkedId == R.id.negativoCargoPublicoConyuge){
-                    txtEspCargoPublico.setVisibility(View.GONE);
+                    cargoPublicoConyuge = "Sí";
+                    txtEspCargoPublicoConyuge.setVisibility(View.VISIBLE);
+                    txtEspCargoPublicoConyuge.requestFocus();
+                } else {
+                    cargoPublicoConyuge = "No";
+                    txtEspCargoPublicoConyuge.setVisibility(View.GONE);
                 }
             }
         });
@@ -197,7 +198,7 @@ public class InformacionSolicitante extends AppCompatActivity {
         agregar =(Button)findViewById(R.id.btnGuardar);
         agregar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-               // validar();
+                validar();
                 guardarInformacionSolicitante();
                 mostraDatos();
             }
@@ -214,11 +215,12 @@ public class InformacionSolicitante extends AppCompatActivity {
         Boolean v6 = txtRfc.getText().toString().trim().equalsIgnoreCase("");
         Boolean v7 = txtCurp.getText().toString().trim().equalsIgnoreCase("");
         Boolean v8 = txtFolioIfe.getText().toString().trim().equalsIgnoreCase("");
-        Boolean v9 = txtInConyuge.getText().toString().trim().equalsIgnoreCase("");
-        Boolean v10 = txtRegimen.getText().toString().trim().equalsIgnoreCase("");
-        Boolean v11 = txtEstadoCivil.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v10 = txtInConyuge.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v11 = txtRegimen.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v9 = txtEstadoCivil.getText().toString().trim().equalsIgnoreCase("");
         Boolean v12 = txtPersonas.getText().toString().trim().equalsIgnoreCase("");
         Boolean v13 = txtCalle.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v188 = txtMun.getText().toString().trim().equalsIgnoreCase("");
         Boolean v14 = txtNExt.getText().toString().trim().equalsIgnoreCase("");
         Boolean v15 = txtNInt.getText().toString().trim().equalsIgnoreCase("");
         Boolean v16 = txtColonia.getText().toString().trim().equalsIgnoreCase("");
@@ -228,7 +230,7 @@ public class InformacionSolicitante extends AppCompatActivity {
         Boolean v20 = txtTelCasa.getText().toString().trim().equalsIgnoreCase("");
         Boolean v21 = txtCelular.getText().toString().trim().equalsIgnoreCase("");
         Boolean v22 = txtCorreo.getText().toString().trim().equalsIgnoreCase("");
-        Boolean v23 = txtEspCargoPublico.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v23 = txtEspCargoPublicoConyuge.getText().toString().trim().equalsIgnoreCase("");
 
         if(v1) {
             txtAp.setError("Este campo no puede estar vacio");
@@ -267,17 +269,17 @@ public class InformacionSolicitante extends AppCompatActivity {
             txtFolioIfe.setText("");
             txtFolioIfe.requestFocus();
         } else if(v9){
-            txtInConyuge.setError("Este campo no puede estar vacio");
-            txtInConyuge.setText("");
-            txtInConyuge.requestFocus();
-        } else if(v10){
-            txtRegimen.setError("Este campo no puede estar vacio");
-            txtRegimen.setText("");
-            txtRegimen.requestFocus();
-        } else if(v11){
             txtEstadoCivil.setError("Este campo no puede estar vacio");
             txtEstadoCivil.setText("");
             txtEstadoCivil.requestFocus();
+        } else if(v10){
+            txtInConyuge.setError("Este campo no puede estar vacio");
+            txtInConyuge.setText("");
+            txtInConyuge.requestFocus();
+        } else if(v11){
+            txtRegimen.setError("Este campo no puede estar vacio");
+            txtRegimen.setText("");
+            txtRegimen.requestFocus();
         } else if(v12){
             txtPersonas.setError("Este campo no puede estar vacio");
             txtPersonas.setText("");
@@ -289,6 +291,7 @@ public class InformacionSolicitante extends AppCompatActivity {
         } else if ( v14) {
             txtNExt.setError("Este campo no puede estar vacio");
             txtNExt.setText("");
+            txtNExt.requestFocus();
         } else if ( v15) {
             txtNInt.setError("Este campo no puede estar vacio");
             txtNInt.setText("");
@@ -301,6 +304,10 @@ public class InformacionSolicitante extends AppCompatActivity {
             txtCP.setError("Este campo no puede estar vacio");
             txtCP.setText("");
             txtCP.requestFocus();
+        } else if ( v188) {
+            txtMun.setError("Este campo no puede estar vacio");
+            txtMun.setText("");
+            txtMun.requestFocus();
         } else if ( v18) {
             txtEstado.setError("Este campo no puede estar vacio");
             txtEstado.setText("");
@@ -322,9 +329,16 @@ public class InformacionSolicitante extends AppCompatActivity {
             txtCorreo.setText("");
             txtCorreo.requestFocus();
         } else if ( v23) {
-            txtEspCargoPublico.setError("Este campo no puede estar vacio");
-            txtEspCargoPublico.setText("");
-            txtEspCargoPublico.requestFocus();
+            txtEspCargoPublicoConyuge.setError("Este campo no puede estar vacio");
+            txtEspCargoPublicoConyuge.setText("");
+            txtEspCargoPublicoConyuge.requestFocus();
+        }
+
+        if(!checkVivienda.isChecked()) {
+            checkVivienda.setError("Seleccione por favor");
+            checkVivienda.requestFocus();
+        } else {
+            checkVivienda.setError(null);
         }
 
     }
@@ -334,13 +348,6 @@ public class InformacionSolicitante extends AppCompatActivity {
 
         try {
             ContentValues values = new ContentValues();
-
-            values.put(DataDB.PR_SO_NUMSOLICITUD, txtAp.getText().toString());
-            values.put(DataDB.PR_SO_MTO_PRESTAMO, txtAp.getText().toString());
-            values.put(DataDB.PR_SO_PLAZO, txtAp.getText().toString());
-            values.put(DataDB.PR_SO_ASESOR, txtAp.getText().toString());
-            values.put(DataDB.PR_SO_DTE_SOLICITUD, txtAp.getText().toString());
-            values.put(DataDB.PR_SO_DESTINO, txtAp.getText().toString());
 
             values.put(DataDB.PR_SO_APATERNO, txtAp.getText().toString());
             values.put(DataDB.PR_SO_AMATERNO, txtAm.getText().toString());
@@ -353,9 +360,9 @@ public class InformacionSolicitante extends AppCompatActivity {
             values.put(DataDB.PR_SO_CURP, txtCurp.getText().toString());
             values.put(DataDB.PR_SO_INE, txtFolioIfe.getText().toString());
             values.put(DataDB.PR_SO_EDO_CIVIL, txtEstadoCivil.getText().toString());
-            values.put(DataDB.PR_SO_CONYUGE_TRABAJA, txtAp.getText().toString());//rg y n
+            values.put(DataDB.PR_SO_CONYUGE_TRABAJA, tabajaConyuge);//rg y n
             values.put(DataDB.PR_SO_INGRESO_CONYUGE, txtInConyuge.getText().toString());
-            values.put(DataDB.PR_SO_DEPENDIENTES, txtAp.getText().toString());//rg y n
+            values.put(DataDB.PR_SO_DEPENDIENTES, dependientes);//rg y n
             values.put(DataDB.PR_SO_NUMDEPENDIENTES, txtPersonas.getText().toString());
             values.put(DataDB.PR_SO_CALLE, txtCalle.getText().toString());
             values.put(DataDB.PR_SO_NUM_EXT, txtNExt.getText().toString());
@@ -365,17 +372,17 @@ public class InformacionSolicitante extends AppCompatActivity {
             values.put(DataDB.PR_SO_MUNICIPIO, txtMun.getText().toString());
             values.put(DataDB.PR_SO_ESTADO, txtEstado.getText().toString());
             values.put(DataDB.PR_SO_TIPO_RECIDENCIA, estadoPropiedad);//rg
-            values.put(DataDB.PR_SO_TIEMPO_RESIDENCIA_A, tiempoResidencia);//rg revisar esto
-            values.put(DataDB.PR_SO_TIEMPO_RESIDENCIA_M, tiempoResidencia);//rg revisar esto
-            values.put(DataDB.PR_SO_CREDITO_VI, txtAp.getText().toString());//rg
+            values.put(DataDB.PR_SO_TIEMPO_RESIDENCIA_A, tiempoResidenciaAnios);//rg
+            values.put(DataDB.PR_SO_TIEMPO_RESIDENCIA_M, tiempoResidenciaMeses);//rg
+            values.put(DataDB.PR_SO_CREDITO_VI, creditoVivienda);//rg
             values.put(DataDB.PR_SO_PAGO_VIVIENDA, txtMontoCred.getText().toString());
             values.put(DataDB.PR_SO_TEL_CASA, txtTelCasa.getText().toString());
             values.put(DataDB.PR_SO_TEL_CEL, txtCelular.getText().toString());
             values.put(DataDB.PR_SO_CORREO, txtCorreo.getText().toString());
-            values.put(DataDB.PR_SO_CARGO_P_PUBLICO, txtAp.getText().toString());//rg Y N
-            values.put(DataDB.PR_SO_CARGO_PUBLICO, txtAp.getText().toString());//rg Y N
-            values.put(DataDB.PR_SO_CONYUGE_P_PUBLICO, txtAp.getText().toString());//rg Y N
-            values.put(DataDB.PR_SO_CONYUGE_PUBLICO, txtAp.getText().toString());//rg Y N
+            values.put(DataDB.PR_SO_CARGO_P_PUBLICO, cargoPublicoSolicitante);//rg Y N
+            values.put(DataDB.PR_SO_CARGO_PUBLICO, txtCargoPublicSolicitante.getText().toString());
+            values.put(DataDB.PR_SO_CONYUGE_P_PUBLICO, cargoPublicoConyuge);//rg Y N
+            values.put(DataDB.PR_SO_CONYUGE_PUBLICO, txtEspCargoPublicoConyuge.getText().toString());
 
             db.insert(DataDB.TABLE_NAME_INFO_SOLICITANTE, null, values);
             System.out.println("Insertado");
@@ -387,61 +394,23 @@ public class InformacionSolicitante extends AppCompatActivity {
     }
 
     public void mostraDatos() {
-
         db = getApplicationContext().openOrCreateDatabase(DataDB.DB_NAME, android.content.Context.MODE_PRIVATE, null);
         try {
-            String[] valores_recuperar = {"_id",
-                    DataDB.PR_SO_APATERNO,
-                    DataDB.PR_SO_AMATERNO,
-                    DataDB.PR_SO_NOMBRE,
-                    DataDB.PR_SO_DTE_NACIMIENTO,
-                    DataDB.PR_SO_LUGAR,
-                    DataDB.PR_SO_EDAD,
-                    DataDB.PR_SO_SEXO,
-                    DataDB.PR_SO_RFC,
-                    DataDB.PR_SO_CURP,
-                    DataDB.PR_SO_INE,
-                    DataDB.PR_SO_EDO_CIVIL,
-                    DataDB.PR_SO_CONYUGE_TRABAJA,
-                    DataDB.PR_SO_INGRESO_CONYUGE,
-                    DataDB.PR_SO_DEPENDIENTES,
-                    DataDB.PR_SO_NUMDEPENDIENTES,
-                    DataDB.PR_SO_CALLE,
-                    DataDB.PR_SO_NUM_EXT,
-                    DataDB.PR_SO_NUM_INT,
-                    DataDB.PR_SO_COLONIA,
-                    DataDB.PR_SO_CP,
-                    DataDB.PR_SO_MUNICIPIO,
-                    DataDB.PR_SO_ESTADO,
-                    DataDB.PR_SO_TIPO_RECIDENCIA,
-                    DataDB.PR_SO_TIEMPO_RESIDENCIA_A,
-                    DataDB.PR_SO_TIEMPO_RESIDENCIA_M,
-                    DataDB.PR_SO_CREDITO_VI,
-                    DataDB.PR_SO_PAGO_VIVIENDA,
-                    DataDB.PR_SO_TEL_CASA,
-                    DataDB.PR_SO_TEL_CEL,
-                    DataDB.PR_SO_CORREO,
-                    DataDB.PR_SO_CARGO_P_PUBLICO,
-                    DataDB.PR_SO_CARGO_PUBLICO,
-                    DataDB.PR_SO_CONYUGE_P_PUBLICO,
-                    DataDB.PR_SO_CONYUGE_PUBLICO
-            };
-            Cursor c = db.query(DataDB.TABLE_NAME_INFO_SOLICITANTE, valores_recuperar,null,null,null,null,null,null);
+            Cursor c = db.rawQuery("SELECT *  FROM " + DataDB.TABLE_NAME_INFO_SOLICITANTE, null);
             tamDatos = c.getCount();
-            //getApplicationContext().setTitle("Sincronizar: " + tamDatos); // Cambiar el titulo de la pantalla
             if (c.moveToFirst()) {
                 do {
-                    System.out.println("=============================================" + tamDatos);
-                    System.out.println("id:" + c.getString(0) + "\n" + c.getString(1) + "\nPaterno: " + c.getString(2) + "\nMaterno" + c.getString(3)+ "\n" +
-                            c.getString(4) + "\n" + c.getString(5) + "\n" + c.getString(6) + "\n" + c.getString(7) + "\n" + c.getString(8) + "\n"
-                            + c.getString(9) + "\n" + c.getString(10) + "\n: " + c.getString(11)+ "\n" + c.getString(12) + "\n" + c.getString(13) +
-                            "\n" + c.getString(14) + "\n" + c.getString(15) + "\n" + c.getString(16) + "\n" + c.getString(17) + "\n" + c.getString(18) +
-                            "\n" + c.getString(19) + "\n" + c.getString(20) + "\n" + c.getString(21) + "\n" + c.getString(22));
+                    System.out.println("===============================================================================");
+                    System.out.println("id:" + c.getString(0) + "\n" + c.getString(1) + "\n" + c.getString(2) + "\n" + c.getString(3)+ "\n" + c.getString(4) + "\n"
+                            + c.getString(5) + "\nFecha Nacimiento: " + c.getString(6) + "\nApellido Paterno: " + c.getString(7) + "\n" + c.getString(8) + "\nNombre: " + c.getString(9) + "\nLugar Nacimiento: "
+                            + c.getString(10) + "\n: " + c.getString(11)+ "\nEdad: " + c.getString(12) + "\n" + c.getString(13) + "\n" + c.getString(14) + "\n"
+                            + c.getString(15) + "\n" + c.getString(16) + "\nEstado Civil: " + c.getString(17) + "\n" + c.getString(18) + "\n" + c.getString(19) + "\n"
+                            + c.getString(20) + "\n" + c.getString(21) + "\n" + c.getString(22) + c.getString(23)  + c.getString(24) + "\n" + c.getString(25)
+                            + "\n" + c.getString(26) + "\nMunicipio: " + c.getString(27) + "\n" + c.getString(28) + "\n" + c.getString(29) + "\n" + c.getString(30) + "\n"
+                            + c.getString(31) + "\nInfonavit: " + c.getString(32) + "\nMonto Crédito: " + c.getString(33) + "\nTelefono: " + c.getString(34)+ "\nCelular: " + c.getString(35) + "\nCorreo: " + c.getString(36)
+                            + "\nCargo G Solicitante: " + c.getString(37) + "\nEspecificacion Cargo: " + c.getString(38) + "\nCargo G Conyuge: " + c.getString(39)
+                            + "\nEspecificación G Conyuge: " + c.getString(40));
 
-                  /*  items.add(new Item(c.getString(1), c.getString(2), Integer.parseInt(c.getString(3)),c.getString(4), c.getString(5), c.getString(6),
-                            c.getString(7), c.getString(8), c.getString(9),c.getString(10), c.getString(11), c.getString(12),c.getString(13),c.getString(14),
-                            c.getString(15), c.getString(16), c.getString(17),c.getString(18),c.getString(19), c.getString(20),c.getString(21),c.getString(22),c.getString(23),1));
-                */
                 } while (c.moveToNext());
                 c.close();
             } else {
@@ -454,5 +423,3 @@ public class InformacionSolicitante extends AppCompatActivity {
         }
     }
 }
-
-

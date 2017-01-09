@@ -6,6 +6,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +18,7 @@ public class ReferenciasPersonalesDistintoDomicilio extends AppCompatActivity {
     private SQLiteDatabase db = null;
     private Cursor c = null;
     private  Button agregar;
+    public static int tamDatos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +43,9 @@ public class ReferenciasPersonalesDistintoDomicilio extends AppCompatActivity {
         agregar =(Button)findViewById(R.id.btnGuardarReferenciasDistintoDomicilio);
         agregar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                validarReferenciasDistintoDomiciolio();
+                //validarReferenciasDistintoDomiciolio();
                 guardarReferenciasPersonalesDistintoDomiciolio();
-                //mostraDatos();
+                mostraDatos();
             }
         });
     }
@@ -148,6 +150,30 @@ public class ReferenciasPersonalesDistintoDomicilio extends AppCompatActivity {
             System.out.println("Insertado");
         } catch (SQLException ex) {
             System.out.println("Error al insertar solicitud: " + ex);
+        } finally {
+            db.close();
+        }
+    }
+
+    public void mostraDatos() {
+        db = getApplicationContext().openOrCreateDatabase(DataDB.DB_NAME, android.content.Context.MODE_PRIVATE, null);
+        try {
+            Cursor c = db.rawQuery("SELECT *  FROM " + DataDB.TABLE_NAME_INFO_REF_P, null);
+            tamDatos = c.getCount();
+            if (c.moveToFirst()) {
+                do {
+                    System.out.println("===============================================================================");
+                    System.out.println("id:" + c.getString(0) + "\nEmpresa: " + c.getString(1) + "\nImss: " + c.getString(2) + "\nCalle: " + c.getString(3)+ "\nN Ext: " + c.getString(4) + "\nN Int: "
+                            + c.getString(5) + "\nColonia: " + c.getString(6) + "\nCp: " + c.getString(7) + "\n" + c.getString(8) + "\n" + c.getString(9) + "\n"
+                            + c.getString(10) + "\nPuesto: " + c.getString(11)+ "\nIngreso: " + c.getString(12) + "\nOtros ingresos: " + c.getString(13));
+
+                } while (c.moveToNext());
+                c.close();
+            } else {
+                System.out.println("No existen cuentas a sincronizar");
+            }
+        } catch (Exception ex) {
+            Log.e("Error", ex.toString());
         } finally {
             db.close();
         }

@@ -21,24 +21,21 @@ public class Login extends AppCompatActivity {
 
     final static public String IPpublic = "http://masternoc1.mx/wsmovil/api/";
 
-    /***********************************************************************************************
-     *                                      DECLARACIÓN DE OBJETOS                                 *
-     **********************************************************************************************/
-    public static EditText usuario;   // Campo de texto para usuario
-    public static EditText password;  // Campo de texto para contraseña
-    public static Button entrar;      // Boton para ingresar
+    public static EditText usuario;
+    public static EditText password;
+    public static Button entrar;
     public static ProgressBar progress;
-    public static TextView titulo;    // Texto para el titulo
-    private TextView txtUser;         // Texto para usuaio en sesion
-    private TextView cerrar;          // Texto para cerrar sesión
-    private Toast toast;              // Toast para mostrar mensajes
-    public SQLiteDatabase db = null;   // Objeto para usar la Base de Datos Local
-    private Cursor c;                   // Objeto para hacer consultas la Base de Datos
-    private DBHelper sqliteHelper;      // Objeto para abrir la base de Datos
-    private Connection connection;      // Objeto para saber si estamos conectados (wifi/datos)
-    private String strLogin = "";       // Cadena para concatenar el usuario y contraseña
-    private String strPassword = "";    // String que recuperra la contraseña
-    private boolean flagSesion = false; // Bandera para saber si esta abierta la sesión
+    public static TextView titulo;
+    private TextView txtUser;
+    private TextView cerrar;
+    private Toast toast;
+    public SQLiteDatabase db = null;
+    private Cursor c;
+    private DBHelper sqliteHelper;
+    private Connection connection;
+    private String strLogin = "";
+    private String strPassword = "";
+    private boolean flagSesion = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,36 +68,25 @@ public class Login extends AppCompatActivity {
                 } else if (pass.trim().equalsIgnoreCase("")) {
                     password.setError("Este campo no puede estar vacio");
                     password.setText("");
-                }
-                /**
-                 * Si ya tiene la sesión abierta comparamos la contraseña con la base de datos
-                 * local para no acceder al recurso y sea mas rápida la autenticación.
-                 */
-                else if (flagSesion) {
-                    // Si las contraseñas son iguales abrimos el Activity de catalogo
+                } else if (flagSesion) {
                     if (pass.equals(strPassword)) {
                         Intent intentCatalogo = new Intent(Login.this, VentanaPrincipal.class);
                         startActivity(intentCatalogo);
                         finish();
-                    }
-                    // Si las contraseñas son distintas mostrar mensaje de contraseña incorrecta
-                    else {
+                    } else {
                         if (toast != null)
                             toast.cancel();
                         toast = Toast.makeText(Login.this, "Contraseña incorrecta", Toast.LENGTH_SHORT);
                         toast.show();
                     }
-                } else {  // Si no existe una sesión cosumir web service para autentificar usuarios y password
+                } else {
                     progress.setVisibility(View.VISIBLE);
                     usuario.setVisibility(View.INVISIBLE);
                     password.setVisibility(View.INVISIBLE);
                     entrar.setVisibility(View.INVISIBLE);
-                    /**
-                     * Si no existe una sesión verificar el estado de red, ya que para el primer
-                     * Login es necesario acceder al recurso a traves de internet.
-                     */
-                    if (connection.getConnection("No informar")) {//usuario?v_cliente=2&v_usuario=ORIGINACION&v_contrasena=12345678
-                        strLogin = IPpublic + "usuario?v_cliente=2&v_usuario=" + user + "&v_contrasena=" + pass;
+
+                    if (connection.getConnection("No informar")) {
+                        strLogin = IPpublic + "usuario?v_cliente=2&v_usuario=" + user + "&v_contrasena=" + pass;//
                         new GetWebServices(Login.this).execute(strLogin, "login", user, pass);// Parámetros que recibe doInBackground
                     } else {
                         usuario.setVisibility(View.VISIBLE);
@@ -118,7 +104,6 @@ public class Login extends AppCompatActivity {
                 cerrar();
             }
         });
-
         getSession();       // Revisar si tiene la sesion abierta
     }
 
@@ -210,7 +195,7 @@ public class Login extends AppCompatActivity {
         } catch (Exception ex) {
             Log.e("Error", ex.toString());
         } finally {
-            System.out.println("Fragment actualizado: HOME");
+           // System.out.println("Fragment actualizado: HOME");
             db.close();
         }
 

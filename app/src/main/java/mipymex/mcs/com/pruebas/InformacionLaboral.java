@@ -6,11 +6,11 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 
 public class InformacionLaboral extends AppCompatActivity {
 
@@ -18,6 +18,8 @@ public class InformacionLaboral extends AppCompatActivity {
     private EditText txtIngreso, txtEMontoCred, txtInst, txtNJefe, txtAntig, txtTel, txtExt, txtFax, txtOtros;
     private RadioGroup rgRegistroIms, rgOtrosIngresos, rgComprobable, rgCredito, rgPeriodicidad;
     private Button btnLaboral;
+    public static int tamDatos;
+    String otrosIngresos, registroImss, otrosComprobable, pagaCredito, periodicidad;
     private SQLiteDatabase db = null;
     private Cursor c = null;
 
@@ -26,24 +28,15 @@ public class InformacionLaboral extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.informacion_laboral);
 
-        btnLaboral = (Button) findViewById(R.id.btnGuardarLaboral);
-        btnLaboral.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                validar();
-                guardarInformacionLaboral();
-            }
-        });
-
-
         txtNEmp = (EditText) findViewById(R.id.txtNombreEmpresa);
         rgRegistroIms = (RadioGroup) findViewById(R.id.rgRegistroIMSS);
         rgRegistroIms.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.afirmativoRegistroImss) {
-
+                    registroImss = "Sí";
                 } else if (checkedId == R.id.negativoRegistroImss) {
-
+                    registroImss = "No";
                 }
             }
 
@@ -60,7 +53,6 @@ public class InformacionLaboral extends AppCompatActivity {
         txtPuesto = (EditText)findViewById(R.id.txtLaboralPuesto);
         txtIngreso = (EditText)findViewById(R.id.txtLaboralIngreso);
 
-
         rgOtrosIngresos = (RadioGroup) findViewById(R.id.rgOtrosIngresos);
         txtOtros = (EditText) findViewById(R.id.txtEspecificacionMonto);
         txtOtros.setVisibility(View.GONE);
@@ -69,8 +61,10 @@ public class InformacionLaboral extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.afirmativoOtrosIngresos) {
+                    otrosIngresos = "Sí";
                     txtOtros.setVisibility(View.VISIBLE);
                 } else if (checkedId == R.id.negativoOtrosIngresos) {
+                    otrosIngresos = "No";
                     txtOtros.setVisibility(View.GONE);
                 }
             }
@@ -82,9 +76,9 @@ public class InformacionLaboral extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.afirmativoComprobable) {
-
+                    otrosComprobable = "Sí";
                 } else if (checkedId == R.id.negativoComprobable) {
-
+                    otrosComprobable = "No";
                 }
             }
 
@@ -97,8 +91,10 @@ public class InformacionLaboral extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.afirmativoPagoDeCredito) {
+                    pagaCredito = "Sí";
                     txtEMontoCred.setVisibility(View.VISIBLE);
                 } else if (checkedId == R.id.negativoPagoDeCredito) {
+                    pagaCredito = "No";
                     txtEMontoCred.setVisibility(View.GONE);
                 }
             }
@@ -115,17 +111,25 @@ public class InformacionLaboral extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.mesualLaboral) {
-
+                    periodicidad = "mensual";
                 } else if (checkedId == R.id.quicenal) {
-
+                    periodicidad = "quincenal";
                 } else if (checkedId == R.id.catorcenal) {
-
+                    periodicidad = "catorcenal";
                 } else if (checkedId == R.id.semanal) {
-
+                    periodicidad = "semanal";
                 }
             }
         });
 
+        btnLaboral = (Button) findViewById(R.id.btnGuardarLaboral);
+        btnLaboral.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+               // validar();
+                guardarInformacionLaboral();
+                mostraDatos();
+            }
+        });
 
     }
 
@@ -155,12 +159,12 @@ public class InformacionLaboral extends AppCompatActivity {
                 txtNEmp.setError("Este campo no puede estar vacio");
                 txtNEmp.setText("");
                 txtNEmp.requestFocus();
-                //txtNEmp.setError(null);
+                txtNEmp.setError(null);
             } else if ( v2) {
                 txtDCalle.setError("Este campo no puede estar vacio");
                 txtDCalle.setText("");
                 txtDCalle.requestFocus();
-                //txtDCalle.setError(null);
+                txtDCalle.setError(null);
             } else if ( v3) {
                 txtNExtm.setError("Este campo no puede estar vacio");
                 txtNExtm.setText("");
@@ -237,19 +241,16 @@ public class InformacionLaboral extends AppCompatActivity {
                 txtFax.setText("");
                 txtFax.requestFocus();
             }
-
     }
 
-
     public void guardarInformacionLaboral() {
-
         db = getApplicationContext().openOrCreateDatabase(DataDB.DB_NAME, android.content.Context.MODE_PRIVATE, null);
 
         try {
             ContentValues values = new ContentValues();
 
             values.put(DataDB.PR_SO_NOM_EMPRESA, txtNEmp.getText().toString());
-            values.put(DataDB.PR_SO_IMSS,txtEMontoCred.getText().toString());//rg
+            values.put(DataDB.PR_SO_IMSS, registroImss);//rg
             values.put(DataDB.PR_SO_CALLE_EMP,txtDCalle.getText().toString());
             values.put(DataDB.PR_SO_NUM_EXT_EMP,txtNExtm.getText().toString());
             values.put(DataDB.PR_SO_NUM_INT_EMP,txtNInt.getText().toString());
@@ -260,24 +261,49 @@ public class InformacionLaboral extends AppCompatActivity {
             values.put(DataDB.PR_SO_DEPARTAMENTO_EMP,txtDepLab.getText().toString());
             values.put(DataDB.PR_SO_PUESTO_EMP,txtPuesto.getText().toString());
             values.put(DataDB.PR_SO_INGRESO_EMP,txtIngreso.getText().toString());
-            values.put(DataDB.PR_SO_OTROS_ING_EMP,txtIngreso.getText().toString());//rg
-            values.put(DataDB.PR_SO_OTRO_ING_C_EMP,txtIngreso.getText().toString());
-            values.put(DataDB.PR_SO_ING_COM,txtIngreso.getText().toString());//rg
-            values.put(DataDB.PR_SO_PAGA_CRED_INS,txtIngreso.getText().toString());//rg
-            values.put(DataDB.PR_SO_PAGA_IMPORTE_INS,txtEMontoCred.getText().toString());
-            values.put(DataDB.PR_SO_PAGA_INS,txtInst.getText().toString());
+            values.put(DataDB.PR_SO_OTROS_ING_EMP,otrosIngresos);//rg
+            values.put(DataDB.PR_SO_OTRO_ING_C_EMP,txtOtros.getText().toString());
+            values.put(DataDB.PR_SO_ING_COM, otrosComprobable);//rg
+            values.put(DataDB.PR_SO_PAGA_CRED_INS, pagaCredito);//rg
+            values.put(DataDB.PR_SO_PAGA_IMPORTE_INS,txtEMontoCred.getText().toString());//
+            values.put(DataDB.PR_SO_PAGA_INS, txtInst.getText().toString());
             values.put(DataDB.PR_SO_NOMBRE_JEFE,txtNJefe.getText().toString());
             values.put(DataDB.PR_SO_ANTIGUEDAD_EMP,txtAntig.getText().toString());
             values.put(DataDB.PR_SO_TEL_EMP,txtTel.getText().toString());
             values.put(DataDB.PR_SO_EXTENSION_EMP,txtExt.getText().toString());
             values.put(DataDB.PR_SO_FAX_EMP,txtFax.getText().toString());
-            values.put(DataDB.PR_SO_PERIODICIDAD_COBRO,txtIngreso.getText().toString());//rg
-            //values.put(DataDB.PR_SO_PAGA_INS,txtAp.getText().toString());
+            values.put(DataDB.PR_SO_PERIODICIDAD_COBRO,periodicidad);//rg
 
                 db.insert(DataDB.TABLE_NAME_INFO_LABORAL, null, values);
                 System.out.println("Insertado");
         } catch (SQLException ex) {
             System.out.println("Error al insertar solicitud: " + ex);
+        } finally {
+            db.close();
+        }
+    }
+
+    public void mostraDatos() {
+        db = getApplicationContext().openOrCreateDatabase(DataDB.DB_NAME, android.content.Context.MODE_PRIVATE, null);
+        try {
+            Cursor c = db.rawQuery("SELECT *  FROM " + DataDB.TABLE_NAME_INFO_LABORAL, null);
+            tamDatos = c.getCount();
+            if (c.moveToFirst()) {
+                do {
+                    System.out.println("===============================================================================");
+                    System.out.println("id:" + c.getString(0) + "\nEmpresa: " + c.getString(1) + "\nImss: " + c.getString(2) + "\nCalle: " + c.getString(3)+ "\nN Ext: " + c.getString(4) + "\nN Int: "
+                            + c.getString(5) + "\nColonia: " + c.getString(6) + "\nCp: " + c.getString(7) + "\n" + c.getString(8) + "\n" + c.getString(9) + "\n"
+                            + c.getString(10) + "\nPuesto: " + c.getString(11)+ "\nIngreso: " + c.getString(12) + "\nOtros ingresos: " + c.getString(13) + "\nMonto otros: " + c.getString(14) + "\nComprobable: "
+                            + c.getString(15) + "\nPaga credito: " + c.getString(16) + "\n" + c.getString(17) + "\n" + c.getString(18) + "\n" + c.getString(19) + "\n"
+                            + c.getString(20) + "\n" + c.getString(21) + "\nExtensión: " + c.getString(22)+ "\nFax: "  + c.getString(23) + "\nPeriodicidad: "  + c.getString(24));
+
+                } while (c.moveToNext());
+                c.close();
+            } else {
+                System.out.println("No existen cuentas a sincronizar");
+            }
+        } catch (Exception ex) {
+            Log.e("Error", ex.toString());
         } finally {
             db.close();
         }

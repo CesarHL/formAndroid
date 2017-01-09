@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +18,7 @@ public class DatosConyugeHijos extends Activity {
     private SQLiteDatabase db = null;
     private Cursor c = null;
     private Button agregar;
+    public static int tamDatos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +46,9 @@ public class DatosConyugeHijos extends Activity {
         agregar =(Button)findViewById(R.id.btnGuardarDatosConyuge);
         agregar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                validarDatosConyuge();
+               // validarDatosConyuge();
                 guardarDatosConyugeEHijos();
-               // mostraDatos();
+                mostraDatos();
             }
         });
     }
@@ -63,13 +65,11 @@ public class DatosConyugeHijos extends Activity {
         Boolean v8 = txtParentescoC2.getText().toString().trim().equalsIgnoreCase("");
         Boolean v9 = txtTelefonoC2.getText().toString().trim().equalsIgnoreCase("");
         Boolean v10 = txtCelularC2.getText().toString().trim().equalsIgnoreCase("");
-
         Boolean v11 = txtNombreC3.getText().toString().trim().equalsIgnoreCase("");
         Boolean v12 = txtEdadC3.getText().toString().trim().equalsIgnoreCase("");
         Boolean v13 = txtParentescoC3.getText().toString().trim().equalsIgnoreCase("");
         Boolean v14 = txtTelefonoC3.getText().toString().trim().equalsIgnoreCase("");
         Boolean v15 = txtCelularC3.getText().toString().trim().equalsIgnoreCase("");
-
 
             if(v1) {
                 txtNombreC.setError("Este campo no puede estar vacio");
@@ -165,5 +165,29 @@ public class DatosConyugeHijos extends Activity {
              db.close();
         }
 
+    }
+
+    public void mostraDatos() {
+        db = getApplicationContext().openOrCreateDatabase(DataDB.DB_NAME, android.content.Context.MODE_PRIVATE, null);
+        try {
+            Cursor c = db.rawQuery("SELECT *  FROM " + DataDB.TABLE_NAME_INFO_CONYUGE, null);
+            tamDatos = c.getCount();
+            if (c.moveToFirst()) {
+                do {
+                    System.out.println("===============================================================================");
+                    System.out.println("id:" + c.getString(0) + "\nNombre1: " + c.getString(1) + "\nEdad1: " + c.getString(2) + "\nParentesco: " + c.getString(3)+ "\nTelefono: " + c.getString(4) + "\nCelular: "
+                            + c.getString(5) + "\nNombre2: " + c.getString(6) + "\nEdad2: " + c.getString(7) + "\nParentesco2: " + c.getString(8) + "\nTelefono2: " + c.getString(9) + "\nCelular2: "
+                            + c.getString(10) + "\nNombre3: " + c.getString(11)+ "\nEdad3: " + c.getString(12) + "\nParentesco3: " + c.getString(13) + "\nTelefono3: " + c.getString(14) + "\nCelular3: " + c.getString(15));
+
+                } while (c.moveToNext());
+                c.close();
+            } else {
+                System.out.println("No existen cuentas a sincronizar");
+            }
+        } catch (Exception ex) {
+            Log.e("Error", ex.toString());
+        } finally {
+            db.close();
+        }
     }
 }

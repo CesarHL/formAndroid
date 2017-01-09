@@ -719,6 +719,7 @@
                     android:id="@+id/infonavit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:checked="false"
                     android:text="Infonavit"
                     />
             </RadioGroup>
@@ -767,7 +768,7 @@
                 android:textSize="20sp"
                 android:padding="7dp"
                 android:background="@drawable/my_comment"
-                android:inputType="text"
+                android:inputType="number"
                 android:alpha="0.5"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
@@ -800,7 +801,7 @@
 
             <TextView
                 android:id="@+id/lblCorreo"
-                android:inputType="textEmailAddress"
+                android:inputType="textWebEmailAddress"
                 android:layout_below="@+id/txtCelular"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
@@ -858,7 +859,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
                         android:layout_marginStart="30dp"
-                        android:checked="true"
                         android:text="No" />
                 </RadioGroup>
                 <EditText
@@ -912,7 +912,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
                         android:layout_marginStart="30dp"
-                        android:checked="true"
                         android:text="No"
                         tools:ignore="TooManyViews" />
                 </RadioGroup>
