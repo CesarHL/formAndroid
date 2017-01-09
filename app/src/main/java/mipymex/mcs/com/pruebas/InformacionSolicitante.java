@@ -29,7 +29,7 @@ public class InformacionSolicitante extends AppCompatActivity {
     private Cursor c = null;
     private String sexo, estadoPropiedad, tiempoResidenciaAnios, tiempoResidenciaMeses, tabajaConyuge, dependientes, creditoVivienda, cargoPublicoSolicitante, cargoPublicoConyuge;
     public static int tamDatos;
-    public List datosSolicitanteLista;
+    public static List datosSolicitanteLista;
     private DBHelper sqliteHelper;
 
     @Override
@@ -204,15 +204,16 @@ public class InformacionSolicitante extends AppCompatActivity {
         agregar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
               //  validar();
-                //guardarInformacionSolicitante();
+               // guardarInformacionSolicitante();
                 mostraDatos();
+                System.out.println("=====================================================" + datosSolicitanteLista);
 
             }
         });
     }
 
     public void mostraDatos() {
-        db = openOrCreateDatabase(DataDB.DB_NAME, android.content.Context.MODE_PRIVATE, null);
+        db = getApplicationContext().openOrCreateDatabase(DataDB.DB_NAME, MODE_PRIVATE, null);
        // db = sqliteHelper.getWritableDatabase();
         try {
             Cursor c = db.rawQuery("SELECT *  FROM " + DataDB.TABLE_NAME_INFO_SOLICITANTE, null);

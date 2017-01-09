@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import java.io.UnsupportedEncodingException;
@@ -22,6 +23,13 @@ public class ObtenerDatosCompletos extends AppCompatActivity  {
     private Button btnSincronizar;
     private List datosSolicitante, datosLaborales, datosConyuge, referencias, referencasP;
     private String strSend1, strSend2, strSend3, strSend4, strSend5;
+    private SQLiteDatabase db = null;
+    private List datosSolicitanteLista;
+    private InformacionSolicitante ifoInformacionSolicitante;
+    private InformacionLaboral informacionLaboral;
+    private DatosConyugeHijos datosConyugeHijos;
+    private ReferenciasPersonales referenciasPersonales;
+    private ReferenciasPersonalesDistintoDomicilio referenciasPersonalesDistintoDomicilio;
 
 
     @Override
@@ -29,35 +37,75 @@ public class ObtenerDatosCompletos extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sincronizar_datos);
 
-        datosSolicitante = new ArrayList();
+        datosSolicitanteLista = new ArrayList();
         datosLaborales = new ArrayList();
         datosConyuge= new ArrayList();
-        referencasP = new ArrayList();
+        referencias = new ArrayList();
         referencasP = new ArrayList();
 
-        InformacionSolicitante ifo = new InformacionSolicitante();
-        ifo.mostraDatos();
-        if (ifo.datosSolicitanteLista != null) {
-
-            System.out.println("==========================================" + datosSolicitante.size());
-            for (int n = 0; n< datosSolicitante.size(); n++) {
-                System.out.println(datosSolicitante.get(n));
-            }
-        } else {
-            System.out.println("==================================== .i. ");
-        }
+        ifoInformacionSolicitante = new InformacionSolicitante();
+        informacionLaboral = new InformacionLaboral();
+        datosConyugeHijos = new DatosConyugeHijos();
+        referenciasPersonales = new ReferenciasPersonales();
+        referenciasPersonalesDistintoDomicilio = new ReferenciasPersonalesDistintoDomicilio();
 
 
         btnSincronizar = (Button) findViewById(R.id.btnSincroinizar);
         btnSincronizar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                mostraDatos();
+                if (ifoInformacionSolicitante.datosSolicitanteLista != null) {
+                    System.out.println("===================================================== LISTA: ");
+                    for (int n = 0; n< datosSolicitanteLista.size(); n++) {
+                        System.out.println(datosSolicitanteLista.get(n));
+                    }
+                    System.out.println(datosSolicitanteLista.toString());
+                } else {
+                    System.out.println("==================================== .i. ");
+                }
+
                 //guardarBaseTemporal();
-                construirUrl();
+              //  construirUrl();
                // sincronizar_datos();
             }
         });
+    }
+
+    public void mostraDatos() {
+        db = getApplicationContext().openOrCreateDatabase(DataDB.DB_NAME, MODE_PRIVATE, null);
+        // db = sqliteHelper.getWritableDatabase();
+        try {
+            Cursor c = db.rawQuery("SELECT *  FROM " + DataDB.TABLE_NAME_INFO_SOLICITANTE, null);
+            tamDatos = c.getCount();
+            if (c.moveToFirst()) {
+                do {
+                    for (int n = 0; n <= 39; n++) {
+                        datosSolicitanteLista.add(c.getString(n));
+                        System.out.println(datosSolicitanteLista.get(n));
+                    }
+                } while (c.moveToNext());
+                c.close();
 
 
+                c = db.rawQuery("SELECT *  FROM " + DataDB.TABLE_NAME_INFO_LABORAL, null);
+                if (c.moveToFirst()) {
+                    do {
+                        for (int n = 0; n <= 39; n++) {
+                            datosLaborales.add(c.getString(n));
+                            System.out.println(datosLaborales.get(n));
+                        }
+                    } while (c.moveToNext());
+                    c.close();
+                }
+
+            } else {
+                System.out.println("No existen cuentas a sincronizar");
+            }
+        } catch (Exception ex) {
+            Log.e("Error", ex.toString());
+        } finally {
+            db.close();
+        }
     }
 
     public void sincronizar_datos(){

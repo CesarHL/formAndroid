@@ -5,7 +5,7 @@ public class DataDB {
     public static int VERSION = 1;
 
     // Datos de la base de datos
-    public static final String DB_NAME = "database_mipymex";
+    public static final String DB_NAME = "database_mipymex.db";
     public static final String TABLE_NAME_USUARIOS = "usuarios";
 
     public static final String TABLE_NAME_SOLICITUD = "solicitud";
