@@ -26,40 +26,6 @@ public class ObtenerDatosCompletos extends AppCompatActivity  {
     public static List<Item> items = null;
     private String aux;
 
-    public void datosSincronizar() {
-        db = getApplicationContext().openOrCreateDatabase(DataDB.DB_NAME, android.content.Context.MODE_PRIVATE, null);
-        try {
-
-           // Cursor c = db.query(DataDB.TABLE_NAME_INFO_SOLICITANTE, valores_recuperar,null,null,null,null,DataDB.PR_SO_APATERNO,null);
-            Cursor c = db.rawQuery("SELECT *  FROM " + DataDB.TABLE_NAME_SOLICITUD, null);
-            tamDatos = c.getCount();
-            this.setTitle("Sincronizar: " + tamDatos); // Cambiar el titulo de la pantalla
-            if (c.moveToFirst()) {
-                do {
-
-                    items.add(new Item(c.getString(1), c.getString(2), c.getString(3),c.getString(4), c.getString(5), c.getString(6),
-                            c.getString(7), c.getString(8), c.getString(9),c.getString(10), c.getString(11), c.getString(12),c.getString(13),c.getString(14),
-                            c.getString(15), c.getString(16), c.getString(17),c.getString(18),c.getString(19), c.getString(20),c.getString(21),c.getString(22),c.getString(23),
-                            c.getString(24),c.getString(25), c.getString(26),c.getString(27),c.getString(28),c.getString(29),c.getString(30),c.getString(31), c.getString(32),c.getString(33),c.getString(34),c.getString(35),
-                            c.getString(36),c.getString(37), c.getString(38),c.getString(39),c.getString(40),c.getString(41),c.getString(42), c.getString(43), c.getString(44),c.getString(45), c.getString(46),
-                            c.getString(47),c.getString(48),c.getString(49),
-                            c.getString(50), c.getString(51), c.getString(52),c.getString(53),c.getString(54), c.getString(55),c.getString(56),c.getString(57),c.getString(58),
-                            c.getString(59),c.getString(60)));
-                    for (int n = 0; n<= items.size(); n++) {
-                        System.out.println(items.get(n));
-                    }
-
-                } while (c.moveToNext());
-                c.close();
-            } else {
-                System.out.println("No existen cuentas a sincronizar");
-            }
-        } catch (Exception ex) {
-            Log.e("Error", ex.toString());
-        } finally {
-            db.close();
-        }
-    }
 
    /* public void sincronizar_datos(){
 
@@ -79,29 +45,44 @@ public class ObtenerDatosCompletos extends AppCompatActivity  {
                    for (int i = 0; i < Service_sincronizar.items.size(); i++) {
                         String strSend = null;
                         try {
-                            strSend = Login.IPpublic + "RecibeDatos?v_cliente=1" +
-                                    "&v_usuario=" + Service_sincronizar.items.get(i).getLogin_usuario() +
-                                    "&v_num_agencia=" + Service_sincronizar.items.get(i).getNum_agencia() +
-                                    "&v_cat_pa_parentesco=" + URLEncoder.encode(Service_sincronizar.items.get(i).getCat_pa_parentesco(), "UTF-8") +
-                                    "&v_nombre_contacto=" + URLEncoder.encode(Service_sincronizar.items.get(i).getPr_da_nom_parentesco(), "UTF-8") +
-                                    "&v_cat_co_resultado=" + Service_sincronizar.items.get(i).getCat_co_resultado() +
-                                    "&v_cat_co_rdescripcion=" + URLEncoder.encode(Service_sincronizar.items.get(i).getCat_co_rdescripcion(), "UTF-8") +
-                                    "&v_cat_np_codigo=" + Service_sincronizar.items.get(i).getCat_np_codigo() +
-                                    "&v_cat_np_descripcion=" + URLEncoder.encode(Service_sincronizar.items.get(i).getCat_np_descripcion(), "UTF-8") +
-                                    "&v_pr_cf_credito=" + Service_sincronizar.items.get(i).getPr_cf_credito() +
-                                    "&v_pr_ca_rpu=" + Service_sincronizar.items.get(i).getRpu() +
-                                    "&v_pr_ca_medidor=" + Service_sincronizar.items.get(i).getMedidor() +
-                                    "&v_pr_cd_latitud=" + Service_sincronizar.items.get(i).getPr_cd_latitud() +
-                                    "&v_pr_cd_longitud=" + Service_sincronizar.items.get(i).getPr_cd_longitud() +
-                                    "&v_fecha_visita=" + URLEncoder.encode(Service_sincronizar.items.get(i).getFecha(), "UTF-8") +
-                                    "&v_comentario=" + URLEncoder.encode(Service_sincronizar.items.get(i).getComentario(), "UTF-8") +
-                                    "&v_pregunta1=" + Service_sincronizar.items.get(i).getPr_da_pregunta1() +
-                                    "&v_pr_da_nombre=" + URLEncoder.encode(Service_sincronizar.items.get(i).getPr_da_nombre(), "UTF-8") +
-                                    "&v_pr_da_cuenta=" + URLEncoder.encode(Service_sincronizar.items.get(i).getPr_da_cuenta(), "UTF-8") +
-                                    "&v_pr_da_rpu=" + URLEncoder.encode(Service_sincronizar.items.get(i).getPr_da_rpu(), "UTF-8") +
-                                    "&v_pregunta2=" + Service_sincronizar.items.get(i).getPr_da_pregunta2() +
-                                    "&v_pr_da_domicilio=" + URLEncoder.encode(Service_sincronizar.items.get(i).getPr_da_domicilio(), "UTF-8") +
-                                    "&v_id=" + URLEncoder.encode(Service_sincronizar.items.get(i).getTmp_id(), "UTF-8");
+                            strSend = Login.IPpublic + "RecibeDatos?v_cliente=2" +
+                                    "&pr_so_apaterno=" + Service_sincronizar.items.get(i).getLogin_usuario() +
+                                    "&pr_so_amaterno=" + Service_sincronizar.items.get(i).getNum_agencia() +
+                                    "&pr_so_nombre" + URLEncoder.encode(Service_sincronizar.items.get(i).getCat_pa_parentesco(), "UTF-8") +
+                                    "&&pr_so_dte_nacimiento" + URLEncoder.encode(Service_sincronizar.items.get(i).getPr_da_nom_parentesco(), "UTF-8") +
+                                    "&pr_so_lugar" + Service_sincronizar.items.get(i).getPr_da_pregunta2() +
+                                    "&pr_so_edad + URLEncoder.encode(Service_sincronizar.items.get(i).getPr_da_domicilio(), "UTF-8") +
+                                    "&pr_so_sexo" + URLEncoder.encode(Service_sincronizar.items.get(i).getCat_pa_parentesco(), "UTF-8") +
+                                    "&&pr_so_rfc" + URLEncoder.encode(Service_sincronizar.items.get(i).getPr_da_nom_parentesco(), "UTF-8") +
+                                    "&pr_so_curp" + Service_sincronizar.items.get(i).getPr_da_pregunta2() +
+                                    "&pr_so_ine + URLEncoder.encode(Service_sincronizar.items.get(i).getPr_da_domicilio(), "UTF-8") +
+                                    "&pr_so_edo_civil" + URLEncoder.encode(Service_sincronizar.items.get(i).getCat_pa_parentesco(), "UTF-8") +
+                                    "&&pr_so_conyuge_trabaja" + URLEncoder.encode(Service_sincronizar.items.get(i).getPr_da_nom_parentesco(), "UTF-8") +
+                                    "&pr_so_ingreso_conyuge" + Service_sincronizar.items.get(i).getPr_da_pregunta2() +
+                                    "&pr_so_dependientes + URLEncoder.encode(Service_sincronizar.items.get(i).getPr_da_domicilio(), "UTF-8") +
+                                    "&pr_so_numdependientes" + URLEncoder.encode(Service_sincronizar.items.get(i).getCat_pa_parentesco(), "UTF-8") +
+                                    "&&pr_so_calle" + URLEncoder.encode(Service_sincronizar.items.get(i).getPr_da_nom_parentesco(), "UTF-8") +
+                                    "&pr_so_num_ext" + Service_sincronizar.items.get(i).getPr_da_pregunta2() +
+                                    "&pr_so_num_int + URLEncoder.encode(Service_sincronizar.items.get(i).getPr_da_domicilio(), "UTF-8") +
+                                    "&pr_so_colonia" + URLEncoder.encode(Service_sincronizar.items.get(i).getCat_pa_parentesco(), "UTF-8") +
+                                    "&&pr_so_cp" + URLEncoder.encode(Service_sincronizar.items.get(i).getPr_da_nom_parentesco(), "UTF-8") +
+                                    "&pr_so_municipio" + Service_sincronizar.items.get(i).getPr_da_pregunta2() +
+                                    "&pr_so_estado + URLEncoder.encode(Service_sincronizar.items.get(i).getPr_da_domicilio(), "UTF-8") +
+                                    "&pr_so_tipo_recidencia" + URLEncoder.encode(Service_sincronizar.items.get(i).getCat_pa_parentesco(), "UTF-8") +
+                                    "&&pr_so_tiempo_recidencia_a" + URLEncoder.encode(Service_sincronizar.items.get(i).getPr_da_nom_parentesco(), "UTF-8") +
+                                    "&pr_so_tiempo_recidencia_m" + Service_sincronizar.items.get(i).getPr_da_pregunta2() +
+                                    "&pr_so_credito_vi + URLEncoder.encode(Service_sincronizar.items.get(i).getPr_da_domicilio(), "UTF-8") +
+                                    "&pr_so_pago_vivienda" + URLEncoder.encode(Service_sincronizar.items.get(i).getCat_pa_parentesco(), "UTF-8") +
+                                    "&&pr_so_tel_casa" + URLEncoder.encode(Service_sincronizar.items.get(i).getPr_da_nom_parentesco(), "UTF-8") +
+                                    "&pr_so_tel_cel" + Service_sincronizar.items.get(i).getPr_da_pregunta2() +
+                                    "&pr_so_correo + URLEncoder.encode(Service_sincronizar.items.get(i).getPr_da_domicilio(), "UTF-8") +
+                                    "&pr_so_cargo_p_publico" + URLEncoder.encode(Service_sincronizar.items.get(i).getCat_pa_parentesco(), "UTF-8") +
+                                    "&&pr_so_cargo_publico" + URLEncoder.encode(Service_sincronizar.items.get(i).getPr_da_nom_parentesco(), "UTF-8") +
+                                    "&pr_so_conyuge_p_publico" + Service_sincronizar.items.get(i).getPr_da_pregunta2() +
+                                    "&pr_so_conyuge_publico + URLEncoder.encode(Service_sincronizar.items.get(i).getPr_da_domicilio(), "UTF-8") +
+                                    "&pr_so_amaterno" + URLEncoder.encode(Service_sincronizar.items.get(i).getCat_pa_parentesco(), "UTF-8") +
+
+                                    "&pr_so_amaterno" + URLEncoder.encode(Service_sincronizar.items.get(i).getTmp_id(), "UTF-8");
 
                         } catch (UnsupportedEncodingException e) {
                             e.printStackTrace();
