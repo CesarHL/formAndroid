@@ -27,8 +27,10 @@ public class InformacionSolicitante extends AppCompatActivity {
     private CheckBox checkVivienda;
     private SQLiteDatabase db = null;
     private Cursor c = null;
-    private String sexo , estadoPropiedad, tiempoResidenciaAnios, tiempoResidenciaMeses, tabajaConyuge, dependientes, creditoVivienda, cargoPublicoSolicitante, cargoPublicoConyuge ;
+    private String sexo, estadoPropiedad, tiempoResidenciaAnios, tiempoResidenciaMeses, tabajaConyuge, dependientes, creditoVivienda, cargoPublicoSolicitante, cargoPublicoConyuge;
     public static int tamDatos;
+    public List datosSolicitanteLista;
+    private DBHelper sqliteHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -196,11 +198,13 @@ public class InformacionSolicitante extends AppCompatActivity {
             }
         });
 
+        datosSolicitanteLista = new ArrayList();
+
         agregar =(Button)findViewById(R.id.btnGuardar);
         agregar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
               //  validar();
-                guardarInformacionSolicitante();
+                //guardarInformacionSolicitante();
                 mostraDatos();
 
             }
@@ -208,7 +212,8 @@ public class InformacionSolicitante extends AppCompatActivity {
     }
 
     public void mostraDatos() {
-        db = getApplicationContext().openOrCreateDatabase(DataDB.DB_NAME, android.content.Context.MODE_PRIVATE, null);
+        db = openOrCreateDatabase(DataDB.DB_NAME, android.content.Context.MODE_PRIVATE, null);
+       // db = sqliteHelper.getWritableDatabase();
         try {
             Cursor c = db.rawQuery("SELECT *  FROM " + DataDB.TABLE_NAME_INFO_SOLICITANTE, null);
             tamDatos = c.getCount();
@@ -225,14 +230,13 @@ public class InformacionSolicitante extends AppCompatActivity {
                             + "\nCargo G Solicitante: " + c.getString(37) + "\nEspecificacion Cargo: " + c.getString(38) + "\nCargo G Conyuge: " + c.getString(39)
                             + "\nEspecificación G Conyuge: " + c.getString(40));
 
-                    List datosA = new ArrayList();
-                    for (int n = 1; n<= tamDatos; n++) {
-                        datosA.add(c.getString(n));
-                        System.out.println(datosA.get(n));
+                    for (int n = 0; n<= 39; n++) {
+                        datosSolicitanteLista.add(c.getString(n));
+                        System.out.println(datosSolicitanteLista.get(n));
                     }
-
                 } while (c.moveToNext());
                 c.close();
+
             } else {
                 System.out.println("No existen cuentas a sincronizar");
             }

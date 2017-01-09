@@ -15,8 +15,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedInputStream;
@@ -32,6 +30,8 @@ public class GetWebServices extends AsyncTask<String, Void, String> {
 
     private String IPpublic = Login.IPpublic;
     private Context context;
+    private boolean flagSend = false;
+    private URL url;
 
     public GetWebServices(Context context){
         this.context = context;
@@ -48,10 +48,10 @@ public class GetWebServices extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... params) {
 
-        System.out.println("Consumir: " + params[1]);
-
         HttpURLConnection conn;
         JSONObject respuestaJSON;
+
+        System.out.println("Consumir: " + params[1]);
         String cadena = params[0];
         System.out.println(cadena);
         flagOnPostExcecute = params[1];
@@ -93,6 +93,55 @@ public class GetWebServices extends AsyncTask<String, Void, String> {
                 } catch (JSONException e) {
                     devuelve = devuelve + "eJSON: " + e.toString();
                     e.printStackTrace();
+                }
+                break;
+
+            case "enviar":
+
+                try{
+                    url = new URL(cadena);
+                    conn = (HttpURLConnection) url.openConnection();
+                    conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Linux; Android 1.5; es-ES) Ejemplo HTTP");
+
+                    int respuesta = conn.getResponseCode();
+                    StringBuilder result = new StringBuilder();
+
+                    if (respuesta == HttpURLConnection.HTTP_OK){
+
+                        System.out.println("HTTP_OK if - DATOS");
+
+                        InputStream in = new BufferedInputStream(conn.getInputStream());
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            result.append(line);
+                        }
+
+                        respuestaJSON = new JSONObject(result.toString());
+
+                        String resultJSON = respuestaJSON.getString("Respuesta");
+
+                        if (resultJSON.equals("OK")){
+                            System.out.println("Datos enviados");
+                            flagSend = true;
+                        }
+                        else{
+                            System.out.println("Datos no enviados");
+                            flagSend = false;
+                        }
+                    } else {
+                        System.out.println("HTTP_OK else - DATOS");
+                    }
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                    System.out.println("MalformedURLException: " + e.toString());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.out.println("IOException: " + e.toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    System.out.println("JSONException: " + e.toString());
                 }
                 break;
 
@@ -146,6 +195,21 @@ public class GetWebServices extends AsyncTask<String, Void, String> {
                     Login.progress.setVisibility(View.GONE);
                 }
                 break;
+
+            case "enviar":
+
+                if(flagSend){
+                    try{
+                        //db = context.openOrCreateDatabase(DataDB.DB_NAME,android.content.Context.MODE_PRIVATE ,null);
+                        //TODO borrar tablas
+
+                    }catch (SQLException e) {
+                        e.printStackTrace();
+                        System.out.println("Cliente no eliminado");
+                    }
+                }
+                break;
+
 
             default: break;
         }

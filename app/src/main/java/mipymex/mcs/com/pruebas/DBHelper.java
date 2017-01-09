@@ -171,7 +171,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 DataDB.PR_SO_DTE_SOLICITUD + " TEXT, " +
                 DataDB.PR_SO_DESTINO + " TEXT, " +
 
-                DataDB.PR_SO_APATERNO + " TEXT, " +
+                DataDB.PR_SO_APATERNO + " TEXT, " + //7
                 DataDB.PR_SO_AMATERNO + " TEXT, " +
                 DataDB.PR_SO_NOMBRE + " TEXT, " +
                 DataDB.PR_SO_DTE_NACIMIENTO + " TEXT, " +

@@ -59,6 +59,9 @@
 
         <activity android:name=".CatalogoImagenes"
             android:label="Catalogo Imagenes"/>
+
+        <activity android:name=".ObtenerDatosCompletos"
+            android:label="Sincronizar"/>
     </application>
 
 </manifest>
