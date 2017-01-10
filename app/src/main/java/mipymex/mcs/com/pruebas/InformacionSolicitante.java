@@ -25,7 +25,7 @@ public class InformacionSolicitante extends AppCompatActivity {
     private RadioGroup rdSexo, rdTConyuge, rdDep, rdRes, rdTRes, rdCPublico, rdCConyuge;
     private TextView lblMontoCred, lblInConyuge, lblDependientes;
     private CheckBox checkVivienda;
-    private SQLiteDatabase db = null;
+    public static SQLiteDatabase db = null;
     private Cursor c = null;
     private String sexo, estadoPropiedad, tiempoResidenciaAnios, tiempoResidenciaMeses, tabajaConyuge, dependientes, creditoVivienda, cargoPublicoSolicitante, cargoPublicoConyuge;
     public static int tamDatos;
@@ -71,12 +71,12 @@ public class InformacionSolicitante extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.afirmativo){
-                    tabajaConyuge = "Sí";
+                    tabajaConyuge = "si";
                     lblInConyuge.setVisibility(View.VISIBLE);
                     txtInConyuge.setVisibility(View.VISIBLE);
                     txtInConyuge.requestFocus();
                 }else if (checkedId == R.id.negativo){
-                    tabajaConyuge = "No";
+                    tabajaConyuge = "no";
                     lblInConyuge.setVisibility(View.GONE);
                     txtInConyuge.setVisibility(View.GONE);
                 }
@@ -95,12 +95,12 @@ public class InformacionSolicitante extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.afirmativoDependientes){
-                    dependientes = "Sí";
+                    dependientes = "si";
                     lblDependientes.setVisibility(View.VISIBLE);
                     txtPersonas.setVisibility(View.VISIBLE);
                     txtPersonas.requestFocus();
                 }else if (checkedId == R.id.negativoDependientes){
-                    dependientes = "No";
+                    dependientes = "no";
                     lblDependientes.setVisibility(View.GONE);
                     txtPersonas.setVisibility(View.GONE);
                 }
@@ -133,9 +133,9 @@ public class InformacionSolicitante extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.anios){
-                    tiempoResidenciaAnios = "años";
+                    tiempoResidenciaAnios = "anios";
                 } else if (checkedId == R.id.meses){
-                    tiempoResidenciaMeses = "menses";
+                    tiempoResidenciaMeses = "meses";
                 }
             }
         });
@@ -149,11 +149,11 @@ public class InformacionSolicitante extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (((CheckBox) v).isChecked()) {
-                    creditoVivienda = "Sí";
+                    creditoVivienda = "si";
                     lblMontoCred.setVisibility(View.VISIBLE);
                     txtMontoCred.setVisibility(View.VISIBLE);
                 } else {
-                    creditoVivienda = "No";
+                    creditoVivienda = "no";
                     lblMontoCred.setVisibility(View.GONE);
                     txtMontoCred.setVisibility(View.GONE);
                 }
@@ -173,11 +173,11 @@ public class InformacionSolicitante extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.afirmativoCargoPublico){
-                    cargoPublicoSolicitante = "Sí";
+                    cargoPublicoSolicitante = "si";
                     txtCargoPublicSolicitante.setVisibility(View.VISIBLE);
                     txtCargoPublicSolicitante.requestFocus();
                 } else {
-                    cargoPublicoSolicitante = "No";
+                    cargoPublicoSolicitante = "no";
                     txtCargoPublicSolicitante.setVisibility(View.GONE);
                 }
             }
@@ -188,11 +188,11 @@ public class InformacionSolicitante extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.afirmativoCargoPublicoConyugeo){
-                    cargoPublicoConyuge = "Sí";
+                    cargoPublicoConyuge = "si";
                     txtEspCargoPublicoConyuge.setVisibility(View.VISIBLE);
                     txtEspCargoPublicoConyuge.requestFocus();
                 } else {
-                    cargoPublicoConyuge = "No";
+                    cargoPublicoConyuge = "no";
                     txtEspCargoPublicoConyuge.setVisibility(View.GONE);
                 }
             }
@@ -204,9 +204,9 @@ public class InformacionSolicitante extends AppCompatActivity {
         agregar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
               //  validar();
-               // guardarInformacionSolicitante();
-                mostraDatos();
-                System.out.println("=====================================================" + datosSolicitanteLista);
+               guardarInformacionSolicitante();
+               // mostraDatos();
+                //System.out.println("=====================================================" + datosSolicitanteLista);
 
             }
         });

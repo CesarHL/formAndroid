@@ -21,15 +21,15 @@ public class ObtenerDatosCompletos extends AppCompatActivity  {
     private Connection connection;
     public static int tamDatos;
     private Button btnSincronizar;
-    private List datosSolicitante, datosLaborales, datosConyuge, referencias, referencasP;
+    private List datosSolicitanteLista, datosLaborales, datosConyuge, referencias, referencasP;
     private String strSend1, strSend2, strSend3, strSend4, strSend5;
     private SQLiteDatabase db = null;
-    private List datosSolicitanteLista;
     private InformacionSolicitante ifoInformacionSolicitante;
     private InformacionLaboral informacionLaboral;
     private DatosConyugeHijos datosConyugeHijos;
     private ReferenciasPersonales referenciasPersonales;
     private ReferenciasPersonalesDistintoDomicilio referenciasPersonalesDistintoDomicilio;
+    private Cursor c;
 
 
     @Override
@@ -39,7 +39,7 @@ public class ObtenerDatosCompletos extends AppCompatActivity  {
 
         datosSolicitanteLista = new ArrayList();
         datosLaborales = new ArrayList();
-        datosConyuge= new ArrayList();
+        datosConyuge = new ArrayList();
         referencias = new ArrayList();
         referencasP = new ArrayList();
 
@@ -53,19 +53,31 @@ public class ObtenerDatosCompletos extends AppCompatActivity  {
         btnSincronizar = (Button) findViewById(R.id.btnSincroinizar);
         btnSincronizar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+               // (ifoInformacionSolicitante).guardarInformacionSolicitante();
+                // informacionLaboral.guardarInformacionLaboral();
                 mostraDatos();
                 if (ifoInformacionSolicitante.datosSolicitanteLista != null) {
-                    System.out.println("===================================================== LISTA: ");
-                    for (int n = 0; n< datosSolicitanteLista.size(); n++) {
-                        System.out.println(datosSolicitanteLista.get(n));
-                    }
+                    System.out.println("===================================================== LISTA - SOLICITANTE: ");
                     System.out.println(datosSolicitanteLista.toString());
+
+                    System.out.println("===================================================== LISTA - LABORAL: ");
+                    System.out.println(datosLaborales.toString());
+
+                    System.out.println("===================================================== LISTA - CONYUGE: ");
+                    System.out.println(datosConyuge.toString());
+
+                    System.out.println("===================================================== LISTA - REFERENCIAS: ");
+                    System.out.println(referencias.toString());
+
+                    System.out.println("===================================================== LISTA - REFERENCIAS - P: ");
+                    System.out.println(referencasP.toString());
+
                 } else {
                     System.out.println("==================================== .i. ");
                 }
 
                 //guardarBaseTemporal();
-              //  construirUrl();
+               construirUrl();
                // sincronizar_datos();
             }
         });
@@ -73,34 +85,77 @@ public class ObtenerDatosCompletos extends AppCompatActivity  {
 
     public void mostraDatos() {
         db = getApplicationContext().openOrCreateDatabase(DataDB.DB_NAME, MODE_PRIVATE, null);
-        // db = sqliteHelper.getWritableDatabase();
         try {
-            Cursor c = db.rawQuery("SELECT *  FROM " + DataDB.TABLE_NAME_INFO_SOLICITANTE, null);
+            c = db.rawQuery("SELECT *  FROM " + DataDB.TABLE_NAME_INFO_SOLICITANTE, null);
             tamDatos = c.getCount();
             if (c.moveToFirst()) {
                 do {
-                    for (int n = 0; n <= 39; n++) {
+                    for (int n = 0; n <= 40; n++) {
                         datosSolicitanteLista.add(c.getString(n));
                         System.out.println(datosSolicitanteLista.get(n));
                     }
                 } while (c.moveToNext());
                 c.close();
-
-
-                c = db.rawQuery("SELECT *  FROM " + DataDB.TABLE_NAME_INFO_LABORAL, null);
-                if (c.moveToFirst()) {
-                    do {
-                        for (int n = 0; n <= 39; n++) {
-                            datosLaborales.add(c.getString(n));
-                            System.out.println(datosLaborales.get(n));
-                        }
-                    } while (c.moveToNext());
-                    c.close();
-                }
-
             } else {
-                System.out.println("No existen cuentas a sincronizar");
+                System.out.println("No existen datos solicitante");
             }
+
+            c = db.rawQuery("SELECT *  FROM " + DataDB.TABLE_NAME_INFO_LABORAL, null);
+            tamDatos = c.getCount();
+            if (c.moveToFirst()) {
+                do {
+                    for (int n = 0; n < 24; n++) {
+                        datosLaborales.add(c.getString(n));
+                        System.out.println(datosLaborales.get(n));
+                    }
+                } while (c.moveToNext());
+                c.close();
+            } else {
+                System.out.println("No existen datos laborales");
+            }
+
+            c = db.rawQuery("SELECT *  FROM " + DataDB.TABLE_NAME_INFO_CONYUGE, null);
+            tamDatos = c.getCount();
+            if (c.moveToFirst()) {
+                do {
+                    for (int n = 0; n < 16; n++) {
+                        datosConyuge.add(c.getString(n));
+                        System.out.println(datosConyuge.get(n));
+                    }
+                } while (c.moveToNext());
+                c.close();
+            } else {
+                System.out.println("No existen datos conyuge");
+            }
+
+            c = db.rawQuery("SELECT *  FROM " + DataDB.TABLE_NAME_INFO_REF, null);
+            tamDatos = c.getCount();
+            if (c.moveToFirst()) {
+                do {
+                    for (int n = 0; n <= 13; n++) {
+                        referencias.add(c.getString(n));
+                        System.out.println(referencias.get(n));
+                    }
+                } while (c.moveToNext());
+                c.close();
+            } else {
+                System.out.println("No existen datos referencias");
+            }
+
+            c = db.rawQuery("SELECT *  FROM " + DataDB.TABLE_NAME_INFO_REF_P, null);
+            tamDatos = c.getCount();
+            if (c.moveToFirst()) {
+                do {
+                    for (int n = 0; n <= 13; n++) {
+                        referencasP.add(c.getString(n));
+                        System.out.println(referencasP.get(n));
+                    }
+                } while (c.moveToNext());
+                c.close();
+            } else {
+                System.out.println("No existen datos Referencias P");
+            }
+
         } catch (Exception ex) {
             Log.e("Error", ex.toString());
         } finally {
@@ -144,160 +199,178 @@ public class ObtenerDatosCompletos extends AppCompatActivity  {
     }
 
     public String construirUrl() {
-
-        for (int h = 0; h <= datosSolicitante.size(); h++) {
             try {
-                strSend1 = "&pr_so_apaterno=" + URLEncoder.encode(String.valueOf(datosSolicitante.get(h)), "UTF-8") +
-                        "&pr_so_amaterno=" + URLEncoder.encode(String.valueOf(datosSolicitante.get(h)), "UTF-8") +
-                        "&pr_so_nombre" + URLEncoder.encode(String.valueOf(datosSolicitante.get(h)), "UTF-8") +
-                        "&&pr_so_dte_nacimiento" + URLEncoder.encode(String.valueOf(datosSolicitante.get(h)), "UTF-8") +
-                        "&pr_so_lugar" + URLEncoder.encode(String.valueOf(datosSolicitante.get(h)), "UTF-8") +
-                        "&pr_so_edad" + URLEncoder.encode(String.valueOf(datosSolicitante.get(h)), "UTF-8") +
-                        "&pr_so_sexo" + URLEncoder.encode(String.valueOf(datosSolicitante.get(h)), "UTF-8") +
-                        "&&pr_so_rfc" + URLEncoder.encode(String.valueOf(datosSolicitante.get(h)), "UTF-8") +
-                        "&pr_so_curp" + URLEncoder.encode(String.valueOf(datosSolicitante.get(h)), "UTF-8") +
-                        "&pr_so_ine" + URLEncoder.encode(String.valueOf(datosSolicitante.get(h)), "UTF-8") +
-                        "&pr_so_edo_civil" + URLEncoder.encode(String.valueOf(datosSolicitante.get(h)), "UTF-8") +
-                        "&&pr_so_conyuge_trabaja" + URLEncoder.encode(String.valueOf(datosSolicitante.get(h)), "UTF-8") +
-                        "&pr_so_ingreso_conyuge" + URLEncoder.encode(String.valueOf(datosSolicitante.get(h)), "UTF-8") +
-                        "&pr_so_dependientes" + URLEncoder.encode(String.valueOf(datosSolicitante.get(h)), "UTF-8") +
-                        "&pr_so_numdependientes" + URLEncoder.encode(String.valueOf(datosSolicitante.get(h)), "UTF-8") +
-                        "&&pr_so_calle" + URLEncoder.encode(String.valueOf(datosSolicitante.get(h)), "UTF-8") +
-                        "&pr_so_num_ext" + URLEncoder.encode(String.valueOf(datosSolicitante.get(h)), "UTF-8") +
-                        "&pr_so_num_int" + URLEncoder.encode(String.valueOf(datosSolicitante.get(h)), "UTF-8") +
-                        "&pr_so_colonia" + URLEncoder.encode(String.valueOf(datosSolicitante.get(h)), "UTF-8") +
-                        "&&pr_so_cp" + URLEncoder.encode(String.valueOf(datosSolicitante.get(h)), "UTF-8") +
-                        "&pr_so_municipio" + URLEncoder.encode(String.valueOf(datosSolicitante.get(h)), "UTF-8") +
-                        "&pr_so_estado" + URLEncoder.encode(String.valueOf(datosSolicitante.get(h)), "UTF-8") +
-                        "&pr_so_tipo_recidencia" + URLEncoder.encode(String.valueOf(datosSolicitante.get(h)), "UTF-8") +
-                        "&&pr_so_tiempo_recidencia_a" + URLEncoder.encode(String.valueOf(datosSolicitante.get(h)), "UTF-8") +
-                        "&pr_so_tiempo_recidencia_m" + URLEncoder.encode(String.valueOf(datosSolicitante.get(h)), "UTF-8") +
-                        "&pr_so_credito_vi" + URLEncoder.encode(String.valueOf(datosSolicitante.get(h)), "UTF-8") +
-                        "&pr_so_pago_vivienda" + URLEncoder.encode(String.valueOf(datosSolicitante.get(h)), "UTF-8") +
-                        "&&pr_so_tel_casa" + URLEncoder.encode(String.valueOf(datosSolicitante.get(h)), "UTF-8") +
-                        "&pr_so_tel_cel" + URLEncoder.encode(String.valueOf(datosSolicitante.get(h)), "UTF-8") +
-                        "&pr_so_correo" + URLEncoder.encode(String.valueOf(datosSolicitante.get(h)), "UTF-8") +
-                        "&pr_so_cargo_p_publico" + URLEncoder.encode(String.valueOf(datosSolicitante.get(h)), "UTF-8") +
-                        "&&pr_so_cargo_publico" + URLEncoder.encode(String.valueOf(datosSolicitante.get(h)), "UTF-8") +
-                        "&pr_so_conyuge_p_publico" + URLEncoder.encode(String.valueOf(datosSolicitante.get(h)), "UTF-8") +
-                        "&pr_so_conyuge_publico" + URLEncoder.encode(String.valueOf(datosSolicitante.get(h)), "UTF-8");
-
-                        System.out.println(strSend1);
+                strSend1 = "&pr_so_apaterno=" + URLEncoder.encode(String.valueOf(datosSolicitanteLista.get(7)), "UTF-8") +
+                        "&pr_so_amaterno=" + URLEncoder.encode(String.valueOf(datosSolicitanteLista.get(8)), "UTF-8") +
+                        "&pr_so_nombre=" + URLEncoder.encode(String.valueOf(datosSolicitanteLista.get(9)), "UTF-8") +
+                        "&pr_so_dte_nacimiento=" + URLEncoder.encode(String.valueOf(datosSolicitanteLista.get(11)), "UTF-8") +
+                        "&pr_so_lugar=" + URLEncoder.encode(String.valueOf(datosSolicitanteLista.get(10)), "UTF-8") +
+                        "&pr_so_edad=" + URLEncoder.encode(String.valueOf(datosSolicitanteLista.get(12)), "UTF-8") +
+                        "&pr_so_sexo=" + URLEncoder.encode(String.valueOf(datosSolicitanteLista.get(13)), "UTF-8") +
+                        "&pr_so_rfc=" + URLEncoder.encode(String.valueOf(datosSolicitanteLista.get(14)), "UTF-8") +
+                        "&pr_so_curp=" + URLEncoder.encode(String.valueOf(datosSolicitanteLista.get(15)), "UTF-8") +
+                        "&pr_so_ine=" + URLEncoder.encode(String.valueOf(datosSolicitanteLista.get(16)), "UTF-8") +
+                        "&pr_so_edo_civil=" + URLEncoder.encode(String.valueOf(datosSolicitanteLista.get(17)), "UTF-8") +
+                        "&pr_so_conyuge_trabaja=" + URLEncoder.encode(String.valueOf(datosSolicitanteLista.get(18)), "UTF-8") +
+                        "&pr_so_ingreso_conyuge=" + URLEncoder.encode(String.valueOf(datosSolicitanteLista.get(19)), "UTF-8") +
+                        "&pr_so_dependientes=" + URLEncoder.encode(String.valueOf(datosSolicitanteLista.get(20)), "UTF-8") +
+                        "&pr_so_numdependientes=" + URLEncoder.encode(String.valueOf(datosSolicitanteLista.get(21)), "UTF-8") +
+                        "&pr_so_calle=" + URLEncoder.encode(String.valueOf(datosSolicitanteLista.get(22)), "UTF-8") +
+                        "&pr_so_num_ext=" + URLEncoder.encode(String.valueOf(datosSolicitanteLista.get(23)), "UTF-8") +
+                        "&pr_so_num_int=" + URLEncoder.encode(String.valueOf(datosSolicitanteLista.get(24)), "UTF-8") +
+                        "&pr_so_colonia=" + URLEncoder.encode(String.valueOf(datosSolicitanteLista.get(25)), "UTF-8") +
+                        "&pr_so_cp=" + URLEncoder.encode(String.valueOf(datosSolicitanteLista.get(26)), "UTF-8") +
+                        "&pr_so_municipio=" + URLEncoder.encode(String.valueOf(datosSolicitanteLista.get(27)), "UTF-8") +
+                        "&pr_so_estado=" + URLEncoder.encode(String.valueOf(datosSolicitanteLista.get(28)), "UTF-8") +
+                        "&pr_so_tipo_recidencia=" + URLEncoder.encode(String.valueOf(datosSolicitanteLista.get(29)), "UTF-8") +
+                        "&pr_so_tiempo_recidencia_a=" + URLEncoder.encode(String.valueOf(datosSolicitanteLista.get(30)), "UTF-8") +
+                        "&pr_so_tiempo_recidencia_m=" + URLEncoder.encode(String.valueOf(datosSolicitanteLista.get(31)), "UTF-8") +
+                        "&pr_so_credito_vi=" + URLEncoder.encode(String.valueOf(datosSolicitanteLista.get(32)), "UTF-8") +
+                        "&pr_so_pago_vivienda=" + URLEncoder.encode(String.valueOf(datosSolicitanteLista.get(33)), "UTF-8") +
+                        "&pr_so_tel_casa=" + URLEncoder.encode(String.valueOf(datosSolicitanteLista.get(34)), "UTF-8") +
+                        "&pr_so_tel_cel=" + URLEncoder.encode(String.valueOf(datosSolicitanteLista.get(35)), "UTF-8") +
+                        "&pr_so_correo=" + URLEncoder.encode(String.valueOf(datosSolicitanteLista.get(36)), "UTF-8") +
+                        "&pr_so_cargo_p_publico=" + URLEncoder.encode(String.valueOf(datosSolicitanteLista.get(37)), "UTF-8") +
+                        "&pr_so_cargo_publico=" + URLEncoder.encode(String.valueOf(datosSolicitanteLista.get(38)), "UTF-8") +
+                        "&pr_so_conyuge_p_publico=" + URLEncoder.encode(String.valueOf(datosSolicitanteLista.get(39)), "UTF-8") +
+                        "&pr_so_conyuge_publico=" + URLEncoder.encode(String.valueOf(datosSolicitanteLista.get(40)), "UTF-8");
                  } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
 
-            }
+        System.out.println("cadena solicitante " + strSend1);
 
-            for (int i = 0; i <= datosLaborales.size(); i++) {
                 try {
-                    strSend2 = "&pr_so_nom_empresa" + URLEncoder.encode(String.valueOf(datosLaborales.get(i)), "UTF-8") +
-                        "&pr_so_imss" + URLEncoder.encode(String.valueOf(datosLaborales.get(i)), "UTF-8") +
-                        "&pr_so_calle_emp" + URLEncoder.encode(String.valueOf(datosLaborales.get(i)), "UTF-8") +
-                        "&pr_so_num_ext_emp" + URLEncoder.encode(String.valueOf(datosLaborales.get(i)), "UTF-8") +
-                        "&pr_so_num_int_emp" + URLEncoder.encode(String.valueOf(datosLaborales.get(i)), "UTF-8") +
-                        "&pr_so_colonia_emp" + URLEncoder.encode(String.valueOf(datosLaborales.get(i)), "UTF-8") +
-                        "&pr_so_municipio_emp" + URLEncoder.encode(String.valueOf(datosLaborales.get(i)), "UTF-8") +
-                        "&pr_so_estado_emp" + URLEncoder.encode(String.valueOf(datosLaborales.get(i)), "UTF-8") +
-                        "&pr_so_departamento_emp" + URLEncoder.encode(String.valueOf(datosLaborales.get(i)), "UTF-8") +
-                        "&pr_so_puesto_emp" + URLEncoder.encode(String.valueOf(datosLaborales.get(i)), "UTF-8") +
-                        "&pr_so_ingreso_emp" + URLEncoder.encode(String.valueOf(datosLaborales.get(i)), "UTF-8") +
-                        "&pr_so_otros_ing_emp" + URLEncoder.encode(String.valueOf(datosLaborales.get(i)), "UTF-8") +
-                        "&pr_so_otro_ing_c_emp" + URLEncoder.encode(String.valueOf(datosLaborales.get(i)), "UTF-8") +
-                        "&pr_so_ing_com" + URLEncoder.encode(String.valueOf(datosLaborales.get(i)), "UTF-8") +
-                        "&pr_so_paga_cred_ins" + URLEncoder.encode(String.valueOf(datosLaborales.get(i)), "UTF-8") +
-                        "&pr_so_paga_importe_ins" + URLEncoder.encode(String.valueOf(datosLaborales.get(i)), "UTF-8") +
-                        "&pr_so_paga_ins" + URLEncoder.encode(String.valueOf(datosLaborales.get(i)), "UTF-8") +
-                        "&pr_so_nombre_jefe" + URLEncoder.encode(String.valueOf(datosLaborales.get(i)), "UTF-8") +
-                        "&pr_so_antiguedad_emp" + URLEncoder.encode(String.valueOf(datosLaborales.get(i)), "UTF-8") +
-                        "&pr_so_tel_emp" + URLEncoder.encode(String.valueOf(datosLaborales.get(i)), "UTF-8") +
-                        "&pr_so_extension_emp" + URLEncoder.encode(String.valueOf(datosLaborales.get(i)), "UTF-8") +
-                        "&pr_so_fax_emp" + URLEncoder.encode(String.valueOf(datosLaborales.get(i)), "UTF-8") +
-                        "&pr_so_periodicidad_cobro" + URLEncoder.encode(String.valueOf(datosLaborales.get(i)), "UTF-8");
-
-                    System.out.println(strSend2);
+                    strSend2 = "&pr_so_nom_empresa=" + URLEncoder.encode(String.valueOf(datosLaborales.get(1)), "UTF-8") +
+                        "&pr_so_imss=" + URLEncoder.encode(String.valueOf(datosLaborales.get(2)), "UTF-8") +
+                        "&pr_so_calle_emp=" + URLEncoder.encode(String.valueOf(datosLaborales.get(3)), "UTF-8") +
+                        "&pr_so_num_ext_emp=" + URLEncoder.encode(String.valueOf(datosLaborales.get(4)), "UTF-8") +
+                        "&pr_so_num_int_emp=" + URLEncoder.encode(String.valueOf(datosLaborales.get(5)), "UTF-8") +
+                        "&pr_so_colonia_emp=" + URLEncoder.encode(String.valueOf(datosLaborales.get(6)), "UTF-8") +
+                        "&pr_so_municipio_emp=" + URLEncoder.encode(String.valueOf(datosLaborales.get(7)), "UTF-8") +
+                        "&pr_so_estado_emp=" + URLEncoder.encode(String.valueOf(datosLaborales.get(8)), "UTF-8") +
+                        "&pr_so_departamento_emp=" + URLEncoder.encode(String.valueOf(datosLaborales.get(9)), "UTF-8") +
+                        "&pr_so_puesto_emp=" + URLEncoder.encode(String.valueOf(datosLaborales.get(10)), "UTF-8") +
+                        "&pr_so_ingreso_emp=" + URLEncoder.encode(String.valueOf(datosLaborales.get(11)), "UTF-8") +
+                        "&pr_so_otros_ing_emp=" + URLEncoder.encode(String.valueOf(datosLaborales.get(12)), "UTF-8") +
+                        "&pr_so_otro_ing_c_emp=" + URLEncoder.encode(String.valueOf(datosLaborales.get(13)), "UTF-8") +
+                        "&pr_so_ing_com=" + URLEncoder.encode(String.valueOf(datosLaborales.get(14)), "UTF-8") +
+                        "&pr_so_paga_cred_ins=" + URLEncoder.encode(String.valueOf(datosLaborales.get(15)), "UTF-8") +
+                        "&pr_so_paga_importe_ins=" + URLEncoder.encode(String.valueOf(datosLaborales.get(16)), "UTF-8") +
+                        "&pr_so_paga_ins=" + URLEncoder.encode(String.valueOf(datosLaborales.get(17)), "UTF-8") +
+                        "&pr_so_nombre_jefe=" + URLEncoder.encode(String.valueOf(datosLaborales.get(18)), "UTF-8") +
+                        "&pr_so_antiguedad_emp=" + URLEncoder.encode(String.valueOf(datosLaborales.get(19)), "UTF-8") +
+                        "&pr_so_tel_emp=" + URLEncoder.encode(String.valueOf(datosLaborales.get(20)), "UTF-8") +
+                        "&pr_so_extension_emp=" + URLEncoder.encode(String.valueOf(datosLaborales.get(21)), "UTF-8") +
+                        "&pr_so_fax_emp=" + URLEncoder.encode(String.valueOf(datosLaborales.get(22)), "UTF-8") +
+                        "&pr_so_periodicidad_cobro=" + URLEncoder.encode(String.valueOf(datosLaborales.get(23)), "UTF-8");
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
 
-            }
 
-                for (int j = 0; j <= datosConyuge.size(); j++) {
+        System.out.println("cadena laboral " + strSend2);
                     try {
-                        strSend3 = "&pr_so_nombre1_cony" + URLEncoder.encode(String.valueOf(datosSolicitante.get(j)), "UTF-8") +
-                                "&pr_so_edad1_cony" + URLEncoder.encode(String.valueOf(datosSolicitante.get(j)), "UTF-8") +
-                                "&pr_so_parentesco1_cony" + URLEncoder.encode(String.valueOf(datosSolicitante.get(j)), "UTF-8") +
-                                "&pr_so_tel1_cony" + URLEncoder.encode(String.valueOf(datosSolicitante.get(j)), "UTF-8") +
-                                "&pr_so_cel1_cony" + URLEncoder.encode(String.valueOf(datosSolicitante.get(j)), "UTF-8") +
-                                "&pr_so_nombre2_cony" + URLEncoder.encode(String.valueOf(datosSolicitante.get(j)), "UTF-8") +
-                                "&pr_so_edad2_cony" + URLEncoder.encode(String.valueOf(datosSolicitante.get(j)), "UTF-8") +
-                                "&pr_so_parentesco2_cony" + URLEncoder.encode(String.valueOf(datosSolicitante.get(j)), "UTF-8") +
-                                "&pr_so_tel2_cony" + URLEncoder.encode(String.valueOf(datosSolicitante.get(j)), "UTF-8") +
-                                "&pr_so_cel2_cony" + URLEncoder.encode(String.valueOf(datosSolicitante.get(j)), "UTF-8") +
-                                "&pr_so_nombre3_cony" + URLEncoder.encode(String.valueOf(datosSolicitante.get(j)), "UTF-8") +
-                                "&pr_so_edad3_cony" + URLEncoder.encode(String.valueOf(datosSolicitante.get(j)), "UTF-8") +
-                                "&pr_so_parentesco3_cony" + URLEncoder.encode(String.valueOf(datosSolicitante.get(j)), "UTF-8") +
-                                "&pr_so_tel3_cony" + URLEncoder.encode(String.valueOf(datosSolicitante.get(j)), "UTF-8") +
-                                "&pr_so_cel3_cony" + URLEncoder.encode(String.valueOf(datosSolicitante.get(j)), "UTF-8");
-
-                        System.out.println(strSend3);
+                        strSend3 = "&pr_so_nombre1_cony=" + URLEncoder.encode(String.valueOf(datosConyuge.get(1)), "UTF-8") +
+                                "&pr_so_edad1_cony=" + URLEncoder.encode(String.valueOf(datosConyuge.get(2)), "UTF-8") +
+                                "&pr_so_parentesco1_cony=" + URLEncoder.encode(String.valueOf(datosConyuge.get(3)), "UTF-8") +
+                                "&pr_so_tel1_cony=" + URLEncoder.encode(String.valueOf(datosConyuge.get(4)), "UTF-8") +
+                                "&pr_so_cel1_cony=" + URLEncoder.encode(String.valueOf(datosConyuge.get(5)), "UTF-8") +
+                                "&pr_so_nombre2_cony=" + URLEncoder.encode(String.valueOf(datosConyuge.get(6)), "UTF-8") +
+                                "&pr_so_edad2_cony=" + URLEncoder.encode(String.valueOf(datosConyuge.get(7)), "UTF-8") +
+                                "&pr_so_parentesco2_cony=" + URLEncoder.encode(String.valueOf(datosConyuge.get(8)), "UTF-8") +
+                                "&pr_so_tel2_cony=" + URLEncoder.encode(String.valueOf(datosConyuge.get(9)), "UTF-8") +
+                                "&pr_so_cel2_cony=" + URLEncoder.encode(String.valueOf(datosConyuge.get(10)), "UTF-8") +
+                                "&pr_so_nombre3_cony=" + URLEncoder.encode(String.valueOf(datosConyuge.get(11)), "UTF-8") +
+                                "&pr_so_edad3_cony=" + URLEncoder.encode(String.valueOf(datosConyuge.get(12)), "UTF-8") +
+                                "&pr_so_parentesco3_cony=" + URLEncoder.encode(String.valueOf(datosConyuge.get(13)), "UTF-8") +
+                                "&pr_so_tel3_cony=" + URLEncoder.encode(String.valueOf(datosConyuge.get(14)), "UTF-8") +
+                                "&pr_so_cel3_cony=" + URLEncoder.encode(String.valueOf(datosConyuge.get(15)), "UTF-8");
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }
 
-                }
+        System.out.println("cadena conyuge "+ strSend3);
 
-                    for (int k = 0; k <= referencias.size(); k++) {
                         try {
-                            strSend4 =  "&pr_so_apaterno_ref" + URLEncoder.encode(String.valueOf(datosSolicitante.get(k)), "UTF-8") +
-                                    "&pr_so_amaterno_ref" + URLEncoder.encode(String.valueOf(datosSolicitante.get(k)), "UTF-8") +
-                                    "&pr_so_nombre_ref" + URLEncoder.encode(String.valueOf(datosSolicitante.get(k)), "UTF-8") +
-                                    "&pr_so_calle_ref" + URLEncoder.encode(String.valueOf(datosSolicitante.get(k)), "UTF-8") +
-                                    "&pr_so_num_ext_ref" + URLEncoder.encode(String.valueOf(datosSolicitante.get(k)), "UTF-8") +
-                                    "&pr_so_num_int_ref" + URLEncoder.encode(String.valueOf(datosSolicitante.get(k)), "UTF-8") +
-                                    "&pr_so_colonia_ref" + URLEncoder.encode(String.valueOf(datosSolicitante.get(k)), "UTF-8") +
-                                    "&pr_so_cp_ref" + URLEncoder.encode(String.valueOf(datosSolicitante.get(k)), "UTF-8") +
-                                    "&pr_so_municipio_ref" + URLEncoder.encode(String.valueOf(datosSolicitante.get(k)), "UTF-8") +
-                                    "&pr_so_estado_ref" + URLEncoder.encode(String.valueOf(datosSolicitante.get(k)), "UTF-8") +
-                                    "&pr_so_tel_casa_ref" + URLEncoder.encode(String.valueOf(datosSolicitante.get(k)), "UTF-8") +
-                                    "&pr_so_tel_cel_ref" + URLEncoder.encode(String.valueOf(datosSolicitante.get(k)), "UTF-8") +
-                                    "&pr_so_correo_ref" + URLEncoder.encode(String.valueOf(datosSolicitante.get(k)), "UTF-8");
-
-                                    System.out.println(strSend4);
+                            strSend4 =  "&pr_so_apaterno_ref=" + URLEncoder.encode(String.valueOf(referencias.get(1)), "UTF-8") +
+                                    "&pr_so_amaterno_ref=" + URLEncoder.encode(String.valueOf(referencias.get(2)), "UTF-8") +
+                                    "&pr_so_nombre_ref=" + URLEncoder.encode(String.valueOf(referencias.get(3)), "UTF-8") +
+                                    "&pr_so_calle_ref=" + URLEncoder.encode(String.valueOf(referencias.get(4)), "UTF-8") +
+                                    "&pr_so_num_ext_ref=" + URLEncoder.encode(String.valueOf(referencias.get(5)), "UTF-8") +
+                                    "&pr_so_num_int_ref=" + URLEncoder.encode(String.valueOf(referencias.get(6)), "UTF-8") +
+                                    "&pr_so_colonia_ref=" + URLEncoder.encode(String.valueOf(referencias.get(7)), "UTF-8") +
+                                    "&pr_so_cp_ref=" + URLEncoder.encode(String.valueOf(referencias.get(8)), "UTF-8") +
+                                    "&pr_so_municipio_ref=" + URLEncoder.encode(String.valueOf(referencias.get(9)), "UTF-8") +
+                                    "&pr_so_estado_ref=" + URLEncoder.encode(String.valueOf(referencias.get(10)), "UTF-8") +
+                                    "&pr_so_tel_casa_ref=" + URLEncoder.encode(String.valueOf(referencias.get(11)), "UTF-8") +
+                                    "&pr_so_tel_cel_ref=" + URLEncoder.encode(String.valueOf(referencias.get(12)), "UTF-8") +
+                                    "&pr_so_correo_ref=" + URLEncoder.encode(String.valueOf(referencias.get(13)), "UTF-8");
                         } catch (UnsupportedEncodingException e) {
                             e.printStackTrace();
                         }
 
-                    }
 
-                    for (int l = 0; l <= referencasP.size(); l++) {
+        System.out.println("Cadena referencias: "+ strSend4);
                         try {
-                            strSend5 =  "&pr_so_apaterno_ref_p" + URLEncoder.encode(String.valueOf(datosSolicitante.get(l)), "UTF-8") +
-                                    "&pr_so_amaterno_ref_p" + URLEncoder.encode(String.valueOf(datosSolicitante.get(l)), "UTF-8") +
-                                    "&pr_so_nombre_ref_p" + URLEncoder.encode(String.valueOf(datosSolicitante.get(l)), "UTF-8") +
-                                    "&pr_so_calle_ref_p" + URLEncoder.encode(String.valueOf(datosSolicitante.get(l)), "UTF-8") +
-                                    "&pr_so_num_ext_ref_p" + URLEncoder.encode(String.valueOf(datosSolicitante.get(l)), "UTF-8") +
-                                    "&pr_so_num_int_ref_p" + URLEncoder.encode(String.valueOf(datosSolicitante.get(l)), "UTF-8") +
-                                    "&pr_so_colonia_ref_p" + URLEncoder.encode(String.valueOf(datosSolicitante.get(l)), "UTF-8") +
-                                    "&pr_so_cp_ref_p" + URLEncoder.encode(String.valueOf(datosSolicitante.get(l)), "UTF-8") +
-                                    "&pr_so_municipio_ref_p" + URLEncoder.encode(String.valueOf(datosSolicitante.get(l)), "UTF-8") +
-                                    "&pr_so_estado_ref_p" + URLEncoder.encode(String.valueOf(datosSolicitante.get(l)), "UTF-8") +
-                                    "&pr_so_tel_casa_ref_p" + URLEncoder.encode(String.valueOf(datosSolicitante.get(l)), "UTF-8") +
-                                    "&pr_so_tel_cel_ref_p" + URLEncoder.encode(String.valueOf(datosSolicitante.get(l)), "UTF-8") +
-                                    "&pr_so_correo_ref_p" + URLEncoder.encode(String.valueOf(datosSolicitante.get(l)), "UTF-8") +
-                                    "&pr_so_folio" + URLEncoder.encode(String.valueOf(datosSolicitante.get(l)), "UTF-8");
+                            strSend5 =  "&pr_so_apaterno_ref_p=" + URLEncoder.encode(String.valueOf(referencasP.get(1)), "UTF-8") +
+                                    "&pr_so_amaterno_ref_p=" + URLEncoder.encode(String.valueOf(referencasP.get(2)), "UTF-8") +
+                                    "&pr_so_nombre_ref_p=" + URLEncoder.encode(String.valueOf(referencasP.get(3)), "UTF-8") +
+                                    "&pr_so_calle_ref_p=" + URLEncoder.encode(String.valueOf(referencasP.get(4)), "UTF-8") +
+                                    "&pr_so_num_ext_ref_p=" + URLEncoder.encode(String.valueOf(referencasP.get(5)), "UTF-8") +
+                                    "&pr_so_num_int_ref_p=" + URLEncoder.encode(String.valueOf(referencasP.get(6)), "UTF-8") +
+                                    "&pr_so_colonia_ref_p=" + URLEncoder.encode(String.valueOf(referencasP.get(7)), "UTF-8") +
+                                    "&pr_so_cp_ref_p=" + URLEncoder.encode(String.valueOf(referencasP.get(8)), "UTF-8") +
+                                    "&pr_so_municipio_ref_p=" + URLEncoder.encode(String.valueOf(referencasP.get(9)), "UTF-8") +
+                                    "&pr_so_estado_ref_p=" + URLEncoder.encode(String.valueOf(referencasP.get(10)), "UTF-8") +
+                                    "&pr_so_tel_casa_ref_p=" + URLEncoder.encode(String.valueOf(referencasP.get(11)), "UTF-8") +
+                                    "&pr_so_tel_cel_ref_p=" + URLEncoder.encode(String.valueOf(referencasP.get(12)), "UTF-8") +
+                                    "&pr_so_correo_ref_p=" + URLEncoder.encode(String.valueOf(referencasP.get(13)), "UTF-8");
 
-                                    System.out.println(strSend5);
+                            //"&pr_so_folio" + URLEncoder.encode(String.valueOf(referencasP.get(14)), "UTF-8"
                         } catch (UnsupportedEncodingException e) {
                              e.printStackTrace();
                         }
 
-                        String cadenaCompleta =Login.IPpublic + "RecibeDatos?v_cliente=2" + strSend1+ strSend2 + strSend3+  strSend4+ strSend5;
+                        System.out.println("cadena referencias p: " + strSend5);
+
+                        String cadenaCompleta = Login.IPpublic + "RecibeDatos?v_cliente=2" + strSend1+ strSend2 + strSend3+  strSend4+ strSend5;
                         System.out.println(cadenaCompleta);
              new GetWebServices(ObtenerDatosCompletos.this).execute(cadenaCompleta, "enviar", null, null, null);
-        }
 
         return Login.IPpublic;
+    }
+
+    public void sincronizar_fotos(){
+
+        if(connection.getConnection("No informar")) {
+
+            db = openOrCreateDatabase(DataDB.DB_NAME,android.content.Context.MODE_PRIVATE ,null);
+            Cursor c = db.rawQuery("SELECT * FROM " + DataDB.TABLE_NAME_IMAGEN, null);
+            try {
+                String strSendFotos;
+                System.out.println("Imagenes encontradas: " + c.getCount());
+                if (c.moveToFirst()) {
+                    do{
+                        strSendFotos = Login.IPpublic + "RecibeImagen" +
+                                "?v_cliente=1" +
+                                "&v_pr_cf_credito=" + c.getString(0) +
+                                "&v_fecha_visita=" + URLEncoder.encode(c.getString(1), "UTF-8") +
+                                "&v_tipo=" + c.getString(2) +
+                                "&v_id="+ URLEncoder.encode(c.getString(4), "UTF-8") +
+                                "&v_imagen=" + URLEncoder.encode(c.getString(3),"UTF-8");
+
+                        //new GetWebServicesFotos(Catalogo.this).execute(strSendFotos, "enviar_fotos",c.getString(0),c.getString(2));
+                    }while(c.moveToNext());
+                } else {
+                    System.out.println("No existen imagenes en BD local");
+                }
+            } catch (Exception ex) {
+                Log.e("Error", ex.toString());
+            }finally {
+                db.close();
+            }
+        }
     }
 
 }

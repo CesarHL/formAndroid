@@ -34,9 +34,9 @@ public class InformacionLaboral extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.afirmativoRegistroImss) {
-                    registroImss = "Sí";
+                    registroImss = "si";
                 } else if (checkedId == R.id.negativoRegistroImss) {
-                    registroImss = "No";
+                    registroImss = "no";
                 }
             }
 
@@ -61,10 +61,10 @@ public class InformacionLaboral extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.afirmativoOtrosIngresos) {
-                    otrosIngresos = "Sí";
+                    otrosIngresos = "si";
                     txtOtros.setVisibility(View.VISIBLE);
                 } else if (checkedId == R.id.negativoOtrosIngresos) {
-                    otrosIngresos = "No";
+                    otrosIngresos = "no";
                     txtOtros.setVisibility(View.GONE);
                 }
             }
@@ -76,9 +76,9 @@ public class InformacionLaboral extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.afirmativoComprobable) {
-                    otrosComprobable = "Sí";
+                    otrosComprobable = "si";
                 } else if (checkedId == R.id.negativoComprobable) {
-                    otrosComprobable = "No";
+                    otrosComprobable = "no";
                 }
             }
 
@@ -91,10 +91,10 @@ public class InformacionLaboral extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.afirmativoPagoDeCredito) {
-                    pagaCredito = "Sí";
+                    pagaCredito = "si";
                     txtEMontoCred.setVisibility(View.VISIBLE);
                 } else if (checkedId == R.id.negativoPagoDeCredito) {
-                    pagaCredito = "No";
+                    pagaCredito = "no";
                     txtEMontoCred.setVisibility(View.GONE);
                 }
             }

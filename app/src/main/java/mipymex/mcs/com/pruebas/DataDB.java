@@ -14,6 +14,7 @@ public class DataDB {
     public static final String TABLE_NAME_INFO_CONYUGE = "infoConyuge";
     public static final String TABLE_NAME_INFO_REF = "infoRef";
     public static final String TABLE_NAME_INFO_REF_P = "infoRefP";
+    public static final String TABLE_NAME_IMAGEN = "imagenes";
 
     // Datos de la tabla Usuarios
     public static final String NAME = "nombre";
