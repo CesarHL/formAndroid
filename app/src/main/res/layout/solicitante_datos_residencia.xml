@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardElevation="1dp"
+    app:cardCornerRadius="0dp"
+    style="@style/card_form"
+    tools:showIn="@layout/fragment_informacion_solicitante">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/lblResidencia"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="@string/residenciaSolicitante" />
+
+        <RadioGroup
+            android:id="@+id/rgResidencia"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/propia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/residencia_propia" />
+
+            <RadioButton
+                android:id="@+id/conFamiliares"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/residencia_rentada"
+                android:textColorLink="@android:color/white" />
+
+            <RadioButton
+                android:id="@+id/pagandose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/residencia_pagandose" />
+        </RadioGroup>
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="Vive con familiares" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/rgViveConFamiliares">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/si_vive_con_familiares"
+                android:id="@+id/siVive" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_vive_con_familiares"
+                android:id="@+id/noVive"
+                android:textColorLink="@android:color/white" />
+        </RadioGroup>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Cuantos"
+                android:inputType="numberSigned"
+                android:id="@+id/txtCuantosFamiliares" />
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:id="@+id/lblTiempoResidencia"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="@string/tiempoResidenciaSolicitante" />
+
+        <RadioGroup
+            android:id="@+id/rgTiempoResidencia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/anios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Años" />
+
+            <RadioButton
+                android:id="@+id/meses"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginStart="30dp"
+                android:text="Meses"
+                android:textColorLink="@android:color/white" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/lblCreditoVivienda"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="@string/creditoViviendaSolicitante" />
+
+        <RadioGroup
+            android:id="@+id/rgCreditoVivienda"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/infonavit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Infonavit" />
+        </RadioGroup>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/montoMensualSolicitante"
+                android:inputType="numberDecimal"
+                android:id="@+id/txtMontoMesual"
+
+                />
+        </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>
