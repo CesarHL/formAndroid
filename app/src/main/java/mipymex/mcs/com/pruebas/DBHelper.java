@@ -277,7 +277,17 @@ public class DBHelper extends SQLiteOpenHelper {
         );
 
         Log.i(DataDB.TABLE_NAME_SOLICITUD," TABLA SOLICITUD CREADA");
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + DataDB.TABLE_NAME_TIPO_FOTO + "(" +
+                "_id INTEGER PRIMARY KEY, " +
+                DataDB.CAT_CM_ID + " INTEGER, " +
+                DataDB.CAT_CM_DESCRIPCION + " TEXT);"
+        );
+
+        Log.i(DataDB.TABLE_NAME_SOLICITUD," TABLA TIPO IMAGENES CREADA");
     }
+
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

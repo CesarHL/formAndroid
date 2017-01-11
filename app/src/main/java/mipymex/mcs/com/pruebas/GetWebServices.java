@@ -27,6 +27,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class GetWebServices extends AsyncTask<String, Void, String> {
 
@@ -34,6 +35,7 @@ public class GetWebServices extends AsyncTask<String, Void, String> {
     private Context context;
     private boolean flagSend = false;
     private URL url;
+    public  static ArrayList descList;
 
     public GetWebServices(Context context){
         this.context = context;
@@ -181,13 +183,15 @@ public class GetWebServices extends AsyncTask<String, Void, String> {
 
                             System.out.println("cat_pa_id:" + cat_pa_id);
                             System.out.println("cat_pa_descripcion:" + cat_pa_descripcion);
+                            descList = new ArrayList<>();
+                            descList.add(cat_pa_descripcion);
 
                             try {
                                 ContentValues values = new ContentValues();
                                 values.put("_id", i + 1);
-                             //   values.put(DataDB.CAT_CM_ID, cat_pa_id);
-                               // values.put(DataDB.CAT_CM_DESCRIPCION, cat_pa_descripcion);
-                               // db.insert(DataDB.TABLE_NAME_TIPO_FOTO, null, values);
+                                values.put(DataDB.CAT_CM_ID, cat_pa_id);
+                                values.put(DataDB.CAT_CM_DESCRIPCION, cat_pa_descripcion);
+                                db.insert(DataDB.TABLE_NAME_TIPO_FOTO, null, values);
                             } catch (SQLException ex) {
                                 System.out.println("Error al insertar tipo de fotos " + ex);
                                 break;

@@ -104,7 +104,8 @@ public class Login extends AppCompatActivity {
                 cerrar();
             }
         });
-        getSession();       // Revisar si tiene la sesion abierta
+        getSession();
+        getTipoFoto();
     }
 
     public void getSession() {
@@ -130,6 +131,22 @@ public class Login extends AppCompatActivity {
                 usuario.requestFocus();
                 flagSesion = false;
             }
+        } catch (Exception ex) {
+            Log.e("Error", ex.toString());
+        }finally {
+            db.close();
+        }
+    }
+
+    public void getTipoFoto(){
+        db = sqliteHelper.getWritableDatabase();
+        c = db.rawQuery("SELECT * FROM " + DataDB.TABLE_NAME_TIPO_FOTO, null);
+        try {
+            if(c.moveToFirst())
+                System.out.println("Tipo de fotos existentes");
+            else
+            if(connection.getConnection("No informar"))
+                new GetWebServices(Login.this).execute("", "fotos",null,null);
         } catch (Exception ex) {
             Log.e("Error", ex.toString());
         }finally {

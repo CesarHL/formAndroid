@@ -5,13 +5,17 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
@@ -30,11 +34,30 @@ public class CatalogoImagenes extends Activity {
     public static Map<Integer,String> mapImagesTmp;
     private String tmpDescImagen = "";
     public static ArrayList<String> listFecha = new ArrayList<>();
+    private ItemAdapterFoto itemAdapterFoto;
+    public static ArrayList<ItemTipoFoto> items = null;
+    private SQLiteDatabase db = null;
+    private Cursor c;
+    public static int tamDatos;
+    public ArrayList tipoFotos = new ArrayList();
+    private GetWebServices gw;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.catalogo_foto);
+
+
+       // ListView myList= (ListView) findViewById(R.id.listView);
+       // myList.setAdapter(myAdapter);
+
+             //consultarCatalogo();
+            String[]  myStringArray={"A","B","C"};
+
+        ArrayAdapter<String> myAdapter=new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, myStringArray);
+        ListView myList=(ListView) findViewById(R.id.listView);
+        myList.setAdapter(myAdapter);
 
         mapImages = new HashMap<>();
         mapImagesTmp = new HashMap <>();
@@ -43,27 +66,28 @@ public class CatalogoImagenes extends Activity {
         foto.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                showOptions();
+               // showOptions();
                 openCamera();
             }
         });
     }
 
-    private void showOptions() {
 
-       /* final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+   /* private void showOptions() {
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Selecciona una opción");
 
         builder.setAdapter(itemAdapterFoto, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
 
                 tmpDescImagen = items.get(item).getCat_cm_descripcion();
-                Toast.makeText(Catalogo.this,items.get(item).getCat_cm_descripcion(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(CatalogoImagenes.this,items.get(item).getCat_cm_descripcion(),Toast.LENGTH_SHORT).show();
                 openCamera();
             }
         });
-        builder.show();*/
-    }
+        builder.show();
+    }*/
 
     private void openCamera() {
         final int REQUEST_IMAGE_CAPTURE = 1;
@@ -122,6 +146,8 @@ public class CatalogoImagenes extends Activity {
         byte[] byte_arr = stream.toByteArray();
         return Base64.encodeToString(byte_arr, Base64.DEFAULT);
     }
+
+
 
 
 }

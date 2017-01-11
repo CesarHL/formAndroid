@@ -50,10 +50,10 @@ public class ItemAdapterFoto extends BaseAdapter {
 
         ItemTipoFoto itemTipoFoto = this.items.get(position);
 
-     //   if(Catalogo.arrayListFotoTomada.contains(itemTipoFoto.getCat_cm_descripcion()))
-       //     check_photo.setImageResource(R.drawable.check_photo);
-        //else
-          //  check_photo.setImageResource(R.drawable.uncheck_photo);
+        if(CatalogoImagenes.arrayListFotoTomada.contains(itemTipoFoto.getCat_cm_descripcion()))
+          check_photo.setImageResource(R.drawable.check_photo);
+        else
+          check_photo.setImageResource(R.drawable.uncheck_photo);
 
         tipoFoto.setText(itemTipoFoto.getCat_cm_descripcion());
         return rowView;

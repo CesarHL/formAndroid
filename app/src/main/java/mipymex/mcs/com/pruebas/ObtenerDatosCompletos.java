@@ -55,6 +55,7 @@ public class ObtenerDatosCompletos extends AppCompatActivity  {
             public void onClick(View v) {
                // (ifoInformacionSolicitante).guardarInformacionSolicitante();
                 // informacionLaboral.guardarInformacionLaboral();
+
                 mostraDatos();
                 if (ifoInformacionSolicitante.datosSolicitanteLista != null) {
                     System.out.println("===================================================== LISTA - SOLICITANTE: ");
@@ -76,9 +77,8 @@ public class ObtenerDatosCompletos extends AppCompatActivity  {
                     System.out.println("==================================== .i. ");
                 }
 
-                //guardarBaseTemporal();
                construirUrl();
-               // sincronizar_datos();
+                //sincronizar_fotos();
             }
         });
     }
@@ -353,14 +353,14 @@ public class ObtenerDatosCompletos extends AppCompatActivity  {
                 if (c.moveToFirst()) {
                     do{
                         strSendFotos = Login.IPpublic + "RecibeImagen" +
-                                "?v_cliente=1" +
+                                "?v_cliente=2" +
                                 "&v_pr_cf_credito=" + c.getString(0) +
                                 "&v_fecha_visita=" + URLEncoder.encode(c.getString(1), "UTF-8") +
                                 "&v_tipo=" + c.getString(2) +
                                 "&v_id="+ URLEncoder.encode(c.getString(4), "UTF-8") +
                                 "&v_imagen=" + URLEncoder.encode(c.getString(3),"UTF-8");
 
-                        //new GetWebServicesFotos(Catalogo.this).execute(strSendFotos, "enviar_fotos",c.getString(0),c.getString(2));
+                        new GetWebServicesFotos(ObtenerDatosCompletos.this).execute(strSendFotos, "enviar_fotos",c.getString(0),c.getString(2));
                     }while(c.moveToNext());
                 } else {
                     System.out.println("No existen imagenes en BD local");
@@ -372,5 +372,7 @@ public class ObtenerDatosCompletos extends AppCompatActivity  {
             }
         }
     }
+
+
 
 }

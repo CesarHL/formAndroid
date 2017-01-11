@@ -33,14 +33,13 @@ public class CaptureSignature extends Activity {
 
     LinearLayout mContent;
     signature mSignature;
-    private Button mClear, mGetSign, mCancel;
+    private Button mClear, mGetSign;
     public static String tempDir;
     public String current = null;
     private Bitmap mBitmap;
     View mView;
     File mypath;
     protected String uniqueId;
-    private EditText yourName;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,10 +64,7 @@ public class CaptureSignature extends Activity {
         mClear = (Button)findViewById(R.id.clear);
         mGetSign = (Button)findViewById(R.id.getsign);
         mGetSign.setEnabled(false);
-        mCancel = (Button)findViewById(R.id.cancel);
         mView = mContent;
-
-        yourName = (EditText) findViewById(R.id.yourName);
 
         mClear.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
@@ -90,22 +86,12 @@ public class CaptureSignature extends Activity {
                     Intent intent = new Intent();
                     intent.putExtras(b);
                     setResult(RESULT_OK,intent);
-                    finish();
+                 //   finish();
                 }
             }
         });
 
-        mCancel.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                Log.v("log_tag", "Panel Canceled");
-                Bundle b = new Bundle();
-                b.putString("status", "cancel");
-                Intent intent = new Intent();
-                intent.putExtras(b);
-                setResult(RESULT_OK,intent);
-               // finish();
-            }
-        });
+
     }
 
     @Override
@@ -118,11 +104,6 @@ public class CaptureSignature extends Activity {
 
         boolean error = false;
         String errorMessage = "";
-
-        if(yourName.getText().toString().equalsIgnoreCase("")) {
-            errorMessage = errorMessage + "Please enter your Name\n";
-            error = true;
-        }
 
         if(error) {
             Toast toast = Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT);
@@ -154,7 +135,6 @@ public class CaptureSignature extends Activity {
         return(String.valueOf(currentTime));
 
     }
-
 
     private boolean prepareDirectory() {
         try {

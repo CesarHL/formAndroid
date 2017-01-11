@@ -392,6 +392,15 @@ public class InformacionSolicitante extends AppCompatActivity {
         try {
             ContentValues values = new ContentValues();
 
+            /*
+                PR_SO_NUMSOLICITUD
+                PR_SO_MTO_PRESTAMO
+                PR_SO_PLAZO
+                PR_SO_ASESOR
+                PR_SO_DTE_SOLICITUD
+                PR_SO_DESTINO
+             */
+
             values.put(DataDB.PR_SO_APATERNO, txtAp.getText().toString());
             values.put(DataDB.PR_SO_AMATERNO, txtAm.getText().toString());
             values.put(DataDB.PR_SO_NOMBRE, txtNombre.getText().toString());
