@@ -6,45 +6,120 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import mipymex.mcs.com.pruebas.DataDB;
 import mipymex.mcs.com.pruebas.R;
 
 public class InformacionSolicitante extends Fragment {
 
-    private EditText txtAp, txtAm, txtNombre, txtLugarNacimiento, txtFechaNacimiento, txtEdad, txtRfc, txtCurp, txtFolioIfe, txtInConyuge;
-    private EditText txtRegimen, txtEstadoCivil, txtPersonas, txtCalle, txtNExt, txtNInt, txtColonia, txtCP, txtMun;
-    private EditText txtEstado, txtMontoCred, txtTelCasa, txtCelular, txtCorreo, txtCargoPublicSolicitante, txtEspCargoPublico;
-    private Button agregar;
-    private RadioGroup rdSexo, rdTConyuge, rdDep, rdRes, rdTRes, rdCPublico, rdCConyuge;
-    private TextView lblMontoCred, lblInConyuge, lblDependientes;
-    private CheckBox checkVivienda;
+    @BindView(R.id.txtApellidoPaterno)TextInputEditText txtAp;
+    @BindView(R.id.txtApellidoMaterno)TextInputEditText txtAm;
+    @BindView(R.id.txtNombresSolicitante)TextInputEditText txtNombre;
+    @BindView(R.id.txtLugarNacimiento)TextInputEditText txtLugarNacimiento;
+    @BindView(R.id.txtFechaNacimiento)TextInputEditText txtFechaNacimiento;
+    @BindView(R.id.txtEdadSolicitante)TextInputEditText txtEdad;
+    @BindView(R.id.txtRfcSolicitante)TextInputEditText txtRfc;
+    @BindView(R.id.txtCurp)TextInputEditText txtCurp;
+    @BindView(R.id.txtFolioCurp)TextInputEditText txtFolioIfe;
+    @BindView(R.id.txtIngresoConyuge)TextInputEditText txtInConyuge;
+    @BindView(R.id.txtRegimen)TextInputEditText txtRegimen;
+    @BindView(R.id.txtEstadoCivil)TextInputEditText txtEstadoCivil;
+    @BindView(R.id.txtNumeroPersonas)TextInputEditText txtPersonas;
+    @BindView(R.id.txtCalle)TextInputEditText txtCalle;
+    @BindView(R.id.txtExterior)TextInputEditText txtNExt;
+    @BindView(R.id.txtInterior)TextInputEditText txtNInt;
+    @BindView(R.id.txtColoniaSolicitante)TextInputEditText txtColonia;
+    @BindView(R.id.txtCpSolicitante)TextInputEditText txtCP;
+    @BindView(R.id.txtMunicipioSolicitante)TextInputEditText txtMun;
+    @BindView(R.id.txtEstadoSolicitante)TextInputEditText txtEstado;
+    @BindView(R.id.txtMontoMesual)TextInputEditText txtMontoCred;
+    @BindView(R.id.txtTelefono)TextInputEditText txtTelCasa;
+    @BindView(R.id.txtCelular)TextInputEditText txtCelular;
+    @BindView(R.id.txtCorreo)TextInputEditText txtCorreo;
+    @BindView(R.id.txtEspecificarSolicitante)TextInputEditText txtCargoPublicSolicitante;
+    @BindView(R.id.txtEspecificarCargoPublicoConyuge)TextInputEditText txtEspCargoPublico;
+
+    @BindView(R.id.rgSexo)RadioGroup rdSexo;
+    @BindView(R.id.rgTrabajaConyuge)RadioGroup rdTConyuge;
+    @BindView(R.id.rgDependientes)RadioGroup rdDep;
+    @BindView(R.id.rgTiempoResidencia)RadioGroup rdTRes;
+    @BindView(R.id.rgResidencia)RadioGroup rdRes;
+    @BindView(R.id.grpBtnCargoPublico)RadioGroup rdCPublico;
+    @BindView(R.id.grpBtnCargoPublicoConyuge)RadioGroup rdCConyuge;
+
+    @BindView(R.id.infonavit)CheckBox checkVivienda;
+    @BindView(R.id.btnSiguiente)Button agregar;
     private SQLiteDatabase db = null;
-    private Cursor c = null;
     private String sexo , estadoPropiedad, tiempoResidencia;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.informacion_solicitante, null);
+        return inflater.inflate(R.layout.fragment_informacion_solicitante, container, false);
+    }
 
-        txtAp = (EditText) view.findViewById(R.id.txtApellidoPaterno);
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ButterKnife.bind(this, view);
+
+        setTextInputEditTexts();
+        setRadioGroups();
+        setButton();
+        setCheckBox();
+
+
+    }
+
+    private void setCheckBox() {
+        checkVivienda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (((CheckBox) v).isChecked()) {
+                    txtMontoCred.setVisibility(View.VISIBLE);
+                } else {
+                    txtMontoCred.setVisibility(View.GONE);
+                }
+
+            }
+        });
+    }
+
+    private void setButton() {
+        agregar.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //validar();
+                //guardarInformacionSolicitante();
+                TabLayout tabs = (TabLayout) getActivity().findViewById(R.id.tabs);
+                TabLayout.Tab tab = tabs.getTabAt(1);
+                if (tab != null) {
+                    tab.select();
+                }
+                //mostraDatos();
+            }
+        });
+    }
+
+    private void setTextInputEditTexts() {
         txtAp.requestFocus();
-        txtAm = (EditText) view.findViewById(R.id.txtApellidoMaterno);
-        txtNombre = (EditText) view.findViewById(R.id.txtNombresSolicitante);
-        txtLugarNacimiento = (EditText) view.findViewById(R.id.txtLugarNacimiento);
-        txtFechaNacimiento = (EditText) view.findViewById(R.id.txtFechaNacimiento);
-        txtEdad = (EditText) view.findViewById(R.id.txtEdadSolicitante);
-        rdSexo = (RadioGroup) view.findViewById(R.id.rgSexo);
+        txtInConyuge.setVisibility(View.GONE);
+        txtPersonas.setVisibility(View.GONE);
+        txtMontoCred.setVisibility(View.GONE);
+        txtCargoPublicSolicitante.setVisibility(View.GONE);
+        txtEspCargoPublico.setVisibility(View.GONE);
+    }
+    private void setRadioGroups() {
         rdSexo.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -57,60 +132,33 @@ public class InformacionSolicitante extends Fragment {
 
         });
 
-        txtRfc = (EditText) view.findViewById(R.id.txtRfcSolicitante);
-        txtCurp = (EditText) view.findViewById(R.id.txtCurp);
-        txtFolioIfe = (EditText) view.findViewById(R.id.txtFolioCurp);
-        txtEstadoCivil = (EditText) view.findViewById(R.id.txtEstadoCivil);
-        rdTConyuge = (RadioGroup) view.findViewById(R.id.rgTrabajaConyuge);
 
-        lblInConyuge = (TextView) view.findViewById(R.id.lblIngresoConyuge);
-        lblInConyuge.setVisibility(View.GONE);
-        txtInConyuge = (EditText) view.findViewById(R.id.txtIngresoConyuge);
-        txtInConyuge.setVisibility(View.GONE);
         rdTConyuge.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.afirmativo){
-                    lblInConyuge.setVisibility(View.VISIBLE);
                     txtInConyuge.setVisibility(View.VISIBLE);
                     txtInConyuge.requestFocus();
                 }else if (checkedId == R.id.negativo){
-                    lblInConyuge.setVisibility(View.GONE);
                     txtInConyuge.setVisibility(View.GONE);
                 }
             }
         });
-        txtRegimen = (EditText) view.findViewById(R.id.txtRegimen);
 
 
-        lblDependientes = (TextView) view.findViewById(R.id.lblNumeroPersonas);
-        lblDependientes.setVisibility(View.GONE);
-        txtPersonas = (EditText) view.findViewById(R.id.txtNumeroPersonas);
-        txtPersonas.setVisibility(View.GONE);
 
-        rdDep = (RadioGroup) view.findViewById(R.id.rgDependientes);
         rdDep.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.afirmativoDependientes){
-                    lblDependientes.setVisibility(View.VISIBLE);
                     txtPersonas.setVisibility(View.VISIBLE);
                     txtPersonas.requestFocus();
                 }else if (checkedId == R.id.negativoDependientes){
-                    lblDependientes.setVisibility(View.GONE);
                     txtPersonas.setVisibility(View.GONE);
                 }
             }
         });
 
-        txtCalle = (EditText) view.findViewById(R.id.txtCalle);
-        txtNExt = (EditText) view.findViewById(R.id.txtExterior);
-        txtNInt = (EditText) view.findViewById(R.id.txtInterior);
-        txtColonia = (EditText) view.findViewById(R.id.txtColoniaSolicitante);
-        txtCP = (EditText) view.findViewById(R.id.txtCpSolicitante);
-        txtMun = (EditText) view.findViewById(R.id.txtMunicipioSolicitante);
-        txtEstado = (EditText) view.findViewById(R.id.txtEstadoSolicitante);
-        rdRes =(RadioGroup) view.findViewById(R.id.rgResidencia);
         rdRes.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -124,12 +172,6 @@ public class InformacionSolicitante extends Fragment {
             }
         });
 
-        /*
-        * String tipoResidencia = rdTRes.isActivated() ? "meses" : "años";
-                System.out.println("================================ =============" + tipoResidencia);
-        * */
-
-        rdTRes =(RadioGroup) view.findViewById(R.id.rgTiempoResidencia);
         rdTRes.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -140,38 +182,6 @@ public class InformacionSolicitante extends Fragment {
                 }
             }
         });
-
-
-        lblMontoCred = (TextView) view.findViewById(R.id.lblMontoMensual);
-        lblMontoCred.setVisibility(View.GONE);
-        txtMontoCred = (EditText) view.findViewById(R.id.txtMontoMesual);
-        txtMontoCred.setVisibility(View.GONE);
-        checkVivienda =(CheckBox) view.findViewById(R.id.infonavit);
-        checkVivienda.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (((CheckBox) v).isChecked()) {
-                    lblMontoCred.setVisibility(View.VISIBLE);
-                    txtMontoCred.setVisibility(View.VISIBLE);
-                } else {
-                    lblMontoCred.setVisibility(View.GONE);
-                    txtMontoCred.setVisibility(View.GONE);
-                }
-
-            }
-        });
-
-
-
-        txtTelCasa = (EditText) view.findViewById(R.id.txtTelefono);
-        txtCelular = (EditText) view.findViewById(R.id.txtCelular);
-        txtCorreo = (EditText) view.findViewById(R.id.txtCorreo);
-        txtCargoPublicSolicitante = (EditText) view.findViewById(R.id.txtEspecificarSolicitante);
-        txtCargoPublicSolicitante.setVisibility(View.GONE);
-        txtEspCargoPublico = (EditText) view.findViewById(R.id.txtEspecificarCargoPublicoConyuge);
-        txtEspCargoPublico.setVisibility(View.GONE);
-        rdCPublico =(RadioGroup) view.findViewById(R.id.grpBtnCargoPublico);
-
         rdCPublico.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -184,7 +194,6 @@ public class InformacionSolicitante extends Fragment {
             }
         });
 
-        rdCConyuge =(RadioGroup) view.findViewById(R.id.grpBtnCargoPublicoConyuge);
         rdCConyuge.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -196,141 +205,40 @@ public class InformacionSolicitante extends Fragment {
                 }
             }
         });
-
-        agregar =(Button)view.findViewById(R.id.btnGuardar);
-        agregar.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                validar();
-                guardarInformacionSolicitante();
-                //mostraDatos();
-            }
-        });
-        return view;
     }
-
-    public void validar(){
-        Boolean v1 = txtAp.getText().toString().trim().equalsIgnoreCase("");
-        Boolean v2 = txtAm.getText().toString().trim().equalsIgnoreCase("");
-        Boolean v3 = txtNombre.getText().toString().trim().equalsIgnoreCase("");
-        Boolean v4 = txtLugarNacimiento.getText().toString().trim().equalsIgnoreCase("");
-        Boolean v24 = txtFechaNacimiento.getText().toString().trim().equalsIgnoreCase("");
-        Boolean v5 = txtEdad.getText().toString().trim().equalsIgnoreCase("");
-        Boolean v6 = txtRfc.getText().toString().trim().equalsIgnoreCase("");
-        Boolean v7 = txtCurp.getText().toString().trim().equalsIgnoreCase("");
-        Boolean v8 = txtFolioIfe.getText().toString().trim().equalsIgnoreCase("");
-        Boolean v9 = txtInConyuge.getText().toString().trim().equalsIgnoreCase("");
-        Boolean v10 = txtRegimen.getText().toString().trim().equalsIgnoreCase("");
-        Boolean v11 = txtEstadoCivil.getText().toString().trim().equalsIgnoreCase("");
-        Boolean v12 = txtPersonas.getText().toString().trim().equalsIgnoreCase("");
-        Boolean v13 = txtCalle.getText().toString().trim().equalsIgnoreCase("");
-        Boolean v14 = txtNExt.getText().toString().trim().equalsIgnoreCase("");
-        Boolean v15 = txtNInt.getText().toString().trim().equalsIgnoreCase("");
-        Boolean v16 = txtColonia.getText().toString().trim().equalsIgnoreCase("");
-        Boolean v17 = txtCP.getText().toString().trim().equalsIgnoreCase("");
-        Boolean v18 = txtEstado.getText().toString().trim().equalsIgnoreCase("");
-        Boolean v19 = txtMontoCred.getText().toString().trim().equalsIgnoreCase("");
-        Boolean v20 = txtTelCasa.getText().toString().trim().equalsIgnoreCase("");
-        Boolean v21 = txtCelular.getText().toString().trim().equalsIgnoreCase("");
-        Boolean v22 = txtCorreo.getText().toString().trim().equalsIgnoreCase("");
-        Boolean v23 = txtEspCargoPublico.getText().toString().trim().equalsIgnoreCase("");
-
-        if(v1) {
-            txtAp.setError("Este campo no puede estar vacio");
-            txtAp.setText("");
-            txtAp.requestFocus();
-        } else if(v2) {
-            txtAm.setError("Este campo no puede estar vacio");
-            txtAm.setText("");
-            txtAm.requestFocus();
-        } else if(v3){
-            txtNombre.setError("Este campo no puede estar vacio");
-            txtNombre.setText("");
-            txtNombre.requestFocus();
-        } else if(v4) {
-            txtLugarNacimiento.setError("Este campo no puede estar vacio");
-            txtLugarNacimiento.setText("");
-            txtLugarNacimiento.requestFocus();
-        } else if(v24) {
-            txtFechaNacimiento.setError("Este campo no puede estar vacio");
-            txtFechaNacimiento.setText("");
-            txtFechaNacimiento.requestFocus();
-        }else if(v5) {
-            txtEdad.setError("Este campo no puede estar vacio");
-            txtEdad.setText("");
-            txtEdad.requestFocus();
-        } else if(v6){
-            txtRfc.setError("Este campo no puede estar vacio");
-            txtRfc.setText("");
-            txtRfc.requestFocus();
-        } else if(v7){
-            txtCurp.setError("Este campo no puede estar vacio");
-            txtCurp.setText("");
-            txtCurp.requestFocus();
-        } else if(v8){
-            txtFolioIfe.setError("Este campo no puede estar vacio");
-            txtFolioIfe.setText("");
-            txtFolioIfe.requestFocus();
-        } else if(v9){
-            txtInConyuge.setError("Este campo no puede estar vacio");
-            txtInConyuge.setText("");
-            txtInConyuge.requestFocus();
-        } else if(v10){
-            txtRegimen.setError("Este campo no puede estar vacio");
-            txtRegimen.setText("");
-            txtRegimen.requestFocus();
-        } else if(v11){
-            txtEstadoCivil.setError("Este campo no puede estar vacio");
-            txtEstadoCivil.setText("");
-            txtEstadoCivil.requestFocus();
-        } else if(v12){
-            txtPersonas.setError("Este campo no puede estar vacio");
-            txtPersonas.setText("");
-            txtPersonas.requestFocus();
-        } else if ( v13) {
-            txtCalle.setError("Este campo no puede estar vacio");
-            txtCalle.setText("");
-            txtCalle.requestFocus();
-        } else if ( v14) {
-            txtNExt.setError("Este campo no puede estar vacio");
-            txtNExt.setText("");
-        } else if ( v15) {
-            txtNInt.setError("Este campo no puede estar vacio");
-            txtNInt.setText("");
-            txtNInt.requestFocus();
-        } else if ( v16) {
-            txtColonia.setError("Este campo no puede estar vacio");
-            txtColonia.setText("");
-            txtColonia.requestFocus();
-        } else if ( v17) {
-            txtCP.setError("Este campo no puede estar vacio");
-            txtCP.setText("");
-            txtCP.requestFocus();
-        } else if ( v18) {
-            txtEstado.setError("Este campo no puede estar vacio");
-            txtEstado.setText("");
-            txtEstado.requestFocus();
-        } else if ( v19) {
-            txtMontoCred.setError("Este campo no puede estar vacio");
-            txtMontoCred.setText("");
-            txtMontoCred.requestFocus();
-        } else if ( v20) {
-            txtTelCasa.setError("Este campo no puede estar vacio");
-            txtTelCasa.setText("");
-            txtTelCasa.requestFocus();
-        } else if ( v21) {
-            txtCelular.setError("Este campo no puede estar vacio");
-            txtCelular.setText("");
-            txtCelular.requestFocus();
-        } else if ( v22) {
-            txtCorreo.setError("Este campo no puede estar vacio");
-            txtCorreo.setText("");
-            txtCorreo.requestFocus();
-        } else if ( v23) {
-            txtEspCargoPublico.setError("Este campo no puede estar vacio");
-            txtEspCargoPublico.setText("");
-            txtEspCargoPublico.requestFocus();
+    private void validarCampo(TextInputEditText textInputEditText) {
+        boolean estaVacio = textInputEditText.getText().toString().trim().isEmpty();
+        if (estaVacio) {
+            textInputEditText.setError("Este campo no puede estar vacío");
+            textInputEditText.setText("");
+            textInputEditText.requestFocus();
         }
-
+    }
+    public void validar(){
+        validarCampo(txtAp);
+        validarCampo(txtAm);
+        validarCampo(txtNombre);
+        validarCampo(txtLugarNacimiento);
+        validarCampo(txtFechaNacimiento);
+        validarCampo(txtEdad);
+        validarCampo(txtRfc);
+        validarCampo(txtCurp);
+        validarCampo(txtFolioIfe);
+        validarCampo(txtInConyuge);
+        validarCampo(txtRegimen);
+        validarCampo(txtEstadoCivil);
+        validarCampo(txtPersonas);
+        validarCampo(txtCalle);
+        validarCampo(txtNExt);
+        validarCampo(txtNInt);
+        validarCampo(txtColonia);
+        validarCampo(txtCP);
+        validarCampo(txtEstado);
+        validarCampo(txtMontoCred);
+        validarCampo(txtTelCasa);
+        validarCampo(txtCelular);
+        validarCampo(txtCorreo);
+        validarCampo(txtEspCargoPublico);
     }
 
     public void guardarInformacionSolicitante() {
@@ -400,7 +308,7 @@ public class InformacionSolicitante extends Fragment {
                     DataDB.PR_SO_CALLE
             };
 
-            c = db.rawQuery("SELECT * FROM " + DataDB.TABLE_NAME_INFO_SOLICITANTE, null);
+            Cursor c = db.rawQuery("SELECT * FROM " + DataDB.TABLE_NAME_INFO_SOLICITANTE, null);
 
             if (c.moveToFirst()) {
                 do {
@@ -410,7 +318,7 @@ public class InformacionSolicitante extends Fragment {
                     }
 
                 } while (c.moveToNext());
-                    c.close();
+                c.close();
             } else {
                 System.out.println("No existe información");
             }
