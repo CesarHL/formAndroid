@@ -1,9 +1,13 @@
 package mipymex.mcs.com.pruebas;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -53,8 +57,8 @@ public class ObtenerDatosCompletos extends AppCompatActivity  {
         btnSincronizar = (Button) findViewById(R.id.btnSincroinizar);
         btnSincronizar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-               // (ifoInformacionSolicitante).guardarInformacionSolicitante();
-                // informacionLaboral.guardarInformacionLaboral();
+
+               // System.out.println("=====================================================" + ifoInformacionSolicitante.txtAp.getText().toString());
 
                 mostraDatos();
                 if (ifoInformacionSolicitante.datosSolicitanteLista != null) {
@@ -77,14 +81,68 @@ public class ObtenerDatosCompletos extends AppCompatActivity  {
                     System.out.println("==================================== .i. ");
                 }
 
-               construirUrl();
+                obtenerDatosSolicitar();
+                construirUrl();
                 //sincronizar_fotos();
             }
         });
     }
 
+
+    public void obtenerDatosSolicitar() {
+
+        db = openOrCreateDatabase(DataDB.DB_NAME, android.content.Context.MODE_PRIVATE, null);
+        try {
+
+            ContentValues values = new ContentValues();
+
+            values.put(DataDB.PR_SO_APATERNO, ifoInformacionSolicitante.txtAp.getText().toString());
+            values.put(DataDB.PR_SO_AMATERNO, ifoInformacionSolicitante.txtAm.getText().toString());
+            values.put(DataDB.PR_SO_NOMBRE, ifoInformacionSolicitante.txtNombre.getText().toString());
+            values.put(DataDB.PR_SO_DTE_NACIMIENTO, ifoInformacionSolicitante.txtLugarNacimiento.getText().toString());
+            values.put(DataDB.PR_SO_LUGAR, ifoInformacionSolicitante.txtFechaNacimiento.getText().toString());
+            values.put(DataDB.PR_SO_EDAD, ifoInformacionSolicitante.txtEdad.getText().toString());
+            values.put(DataDB.PR_SO_SEXO, ifoInformacionSolicitante.sexo); //rg
+            values.put(DataDB.PR_SO_RFC , ifoInformacionSolicitante.txtRfc.getText().toString());
+            values.put(DataDB.PR_SO_CURP, ifoInformacionSolicitante.txtCurp.getText().toString());
+            values.put(DataDB.PR_SO_INE, ifoInformacionSolicitante.txtFolioIfe.getText().toString());
+            values.put(DataDB.PR_SO_EDO_CIVIL, ifoInformacionSolicitante.txtEstadoCivil.getText().toString());
+            values.put(DataDB.PR_SO_CONYUGE_TRABAJA, ifoInformacionSolicitante.tabajaConyuge);//rg y n
+            values.put(DataDB.PR_SO_INGRESO_CONYUGE, ifoInformacionSolicitante.txtInConyuge.getText().toString());
+            values.put(DataDB.PR_SO_DEPENDIENTES, ifoInformacionSolicitante.dependientes);//rg y n
+            values.put(DataDB.PR_SO_NUMDEPENDIENTES, ifoInformacionSolicitante.txtPersonas.getText().toString());
+            values.put(DataDB.PR_SO_CALLE, ifoInformacionSolicitante.txtCalle.getText().toString());
+            values.put(DataDB.PR_SO_NUM_EXT, ifoInformacionSolicitante.txtNExt.getText().toString());
+            values.put(DataDB.PR_SO_NUM_INT, ifoInformacionSolicitante.txtNInt.getText().toString());
+            values.put(DataDB.PR_SO_COLONIA, ifoInformacionSolicitante.txtColonia.getText().toString());
+            values.put(DataDB.PR_SO_CP, ifoInformacionSolicitante.txtCP.getText().toString());
+            values.put(DataDB.PR_SO_MUNICIPIO, ifoInformacionSolicitante.txtMun.getText().toString());
+            values.put(DataDB.PR_SO_ESTADO, ifoInformacionSolicitante.txtEstado.getText().toString());
+            values.put(DataDB.PR_SO_TIPO_RECIDENCIA, ifoInformacionSolicitante.estadoPropiedad);//rg
+            values.put(DataDB.PR_SO_TIEMPO_RESIDENCIA_A, ifoInformacionSolicitante.tiempoResidenciaAnios);//rg
+            values.put(DataDB.PR_SO_TIEMPO_RESIDENCIA_M, ifoInformacionSolicitante.tiempoResidenciaMeses);//rg
+            values.put(DataDB.PR_SO_CREDITO_VI, ifoInformacionSolicitante.creditoVivienda);//rg
+            values.put(DataDB.PR_SO_PAGO_VIVIENDA, ifoInformacionSolicitante.txtMontoCred.getText().toString());
+            values.put(DataDB.PR_SO_TEL_CASA, ifoInformacionSolicitante.txtTelCasa.getText().toString());
+            values.put(DataDB.PR_SO_TEL_CEL, ifoInformacionSolicitante.txtCelular.getText().toString());
+            values.put(DataDB.PR_SO_CORREO, ifoInformacionSolicitante.txtCorreo.getText().toString());
+            values.put(DataDB.PR_SO_CARGO_P_PUBLICO, ifoInformacionSolicitante.cargoPublicoSolicitante);//rg Y N
+            values.put(DataDB.PR_SO_CARGO_PUBLICO, ifoInformacionSolicitante.txtCargoPublicSolicitante.getText().toString());
+            values.put(DataDB.PR_SO_CONYUGE_P_PUBLICO, ifoInformacionSolicitante.cargoPublicoConyuge);//rg Y N
+            values.put(DataDB.PR_SO_CONYUGE_PUBLICO, ifoInformacionSolicitante.txtEspCargoPublicoConyuge.getText().toString());
+
+            db.insert(DataDB.TABLE_NAME_INFO_SOLICITANTE, null, values);
+            System.out.println("Insertado");
+        } catch (SQLException ex) {
+            System.out.println("Error al insertar solicitud: " + ex);
+        } finally {
+            db.close();
+        }
+    }
+
     public void mostraDatos() {
-        db = getApplicationContext().openOrCreateDatabase(DataDB.DB_NAME, MODE_PRIVATE, null);
+
+        db = openOrCreateDatabase(DataDB.DB_NAME, MODE_PRIVATE, null);
         try {
             c = db.rawQuery("SELECT *  FROM " + DataDB.TABLE_NAME_INFO_SOLICITANTE, null);
             tamDatos = c.getCount();

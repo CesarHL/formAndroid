@@ -18,19 +18,18 @@ import java.util.List;
 
 public class InformacionSolicitante extends AppCompatActivity {
 
-    private EditText txtAp, txtAm, txtNombre, txtLugarNacimiento, txtFechaNacimiento, txtEdad, txtRfc, txtCurp, txtFolioIfe, txtInConyuge;
-    private EditText txtRegimen, txtEstadoCivil, txtPersonas, txtCalle, txtNExt, txtNInt, txtColonia, txtCP, txtMun;
-    private EditText txtEstado, txtMontoCred, txtTelCasa, txtCelular, txtCorreo, txtCargoPublicSolicitante, txtEspCargoPublicoConyuge;
+    public static EditText txtAp, txtAm, txtNombre, txtLugarNacimiento, txtFechaNacimiento, txtEdad, txtRfc, txtCurp, txtFolioIfe, txtInConyuge;
+    public static EditText txtRegimen, txtEstadoCivil, txtPersonas, txtCalle, txtNExt, txtNInt, txtColonia, txtCP, txtMun;
+    public static EditText txtEstado, txtMontoCred, txtTelCasa, txtCelular, txtCorreo, txtCargoPublicSolicitante, txtEspCargoPublicoConyuge;
     private Button agregar;
     private RadioGroup rdSexo, rdTConyuge, rdDep, rdRes, rdTRes, rdCPublico, rdCConyuge;
     private TextView lblMontoCred, lblInConyuge, lblDependientes;
     private CheckBox checkVivienda;
     public static SQLiteDatabase db = null;
     private Cursor c = null;
-    private String sexo, estadoPropiedad, tiempoResidenciaAnios, tiempoResidenciaMeses, tabajaConyuge, dependientes, creditoVivienda, cargoPublicoSolicitante, cargoPublicoConyuge;
+    public static String sexo, estadoPropiedad, tiempoResidenciaAnios, tiempoResidenciaMeses, tabajaConyuge, dependientes, creditoVivienda, cargoPublicoSolicitante, cargoPublicoConyuge;
     public static int tamDatos;
     public static List datosSolicitanteLista;
-    private DBHelper sqliteHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -213,8 +212,8 @@ public class InformacionSolicitante extends AppCompatActivity {
     }
 
     public void mostraDatos() {
-        db = getApplicationContext().openOrCreateDatabase(DataDB.DB_NAME, MODE_PRIVATE, null);
-       // db = sqliteHelper.getWritableDatabase();
+       db = this.openOrCreateDatabase(DataDB.DB_NAME, MODE_PRIVATE, null);
+
         try {
             Cursor c = db.rawQuery("SELECT *  FROM " + DataDB.TABLE_NAME_INFO_SOLICITANTE, null);
             tamDatos = c.getCount();
@@ -387,19 +386,15 @@ public class InformacionSolicitante extends AppCompatActivity {
     }
 
     public void guardarInformacionSolicitante() {
-        db = getApplicationContext().openOrCreateDatabase(DataDB.DB_NAME, android.content.Context.MODE_PRIVATE, null);
+        System.out.println("===========================================================================");
 
+        System.out.println(txtAp.getText().toString());
+        /*db = openOrCreateDatabase(DataDB.DB_NAME, android.content.Context.MODE_PRIVATE, null);
         try {
+
             ContentValues values = new ContentValues();
 
-            /*
-                PR_SO_NUMSOLICITUD
-                PR_SO_MTO_PRESTAMO
-                PR_SO_PLAZO
-                PR_SO_ASESOR
-                PR_SO_DTE_SOLICITUD
-                PR_SO_DESTINO
-             */
+
 
             values.put(DataDB.PR_SO_APATERNO, txtAp.getText().toString());
             values.put(DataDB.PR_SO_AMATERNO, txtAm.getText().toString());
@@ -443,5 +438,6 @@ public class InformacionSolicitante extends AppCompatActivity {
         } finally {
             db.close();
         }
+    }*/
     }
 }
