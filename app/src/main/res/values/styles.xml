@@ -13,4 +13,18 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <style name="card_form">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/card_top_separation</item>
+    </style>
+
+    <style name="frame_two_pane_cards">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_margin">16dp</item>
+    </style>
+
 </resources>
