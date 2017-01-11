@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:background="@color/colorCardContrast">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <FrameLayout style="@style/frame_two_pane_cards">
+                <include layout="@layout/solicitante_datos_personal" />
+            </FrameLayout>
+
+            <FrameLayout style="@style/frame_two_pane_cards">
+                <include layout="@layout/solicitante_datos_residencia" />
+
+            </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <FrameLayout style="@style/frame_two_pane_cards">
+                <include layout="@layout/solicitante_datos_civil" />
+            </FrameLayout>
+
+            <FrameLayout style="@style/frame_two_pane_cards">
+                <include layout="@layout/solicitante_datos_domicilio" />
+            </FrameLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <FrameLayout style="@style/frame_two_pane_cards">
+                <include layout="@layout/solicitante_datos_rfc" />
+
+            </FrameLayout>
+            <FrameLayout style="@style/frame_two_pane_cards">
+                <include layout="@layout/solicitante_datos_contacto" />
+            </FrameLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <FrameLayout style="@style/frame_two_pane_cards">
+                <include layout="@layout/solicitante_datos_cargo_publico" />
+            </FrameLayout>
+            <FrameLayout style="@style/frame_two_pane_cards">
+                <include layout="@layout/solicitante_datos_cargo_publico_conyuge" />
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Siguiente"
+            android:layout_gravity="center"
+            android:background="@color/colorAccent"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/colorWhite"
+            android:id="@+id/btnSiguiente"/>
+    </LinearLayout>
+
+</ScrollView>
