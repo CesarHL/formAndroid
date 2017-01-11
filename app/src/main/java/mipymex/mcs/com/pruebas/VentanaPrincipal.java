@@ -28,22 +28,15 @@ import mipymex.mcs.com.pruebas.fragments.ReferenciasPersonalesDistintoDomicilio;
 
 public class VentanaPrincipal extends AppCompatActivity {
 
-    private ViewPager viewPager;
+    private  ViewPager viewPager;
+    private  TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pantalla_principal);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-
-        //tabLayout.addTab(tabLayout.newTab().setText("Solicitante"));
-        //tabLayout.addTab(tabLayout.newTab().setText("Laboral"));
-        //tabLayout.addTab(tabLayout.newTab().setText("Cónyuge"));
-        //tabLayout.addTab(tabLayout.newTab().setText("Referencias"));
-        //tabLayout.addTab(tabLayout.newTab().setText("Referencias F"));
-        //tabLayout.addTab(tabLayout.newTab().setText("Firma"));
-        //tabLayout.addTab(tabLayout.newTab().setText("Imágenes"));
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -54,7 +47,6 @@ public class VentanaPrincipal extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
     }
-
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
         adapter.addFragment(new InformacionSolicitante(), "Solicitante");
