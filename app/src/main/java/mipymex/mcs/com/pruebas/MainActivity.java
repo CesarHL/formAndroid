@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.txtBienvenido)TextView txtBienvenido;
     @BindView(R.id.btnSiguiente)Button btnSiguiente;
     @BindView(R.id.montoContrato)TextInputEditText montoContrato;
+    @BindView(R.id.plazoContrato)TextInputEditText plazoContrato;
+    @BindView(R.id.destinoPrestamoContrato)TextInputEditText destinoPrestamoContrato;
     private SharedPreferences preferences;
 
     @Override
@@ -30,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
+        preferences = getSharedPreferences(Login.PREFS_NAME, 0);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setTitle("Contrato");
@@ -41,12 +43,37 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        final SharedPreferences.Editor editor = preferences.edit();
+        montoContrato.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    editor.putString("montoContrato", montoContrato.getText().toString()).commit();
+                }
+            }
+        });
+        plazoContrato.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    editor.putString("plazoContrato", plazoContrato.getText().toString()).commit();
+                }
+            }
+        });
+        destinoPrestamoContrato.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    editor.putString("destinoPrestamoContrato", destinoPrestamoContrato.getText().toString()).commit();
+                }
+            }
+        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        preferences = getSharedPreferences(Login.PREFS_NAME, 0);
+
         String bienvenido = String.format(getString(R.string.welcome_user), preferences.getString("Usuario", ""));
         String user = preferences.getString("Usuario", "Error");
         txtUsuario.setText(user);
