@@ -38,27 +38,6 @@
         <activity
             android:name=".VentanaPrincipal"
             android:label="main" />
-        <activity
-            android:name=".fragments.CaptureSignature"
-            android:label="Autorización" />
-        <activity
-            android:name=".fragments.InformacionSolicitante"
-            android:label="Informacion solicitante" />
-        <activity
-            android:name=".fragments.DatosConyugeHijos"
-            android:label="Datos Conyuge" />
-        <activity
-            android:name=".fragments.InformacionLaboral"
-            android:label="Información Laboral" />
-        <activity
-            android:name=".fragments.ReferenciasPersonales"
-            android:label="Referencias Personales" />
-        <activity
-            android:name=".fragments.ReferenciasPersonalesDistintoDomicilio"
-            android:label="Referencias personales Distinto Domicilio" />
-        <activity
-            android:name=".fragments.CatalogoImagenes"
-            android:label="Catalogo Imagenes" />
         <activity android:name=".MainActivity"></activity>
     </application>
 

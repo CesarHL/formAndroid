@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    editor.putString("montoContrato", montoContrato.getText().toString()).commit();
+                    editor.putString("montoContrato", montoContrato.getText().toString()).apply();
                 }
             }
         });
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    editor.putString("plazoContrato", plazoContrato.getText().toString()).commit();
+                    editor.putString("plazoContrato", plazoContrato.getText().toString()).apply();
                 }
             }
         });
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    editor.putString("destinoPrestamoContrato", destinoPrestamoContrato.getText().toString()).commit();
+                    editor.putString("destinoPrestamoContrato", destinoPrestamoContrato.getText().toString()).apply();
                 }
             }
         });

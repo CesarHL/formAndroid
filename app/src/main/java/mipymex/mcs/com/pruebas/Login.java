@@ -21,7 +21,7 @@ import android.widget.Toast;
 
 public class Login extends AppCompatActivity {
 
-    final static public String IPpublic = "http://masternoc1.mx/wsmovil/api/";
+    final static public String IPpublic = "http://pruebasmc.com.mx/wsmovil/api/";
 
     /***********************************************************************************************
      *                                      DECLARACIÓN DE OBJETOS                                 *

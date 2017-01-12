@@ -5,7 +5,7 @@ public class DataDB {
     public static int VERSION = 1;
 
     // Datos de la base de datos
-    public static final String DB_NAME = "database_mipymex";
+    public static final String DB_NAME = "database_mipymex.db";
     public static final String TABLE_NAME_USUARIOS = "usuarios";
 
     public static final String TABLE_NAME_SOLICITUD = "solicitud";
@@ -14,6 +14,8 @@ public class DataDB {
     public static final String TABLE_NAME_INFO_CONYUGE = "infoConyuge";
     public static final String TABLE_NAME_INFO_REF = "infoRef";
     public static final String TABLE_NAME_INFO_REF_P = "infoRefP";
+    public static final String TABLE_NAME_IMAGEN = "imagenes";
+    public static final String TABLE_NAME_TIPO_FOTO = "tipoFoto";
 
     // Datos de la tabla Usuarios
     public static final String NAME = "nombre";
@@ -134,10 +136,13 @@ public class DataDB {
 
 //=========================================IMAGENES=============================
 
-   public static final String PR_IM_CREDITO = "pr_im_credito";
-   public static final String PR_IMG_IMAGEN = "pr_img_imagen";
-   public static final String PR_IMG_DTE = "pr_img_dte";
-   public static final String PR_IMG_TIPO = "pr_img_tipo";
-   public static final String PR_IMG_FOLIO = "pr_img_folio";
+    public static final String PR_IM_CREDITO = "pr_im_credito";
+    public static final String PR_IMG_IMAGEN = "pr_img_imagen";
+    public static final String PR_IMG_DTE = "pr_img_dte";
+    public static final String PR_IMG_TIPO = "pr_img_tipo";
+    public static final String PR_IMG_FOLIO = "pr_img_folio";
+
+    public static String CAT_CM_ID = "cat_cm_id";
+    public static String CAT_CM_DESCRIPCION = "cat_cm_descripcion";
 
 }
