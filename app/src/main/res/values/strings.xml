@@ -111,4 +111,5 @@
     <string name="residencia_pagandose">Pagándose</string>
     <string name="si_vive_con_familiares">Sí</string>
     <string name="no_vive_con_familiares">No</string>
+    <string name="welcome_user">Bienvenido %1$s</string>
 </resources>

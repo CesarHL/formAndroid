@@ -3,6 +3,7 @@ package mipymex.mcs.com.pruebas;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,11 +26,14 @@ public class Login extends AppCompatActivity {
     /***********************************************************************************************
      *                                      DECLARACIÓN DE OBJETOS                                 *
      **********************************************************************************************/
+    public static final String PREFS_NAME = "MyPrefsFile";
+
     public static EditText usuario;   // Campo de texto para usuario
     public static EditText password;  // Campo de texto para contraseña
     public static Button entrar;      // Boton para ingresar
     public static ProgressBar progress;
     public static TextView titulo;    // Texto para el titulo
+    private LinearLayout layoutUser;
     private TextView txtUser;         // Texto para usuaio en sesion
     private TextView cerrar;          // Texto para cerrar sesión
     private Toast toast;              // Toast para mostrar mensajes
@@ -39,16 +44,18 @@ public class Login extends AppCompatActivity {
     private String strLogin = "";       // Cadena para concatenar el usuario y contraseña
     private String strPassword = "";    // String que recuperra la contraseña
     private boolean flagSesion = false; // Bandera para saber si esta abierta la sesión
+    private SharedPreferences preferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_login);
+        setContentView(R.layout.content_login_1);
 
         sqliteHelper = new DBHelper(this, DataDB.DB_NAME, null, DataDB.VERSION);
         db = sqliteHelper.getWritableDatabase();
         db.close();
-
+        preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         connection = new Connection(this);
         usuario  = (EditText)  findViewById(R.id.txtUsuario);
         password = (EditText)  findViewById(R.id.txtPassword);
@@ -57,6 +64,7 @@ public class Login extends AppCompatActivity {
         cerrar   = (TextView)  findViewById(R.id.lblCerrar);
         progress = (ProgressBar) findViewById(R.id.progressBar);
         entrar = (Button) findViewById(R.id.btnIniciar);
+        layoutUser = (LinearLayout) findViewById(R.id.layout_user);
 
         entrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +87,7 @@ public class Login extends AppCompatActivity {
                 else if (flagSesion) {
                     // Si las contraseñas son iguales abrimos el Activity de catalogo
                     if (pass.equals(strPassword)) {
-                        Intent intentCatalogo = new Intent(Login.this, VentanaPrincipal.class);
+                        Intent intentCatalogo = new Intent(Login.this, MainActivity.class);
                         startActivity(intentCatalogo);
                         finish();
                     }
@@ -92,7 +100,7 @@ public class Login extends AppCompatActivity {
                     }
                 } else {  // Si no existe una sesión cosumir web service para autentificar usuarios y password
                     progress.setVisibility(View.VISIBLE);
-                    usuario.setVisibility(View.INVISIBLE);
+                    layoutUser.setVisibility(View.INVISIBLE);
                     password.setVisibility(View.INVISIBLE);
                     entrar.setVisibility(View.INVISIBLE);
                     /**
@@ -102,8 +110,10 @@ public class Login extends AppCompatActivity {
                     if (connection.getConnection("No informar")) {//usuario?v_cliente=2&v_usuario=ORIGINACION&v_contrasena=12345678
                         strLogin = IPpublic + "usuario?v_cliente=2&v_usuario=" + user + "&v_contrasena=" + pass;
                         new GetWebServices(Login.this).execute(strLogin, "login", user, pass);// Parámetros que recibe doInBackground
+                        preferences.edit().putString("Usuario", user).commit();
+
                     } else {
-                        usuario.setVisibility(View.VISIBLE);
+                        layoutUser.setVisibility(View.VISIBLE);
                         password.setVisibility(View.VISIBLE);
                         entrar.setVisibility(View.VISIBLE);
                         progress.setVisibility(View.GONE);
@@ -132,7 +142,7 @@ public class Login extends AppCompatActivity {
                 strPassword = c.getString(2);
                 txtUser.setText(strUsuario);
                 txtUser.setVisibility(View.VISIBLE);
-                usuario.setVisibility(View.INVISIBLE);
+                layoutUser.setVisibility(View.INVISIBLE);
                 cerrar.setVisibility(View.VISIBLE);
                 usuario.setText(strUsuario);
                 password.requestFocus();
@@ -140,7 +150,7 @@ public class Login extends AppCompatActivity {
             } else {
                 titulo.setText("Bienvenido");
                 txtUser.setVisibility(View.INVISIBLE);
-                usuario.setVisibility(View.VISIBLE);
+                layoutUser.setVisibility(View.VISIBLE);
                 cerrar.setVisibility(View.INVISIBLE);
                 usuario.requestFocus();
                 flagSesion = false;
