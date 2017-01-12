@@ -187,7 +187,8 @@
             android:text="Siguiente"
             android:layout_gravity="bottom"
             android:textColor="@color/colorWhite"
-            android:background="@color/colorPrimary" />
+            android:background="@color/colorPrimary"
+            android:id="@+id/btnSiguiente"/>
     </LinearLayout>
 
 </LinearLayout>
