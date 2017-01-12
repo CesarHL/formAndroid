@@ -14,8 +14,8 @@ import android.widget.EditText;
 
 public class ReferenciasPersonales extends AppCompatActivity {
 
-    private EditText txtApaternoRef, txtAMaternoRef, txtNombresRef, txtCalleRef, txtExtRef, txtIntRef, txtColRef, txtCpRef, txtMunRef, txtEdoRef;
-    private EditText txtTelRef, txtCelRef, txtCorreoRef, txtParentescoRef;
+    public static EditText txtApaternoRef, txtAMaternoRef, txtNombresRef, txtCalleRef, txtExtRef, txtIntRef, txtColRef, txtCpRef, txtMunRef, txtEdoRef;
+    public static EditText txtTelRef, txtCelRef, txtCorreoRef, txtParentescoRef;
     private SQLiteDatabase db = null;
     private Cursor c = null;
     private Button agregar ;

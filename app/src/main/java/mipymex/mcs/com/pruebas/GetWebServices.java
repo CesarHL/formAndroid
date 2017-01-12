@@ -151,7 +151,7 @@ public class GetWebServices extends AsyncTask<String, Void, String> {
 
             case "fotos":
                 try {
-                    String IPConfig = IPpublic + "TipoFoto?v_cliente=1";
+                    String IPConfig = IPpublic + "TipoFoto?v_cliente=2";
                     url = new URL(IPConfig);
                     conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Linux; Android 1.5; es-ES) Ejemplo HTTP");

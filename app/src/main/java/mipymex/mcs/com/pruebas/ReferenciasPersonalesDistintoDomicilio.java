@@ -13,8 +13,8 @@ import android.widget.EditText;
 
 public class ReferenciasPersonalesDistintoDomicilio extends AppCompatActivity {
 
-    private EditText txtApaternoRefP, txtAMaternoRefP, txtNombresRefP, txtCalleRefP, txtExtRefP, txtIntRefP, txtColRefP, txtCpRefP, txtMunRefP, txtEdoRefP;
-    private EditText txtTelRefP, txtCelRefP, txtCorreoRefP, txtParentescoRefP;
+    public static EditText txtApaternoRefP, txtAMaternoRefP, txtNombresRefP, txtCalleRefP, txtExtRefP, txtIntRefP, txtColRefP, txtCpRefP, txtMunRefP, txtEdoRefP;
+    public static EditText txtTelRefP, txtCelRefP, txtCorreoRefP, txtParentescoRefP;
     private SQLiteDatabase db = null;
     private Cursor c = null;
     private  Button agregar;

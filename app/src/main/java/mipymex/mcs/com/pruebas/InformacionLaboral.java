@@ -14,12 +14,12 @@ import android.widget.RadioGroup;
 
 public class InformacionLaboral extends AppCompatActivity {
 
-    private EditText txtNEmp, txtDCalle, txtNInt, txtNExtm, txtCol, txtCp, txtMun, txtEdo, txtDepLab, txtPuesto;
-    private EditText txtIngreso, txtEMontoCred, txtInst, txtNJefe, txtAntig, txtTel, txtExt, txtFax, txtOtros;
+    public static EditText txtNEmp , txtDCalle, txtNInt, txtNExtm, txtCol, txtCp, txtMun, txtEdo, txtDepLab, txtPuesto;
+    public static EditText txtIngreso, txtEMontoCred, txtInst, txtNJefe, txtAntig, txtTel, txtExt, txtFax, txtOtros;
     private RadioGroup rgRegistroIms, rgOtrosIngresos, rgComprobable, rgCredito, rgPeriodicidad;
     private Button btnLaboral;
     public static int tamDatos;
-    String otrosIngresos, registroImss, otrosComprobable, pagaCredito, periodicidad;
+    public static String otrosIngresos = " ", registroImss = " " , otrosComprobable= " ", pagaCredito = " ", periodicidad = " ";
     private SQLiteDatabase db = null;
     private Cursor c = null;
 
@@ -29,6 +29,8 @@ public class InformacionLaboral extends AppCompatActivity {
         setContentView(R.layout.informacion_laboral);
 
         txtNEmp = (EditText) findViewById(R.id.txtNombreEmpresa);
+        txtNEmp.setText("");
+
         rgRegistroIms = (RadioGroup) findViewById(R.id.rgRegistroIMSS);
         rgRegistroIms.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -43,25 +45,38 @@ public class InformacionLaboral extends AppCompatActivity {
         });
 
         txtDCalle = (EditText) findViewById(R.id.txtLaboralDomicilioCalle);
+        txtDCalle.setText("");
         txtNInt = (EditText) findViewById(R.id.txtLaboralInterior);
+        txtNInt.setText("");
         txtNExtm = (EditText) findViewById(R.id.txtLaboralExterior);
+        txtNExtm.setText("");
         txtCol = (EditText) findViewById(R.id.txtLaboralColonia);
+        txtCol.setText("");
         txtCp = (EditText) findViewById(R.id.txtLaboralCP);
-        txtMun= (EditText) findViewById(R.id.txtLaboralMunicipio);
+        txtCp.setText("");
+        txtMun = (EditText) findViewById(R.id.txtLaboralMunicipio);
+        txtMun.setText("");
         txtEdo = (EditText) findViewById(R.id.txtLaboralEstado);
+        txtEdo.setText("");
         txtDepLab = (EditText) findViewById(R.id.txtLaboralDepartamento);
+        txtDepLab.setText("");
         txtPuesto = (EditText)findViewById(R.id.txtLaboralPuesto);
+        txtPuesto.setText("");
         txtIngreso = (EditText)findViewById(R.id.txtLaboralIngreso);
+        txtIngreso.setText("");
 
         rgOtrosIngresos = (RadioGroup) findViewById(R.id.rgOtrosIngresos);
         txtOtros = (EditText) findViewById(R.id.txtEspecificacionMonto);
         txtOtros.setVisibility(View.GONE);
 
+        otrosIngresos = " ";
         rgOtrosIngresos.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
+
                 if (checkedId == R.id.afirmativoOtrosIngresos) {
                     otrosIngresos = "si";
+
                     txtOtros.setVisibility(View.VISIBLE);
                 } else if (checkedId == R.id.negativoOtrosIngresos) {
                     otrosIngresos = "no";
@@ -125,123 +140,14 @@ public class InformacionLaboral extends AppCompatActivity {
         btnLaboral = (Button) findViewById(R.id.btnGuardarLaboral);
         btnLaboral.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-               // validar();
+              // validar();
                 guardarInformacionLaboral();
-                mostraDatos();
+              //  mostraDatos();
             }
         });
 
     }
 
-    public void validar() {
-
-            Boolean v1 = txtNEmp.getText().toString().trim().equalsIgnoreCase("");
-            Boolean v2 = txtDCalle.getText().toString().trim().equalsIgnoreCase("");
-            Boolean v3 = txtNExtm.getText().toString().trim().equalsIgnoreCase("");
-            Boolean v4 = txtNInt.getText().toString().trim().equalsIgnoreCase("");
-            Boolean v5 = txtCol.getText().toString().trim().equalsIgnoreCase("");
-            Boolean v6 = txtCp.getText().toString().trim().equalsIgnoreCase("");
-            Boolean v7 = txtMun.getText().toString().trim().equalsIgnoreCase("");
-            Boolean v8 = txtEdo.getText().toString().trim().equalsIgnoreCase("");
-            Boolean v9 = txtDepLab.getText().toString().trim().equalsIgnoreCase("");
-            Boolean v10 = txtPuesto.getText().toString().trim().equalsIgnoreCase("");
-            Boolean v11 = txtIngreso.getText().toString().trim().equalsIgnoreCase("");
-            Boolean v12 = txtOtros.getText().toString().trim().equalsIgnoreCase("");
-            Boolean v13 = txtEMontoCred.getText().toString().trim().equalsIgnoreCase("");
-            Boolean v14 = txtInst.getText().toString().trim().equalsIgnoreCase("");
-            Boolean v15 = txtNJefe.getText().toString().trim().equalsIgnoreCase("");
-            Boolean v16 = txtAntig.getText().toString().trim().equalsIgnoreCase("");
-            Boolean v17 = txtTel.getText().toString().trim().equalsIgnoreCase("");
-            Boolean v18 = txtExt.getText().toString().trim().equalsIgnoreCase("");
-            Boolean v19 = txtFax.getText().toString().trim().equalsIgnoreCase("");
-
-            if ( v1) {
-                txtNEmp.setError("Este campo no puede estar vacio");
-                txtNEmp.setText("");
-                txtNEmp.requestFocus();
-                txtNEmp.setError(null);
-            } else if ( v2) {
-                txtDCalle.setError("Este campo no puede estar vacio");
-                txtDCalle.setText("");
-                txtDCalle.requestFocus();
-                txtDCalle.setError(null);
-            } else if ( v3) {
-                txtNExtm.setError("Este campo no puede estar vacio");
-                txtNExtm.setText("");
-                txtNExtm.requestFocus();
-                //txtNExtm.setError(null);
-            } else if ( v4) {
-                txtNInt.setError("Este campo no puede estar vacio");
-                txtNInt.setText("");
-                txtNInt.requestFocus();
-              //  txtNInt.setError(null);
-            } else if ( v5) {
-                txtCol.setError("Este campo no puede estar vacio");
-                txtCol.setText("");
-                txtCol.requestFocus();
-               // txtCol.setError(null);
-            } else if ( v6) {
-                txtCp.setError("Este campo no puede estar vacio");
-                txtCp.setText("");
-                txtCp.requestFocus();
-               // txtCp.setError(null);
-            } else if ( v7) {
-                txtMun.setError("Este campo no puede estar vacio");
-                txtMun.setText("");
-                txtMun.requestFocus();
-                //txtCp.setError(null);
-            } else if ( v8) {
-                txtEdo.setError("Este campo no puede estar vacio");
-                txtEdo.setText("");
-                txtEdo.requestFocus();
-               // txtEdo.setError(null);
-            } else if ( v9) {
-                txtDepLab.setError("Este campo no puede estar vacio");
-                txtDepLab.setText("");
-                txtDepLab.requestFocus();
-            } else if ( v10) {
-                txtPuesto.setError("Este campo no puede estar vacio");
-                txtPuesto.setText("");
-                txtPuesto.requestFocus();
-                txtPuesto.setError(null);
-            } else if ( v11) {
-                txtIngreso.setError("Este campo no puede estar vacio");
-                txtIngreso.setText("");
-                txtIngreso.requestFocus();
-            } else if ( v12) {
-                txtOtros.setError("Este campo no puede estar vacio");
-                txtOtros.setText("");
-                txtOtros.requestFocus();
-            } else if ( v13) {
-                txtEMontoCred.setError("Este campo no puede estar vacio");
-                txtEMontoCred.setText("");
-                txtEMontoCred.requestFocus();
-            } else if ( v14) {
-                txtInst.setError("Este campo no puede estar vacio");
-                txtInst.setText("");
-                txtInst.requestFocus();
-            } else if ( v15) {
-                txtNJefe.setError("Este campo no puede estar vacio");
-                txtNJefe.setText("");
-                txtNJefe.requestFocus();
-            } else if ( v16) {
-                txtAntig.setError("Este campo no puede estar vacio");
-                txtAntig.setText("");
-                txtAntig.requestFocus();
-            } else if ( v17) {
-                txtTel.setError("Este campo no puede estar vacio");
-                txtTel.setText("");
-                txtTel.requestFocus();
-            } else if ( v18) {
-                txtExt.setError("Este campo no puede estar vacio");
-                txtExt.setText("");
-                txtTel.requestFocus();
-            } else if ( v19) {
-                txtFax.setError("Este campo no puede estar vacio");
-                txtFax.setText("");
-                txtFax.requestFocus();
-            }
-    }
 
     public void guardarInformacionLaboral() {
         db = getApplicationContext().openOrCreateDatabase(DataDB.DB_NAME, android.content.Context.MODE_PRIVATE, null);
@@ -306,6 +212,112 @@ public class InformacionLaboral extends AppCompatActivity {
             Log.e("Error", ex.toString());
         } finally {
             db.close();
+        }
+    }
+
+    public void validar() {
+
+        Boolean v1 = txtNEmp.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v2 = txtDCalle.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v3 = txtNExtm.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v4 = txtNInt.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v5 = txtCol.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v6 = txtCp.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v7 = txtMun.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v8 = txtEdo.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v9 = txtDepLab.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v10 = txtPuesto.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v11 = txtIngreso.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v12 = txtOtros.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v13 = txtEMontoCred.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v14 = txtInst.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v15 = txtNJefe.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v16 = txtAntig.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v17 = txtTel.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v18 = txtExt.getText().toString().trim().equalsIgnoreCase("");
+        Boolean v19 = txtFax.getText().toString().trim().equalsIgnoreCase("");
+
+        if ( v1) {
+            txtNEmp.setError("Este campo no puede estar vacio");
+            txtNEmp.setText("");
+            txtNEmp.requestFocus();
+        } else if ( v2) {
+            txtDCalle.setError("Este campo no puede estar vacio");
+            txtDCalle.setText("");
+            txtDCalle.requestFocus();
+        } else if ( v3) {
+            txtNExtm.setError("Este campo no puede estar vacio");
+            txtNExtm.setText("");
+            txtNExtm.requestFocus();
+        } else if ( v4) {
+            txtNInt.setError("Este campo no puede estar vacio");
+            txtNInt.setText("");
+            txtNInt.requestFocus();
+
+        } else if ( v5) {
+            txtCol.setError("Este campo no puede estar vacio");
+            txtCol.setText("");
+            txtCol.requestFocus();
+
+        } else if ( v6) {
+            txtCp.setError("Este campo no puede estar vacio");
+            txtCp.setText("");
+            txtCp.requestFocus();
+
+        } else if ( v7) {
+            txtMun.setError("Este campo no puede estar vacio");
+            txtMun.setText("");
+            txtMun.requestFocus();
+
+        } else if ( v8) {
+            txtEdo.setError("Este campo no puede estar vacio");
+            txtEdo.setText("");
+            txtEdo.requestFocus();
+        } else if ( v9) {
+            txtDepLab.setError("Este campo no puede estar vacio");
+            txtDepLab.setText("");
+            txtDepLab.requestFocus();
+        } else if ( v10) {
+            txtPuesto.setError("Este campo no puede estar vacio");
+            txtPuesto.setText("");
+            txtPuesto.requestFocus();
+            txtPuesto.setError(null);
+        } else if ( v11) {
+            txtIngreso.setError("Este campo no puede estar vacio");
+            txtIngreso.setText("");
+            txtIngreso.requestFocus();
+        } else if ( v12) {
+            txtOtros.setError("Este campo no puede estar vacio");
+            txtOtros.setText("");
+            txtOtros.requestFocus();
+        } else if ( v13) {
+            txtEMontoCred.setError("Este campo no puede estar vacio");
+            txtEMontoCred.setText("");
+            txtEMontoCred.requestFocus();
+        } else if ( v14) {
+            txtInst.setError("Este campo no puede estar vacio");
+            txtInst.setText("");
+            txtInst.requestFocus();
+        } else if ( v15) {
+            txtNJefe.setError("Este campo no puede estar vacio");
+            txtNJefe.setText("");
+            txtNJefe.requestFocus();
+        } else if ( v16) {
+            txtAntig.setError("Este campo no puede estar vacio");
+            txtAntig.setText("");
+            txtAntig.requestFocus();
+        } else if ( v17) {
+            txtTel.setError("Este campo no puede estar vacio");
+            txtTel.setText("");
+            txtTel.requestFocus();
+        } else if ( v18) {
+            txtExt.setError("Este campo no puede estar vacio");
+            txtExt.setText("");
+            txtTel.requestFocus();
+        } else if ( v19) {
+            txtFax.setError("Este campo no puede estar vacio");
+            txtFax.setText("");
+            txtFax.requestFocus();
         }
     }
 }

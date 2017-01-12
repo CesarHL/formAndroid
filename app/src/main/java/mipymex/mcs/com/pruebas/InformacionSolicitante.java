@@ -25,9 +25,9 @@ public class InformacionSolicitante extends AppCompatActivity {
     private RadioGroup rdSexo, rdTConyuge, rdDep, rdRes, rdTRes, rdCPublico, rdCConyuge;
     private TextView lblMontoCred, lblInConyuge, lblDependientes;
     private CheckBox checkVivienda;
-    public static SQLiteDatabase db = null;
+    public  SQLiteDatabase db = null;
     private Cursor c = null;
-    public static String sexo, estadoPropiedad, tiempoResidenciaAnios, tiempoResidenciaMeses, tabajaConyuge, dependientes, creditoVivienda, cargoPublicoSolicitante, cargoPublicoConyuge;
+    public static String sexo = " ", estadoPropiedad = " ", tiempoResidenciaAnios = " ", tiempoResidenciaMeses = " ", tabajaConyuge = " ", dependientes = " ", creditoVivienda = " ", cargoPublicoSolicitante = " ", cargoPublicoConyuge = " ";
     public static int tamDatos;
     public static List datosSolicitanteLista;
 
@@ -37,7 +37,6 @@ public class InformacionSolicitante extends AppCompatActivity {
         setContentView(R.layout.informacion_solicitante);
 
         txtAp = (EditText) findViewById(R.id.txtApellidoPaterno);
-        txtAp.requestFocus();
         txtAm = (EditText) findViewById(R.id.txtApellidoMaterno);
         txtNombre = (EditText) findViewById(R.id.txtNombresSolicitante);
         txtLugarNacimiento = (EditText) findViewById(R.id.txtLugarNacimiento);
@@ -205,7 +204,6 @@ public class InformacionSolicitante extends AppCompatActivity {
               //  validar();
                guardarInformacionSolicitante();
                // mostraDatos();
-                //System.out.println("=====================================================" + datosSolicitanteLista);
 
             }
         });
@@ -389,12 +387,17 @@ public class InformacionSolicitante extends AppCompatActivity {
         System.out.println("===========================================================================");
 
         System.out.println(txtAp.getText().toString());
-        /*db = openOrCreateDatabase(DataDB.DB_NAME, android.content.Context.MODE_PRIVATE, null);
+        db = openOrCreateDatabase(DataDB.DB_NAME, android.content.Context.MODE_PRIVATE, null);
         try {
 
             ContentValues values = new ContentValues();
 
-
+            values.put(DataDB.PR_SO_NUMSOLICITUD, "");
+            values.put(DataDB.PR_SO_MTO_PRESTAMO, txtAp.getText().toString());
+            values.put(DataDB.PR_SO_PLAZO, txtAp.getText().toString());
+            values.put(DataDB.PR_SO_ASESOR, "");
+            values.put(DataDB.PR_SO_DTE_SOLICITUD, "");
+            values.put(DataDB. PR_SO_DESTINO, txtAp.getText().toString());
 
             values.put(DataDB.PR_SO_APATERNO, txtAp.getText().toString());
             values.put(DataDB.PR_SO_AMATERNO, txtAm.getText().toString());
@@ -438,6 +441,6 @@ public class InformacionSolicitante extends AppCompatActivity {
         } finally {
             db.close();
         }
-    }*/
     }
 }
+

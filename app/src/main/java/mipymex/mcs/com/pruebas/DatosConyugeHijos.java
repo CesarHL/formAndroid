@@ -14,7 +14,7 @@ import android.widget.EditText;
 
 public class DatosConyugeHijos extends Activity {
 
-    private EditText txtNombreC, txtEdadC, txtParentescoC, txtTelefonoC, txtCelularC,txtNombreC2, txtEdadC2, txtParentescoC2, txtTelefonoC2, txtCelularC2,txtNombreC3, txtEdadC3, txtParentescoC3, txtTelefonoC3, txtCelularC3;
+    public static EditText txtNombreC, txtEdadC, txtParentescoC, txtTelefonoC, txtCelularC,txtNombreC2, txtEdadC2, txtParentescoC2, txtTelefonoC2, txtCelularC2,txtNombreC3, txtEdadC3, txtParentescoC3, txtTelefonoC3, txtCelularC3;
     private SQLiteDatabase db = null;
     private Cursor c = null;
     private Button agregar;
