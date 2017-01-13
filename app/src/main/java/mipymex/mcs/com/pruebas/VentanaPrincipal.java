@@ -1,102 +1,88 @@
 package mipymex.mcs.com.pruebas;
 
-import android.app.TabActivity;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.TabHost;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
+import java.util.ArrayList;
+import java.util.List;
 
+import mipymex.mcs.com.pruebas.fragments.CaptureSignature;
+import mipymex.mcs.com.pruebas.fragments.CatalogoImagenes;
+import mipymex.mcs.com.pruebas.fragments.DatosConyugeHijos;
+import mipymex.mcs.com.pruebas.fragments.InformacionLaboral;
+import mipymex.mcs.com.pruebas.fragments.InformacionSolicitante;
+import mipymex.mcs.com.pruebas.fragments.ReferenciasPersonales;
+import mipymex.mcs.com.pruebas.fragments.ReferenciasPersonalesDistintoDomicilio;
 
+public class VentanaPrincipal extends AppCompatActivity {
 
-/**
- * Created by Erick on 02/01/2017.
- */
-
-@SuppressWarnings("deprecation")
-public class VentanaPrincipal extends TabActivity {
-
-    private ViewPager viewPager;
+    private  ViewPager viewPager;
+    private  TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pantalla_principal);
 
-        final TabHost host = (TabHost) findViewById(android.R.id.tabhost);
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
 
-        viewPager  = (ViewPager)    findViewById(R.id.view_pager);
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageSelected(int position) {
-                host.setCurrentTab(position);
-            }
-            @Override
-            public void onPageScrolled(
-                    int position, float positionOffset, int positionOffsetPixels) { }
-            @Override
-            public void onPageScrollStateChanged(int state) {}
-        });
-        host.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
-            @Override
-            public void onTabChanged(String tabId) {
-                int selectItem = host.getCurrentTab();
-                viewPager.setCurrentItem(selectItem);
-            }
-        });
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        setTitle("MiPYMEX");
 
-
-
-        host.addTab(host.newTabSpec("tab1").setIndicator("Solicitante").setContent(
-                new Intent(this, InformacionSolicitante.class)));
-
-        host.addTab(host.newTabSpec("tab2").setIndicator("Laboral").setContent(
-                new Intent(this, InformacionLaboral.class)));
-
-        host.addTab(host.newTabSpec("tab3").setIndicator("Conyuge").setContent(
-                new Intent(this, DatosConyugeHijos.class)));
-
-        host.addTab(host.newTabSpec("tab4").setIndicator("Referencias").setContent(
-                new Intent(this, ReferenciasPersonales.class)));
-
-        host.addTab(host.newTabSpec("tab5").setIndicator("Referencias F").setContent(
-                new Intent(this, ReferenciasPersonalesDistintoDomicilio.class)));
-
-        host.addTab(host.newTabSpec("tab6").setIndicator("Firma").setContent(
-                new Intent(this, CaptureSignature.class)));
-
-        host.addTab(host.newTabSpec("tab7").setIndicator("Imagenes").setContent(
-                new Intent(this, CatalogoImagenes.class)));
-
-        host.addTab(host.newTabSpec("tab8").setIndicator("Enviar Datos").setContent(
-                new Intent(this, ObtenerDatosCompletos.class)));
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        setupViewPager(viewPager);
+        tabLayout.setupWithViewPager(viewPager);
 
     }
+    private void setupViewPager(ViewPager viewPager) {
+        Adapter adapter = new Adapter(getSupportFragmentManager());
+        adapter.addFragment(new InformacionSolicitante(), "Solicitante");
+        adapter.addFragment(new InformacionLaboral(), "Laboral");
+        adapter.addFragment(new DatosConyugeHijos(), "Cónyuge");
+        adapter.addFragment(new ReferenciasPersonales(), "Referencias");
+        adapter.addFragment(new ReferenciasPersonalesDistintoDomicilio(), "Referencias F");
+        adapter.addFragment(new CaptureSignature(), "Firma");
+        adapter.addFragment(new CatalogoImagenes(), "Imágenes");
 
-    public class FakeContent implements TabHost.TabContentFactory{
-
-        Context context;
-
-    public FakeContent(Context context){
-        this.context = context;
+        viewPager.setAdapter(adapter);
     }
-    @Override
-    public View createTabContent(String tag) {
-        View fakeView = new View(context);
-        fakeView.setMinimumWidth(0);
-        fakeView.setMinimumHeight(0);
-        return fakeView;
+
+    static class Adapter extends FragmentPagerAdapter {
+        private final List<Fragment> fragmentList = new ArrayList<>();
+        private final List<String> fragmentTitleList = new ArrayList<>();
+
+        public Adapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return fragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return fragmentList.size();
+        }
+
+        public void addFragment(Fragment fragment, String title) {
+            fragmentList.add(fragment);
+            fragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return fragmentTitleList.get(position);
+        }
     }
-}
+
 
 }
-
-
-
 

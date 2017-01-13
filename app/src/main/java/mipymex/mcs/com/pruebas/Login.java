@@ -3,6 +3,7 @@ package mipymex.mcs.com.pruebas;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,31 +23,35 @@ public class Login extends AppCompatActivity {
 
     final static public String IPpublic = "http://pruebasmc.com.mx/wsmovil/api/";
 
-    public static EditText usuario;
-    public static EditText password;
-    public static Button entrar;
+    public static final String PREFS_NAME = "MyPrefsFile";
+
+    public static EditText usuario;   // Campo de texto para usuario
+    public static EditText password;  // Campo de texto para contraseña
+    public static Button entrar;      // Boton para ingresar
     public static ProgressBar progress;
-    public static TextView titulo;
-    private TextView txtUser;
-    private TextView cerrar;
-    private Toast toast;
-    public SQLiteDatabase db = null;
-    private Cursor c;
-    private DBHelper sqliteHelper;
-    private Connection connection;
-    private String strLogin = "";
-    private String strPassword = "";
-    private boolean flagSesion = false;
+    public static TextView titulo;    // Texto para el titulo
+    private LinearLayout layoutUser;
+    private TextView txtUser;         // Texto para usuaio en sesion
+    private TextView cerrar;          // Texto para cerrar sesión
+    private Toast toast;              // Toast para mostrar mensajes
+    public SQLiteDatabase db = null;   // Objeto para usar la Base de Datos Local
+    private Cursor c;                   // Objeto para hacer consultas la Base de Datos
+    private DBHelper sqliteHelper;      // Objeto para abrir la base de Datos
+    private Connection connection;      // Objeto para saber si estamos conectados (wifi/datos)
+    private String strLogin = "";       // Cadena para concatenar el usuario y contraseña
+    private String strPassword = "";    // String que recuperra la contraseña
+    private boolean flagSesion = false; // Bandera para saber si esta abierta la sesión
+    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_login);
+        setContentView(R.layout.content_login_1);
 
         sqliteHelper = new DBHelper(this, DataDB.DB_NAME, null, DataDB.VERSION);
         db = sqliteHelper.getWritableDatabase();
         db.close();
-
+        preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         connection = new Connection(this);
         usuario  = (EditText)  findViewById(R.id.txtUsuario);
         password = (EditText)  findViewById(R.id.txtPassword);
@@ -54,6 +60,7 @@ public class Login extends AppCompatActivity {
         cerrar   = (TextView)  findViewById(R.id.lblCerrar);
         progress = (ProgressBar) findViewById(R.id.progressBar);
         entrar = (Button) findViewById(R.id.btnIniciar);
+        layoutUser = (LinearLayout) findViewById(R.id.layout_user);
 
         entrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +77,7 @@ public class Login extends AppCompatActivity {
                     password.setText("");
                 } else if (flagSesion) {
                     if (pass.equals(strPassword)) {
-                        Intent intentCatalogo = new Intent(Login.this, VentanaPrincipal.class);
+                        Intent intentCatalogo = new Intent(Login.this, MainActivity.class);
                         startActivity(intentCatalogo);
                         finish();
                     } else {
@@ -88,6 +95,7 @@ public class Login extends AppCompatActivity {
                     if (connection.getConnection("No informar")) {
                         strLogin = IPpublic + "usuario?v_cliente=2&v_usuario=" + user + "&v_contrasena=" + pass;//
                         new GetWebServices(Login.this).execute(strLogin, "login", user, pass);// Parámetros que recibe doInBackground
+                        preferences.edit().putString("Usuario", user).commit();
                     } else {
                         usuario.setVisibility(View.VISIBLE);
                         password.setVisibility(View.VISIBLE);

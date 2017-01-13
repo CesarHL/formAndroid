@@ -1,8 +1,6 @@
-package mipymex.mcs.com.pruebas;
+package mipymex.mcs.com.pruebas.fragments;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,14 +8,12 @@ import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.util.Base64;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.Toast;
-
 import java.io.ByteArrayOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -26,7 +22,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CatalogoImagenes extends Activity {
+import mipymex.mcs.com.pruebas.GetWebServices;
+import mipymex.mcs.com.pruebas.ItemAdapterFoto;
+import mipymex.mcs.com.pruebas.ItemTipoFoto;
+import mipymex.mcs.com.pruebas.R;
+
+public class CatalogoImagenes extends Fragment {
 
     public static ImageView foto;
     public static ArrayList<String> arrayListFotoTomada = new ArrayList<>();
@@ -43,26 +44,14 @@ public class CatalogoImagenes extends Activity {
     private GetWebServices gw;
 
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.catalogo_foto);
-
-
-       // ListView myList= (ListView) findViewById(R.id.listView);
-       // myList.setAdapter(myAdapter);
-
-             //consultarCatalogo();
-            String[]  myStringArray={"A","B","C"};
-
-        ArrayAdapter<String> myAdapter=new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, myStringArray);
-        ListView myList=(ListView) findViewById(R.id.listView);
-        myList.setAdapter(myAdapter);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         mapImages = new HashMap<>();
         mapImagesTmp = new HashMap <>();
-
-        foto = (ImageView) findViewById(R.id.imgCheckPhoto);
+        View view = inflater.inflate(R.layout.catalogo_foto, null);
+        foto = (ImageView) view.findViewById(R.id.imgCheckPhoto);
         foto.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -70,6 +59,7 @@ public class CatalogoImagenes extends Activity {
                 openCamera();
             }
         });
+        return view;
     }
 
 
@@ -92,16 +82,15 @@ public class CatalogoImagenes extends Activity {
     private void openCamera() {
         final int REQUEST_IMAGE_CAPTURE = 1;
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+        if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         }
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == getActivity().RESULT_OK) {
 
-           // itemCam.setIcon(R.drawable.camara);
 
             Bitmap bitmap;
             bitmap = (Bitmap) data.getExtras().get("data");

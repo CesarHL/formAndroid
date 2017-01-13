@@ -1,10 +1,7 @@
 package mipymex.mcs.com.pruebas;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -19,6 +16,12 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+
+import mipymex.mcs.com.pruebas.fragments.DatosConyugeHijos;
+import mipymex.mcs.com.pruebas.fragments.InformacionLaboral;
+import mipymex.mcs.com.pruebas.fragments.InformacionSolicitante;
+import mipymex.mcs.com.pruebas.fragments.ReferenciasPersonales;
+import mipymex.mcs.com.pruebas.fragments.ReferenciasPersonalesDistintoDomicilio;
 
 public class ObtenerDatosCompletos extends AppCompatActivity  {
 

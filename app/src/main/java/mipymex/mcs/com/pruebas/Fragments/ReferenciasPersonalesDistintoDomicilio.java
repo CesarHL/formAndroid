@@ -1,17 +1,22 @@
-package mipymex.mcs.com.pruebas;
+package mipymex.mcs.com.pruebas.fragments;
 
+import android.support.v4.app.Fragment;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import mipymex.mcs.com.pruebas.DataDB;
+import mipymex.mcs.com.pruebas.R;
 
-public class ReferenciasPersonalesDistintoDomicilio extends AppCompatActivity {
+public class ReferenciasPersonalesDistintoDomicilio extends Fragment {
 
     public static EditText txtApaternoRefP, txtAMaternoRefP, txtNombresRefP, txtCalleRefP, txtExtRefP, txtIntRefP, txtColRefP, txtCpRefP, txtMunRefP, txtEdoRefP;
     public static EditText txtTelRefP, txtCelRefP, txtCorreoRefP, txtParentescoRefP;
@@ -20,27 +25,27 @@ public class ReferenciasPersonalesDistintoDomicilio extends AppCompatActivity {
     private  Button agregar;
     public static int tamDatos;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.referencias_personalesfamiliares);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.referencias_personalesfamiliares, null);
 
-        txtApaternoRefP = (EditText) findViewById(R.id.txtApellidoPaternoReferenciasP);
-        txtAMaternoRefP = (EditText) findViewById(R.id.txtApellidoMaternoReferenciasP);
-        txtNombresRefP = (EditText) findViewById(R.id.txtNombresReferenciasP);
-        txtCalleRefP = (EditText) findViewById(R.id.txtCalleReferenciasP);
-        txtExtRefP = (EditText) findViewById(R.id.txtExteriorReferenciasP);
-        txtIntRefP = (EditText) findViewById(R.id.txtInteriorReferenciasP);
-        txtColRefP = (EditText) findViewById(R.id.txtColoniaReferenciasP);
-        txtCpRefP = (EditText) findViewById(R.id.txtCpReferenciasP);
-        txtMunRefP = (EditText) findViewById(R.id.txtMunicipioReferenciasP);
-        txtEdoRefP = (EditText) findViewById(R.id.txtEstadoReferenciasP);
-        txtTelRefP = (EditText) findViewById(R.id.txtTelefonoReferenciasP);
-        txtCelRefP = (EditText) findViewById(R.id.txtCelularReferenciasP);
-        txtCorreoRefP = (EditText) findViewById(R.id.txtCorreoReferenciasP);
-        txtParentescoRefP = (EditText) findViewById(R.id.txtParentescoReferenciasP);
+        txtApaternoRefP = (EditText) view.findViewById(R.id.txtApellidoPaternoReferenciasP);
+        txtAMaternoRefP = (EditText) view.findViewById(R.id.txtApellidoMaternoReferenciasP);
+        txtNombresRefP = (EditText) view.findViewById(R.id.txtNombresReferenciasP);
+        txtCalleRefP = (EditText) view.findViewById(R.id.txtCalleReferenciasP);
+        txtExtRefP = (EditText) view.findViewById(R.id.txtExteriorReferenciasP);
+        txtIntRefP = (EditText) view.findViewById(R.id.txtInteriorReferenciasP);
+        txtColRefP = (EditText) view.findViewById(R.id.txtColoniaReferenciasP);
+        txtCpRefP = (EditText) view.findViewById(R.id.txtCpReferenciasP);
+        txtMunRefP = (EditText) view.findViewById(R.id.txtMunicipioReferenciasP);
+        txtEdoRefP = (EditText) view.findViewById(R.id.txtEstadoReferenciasP);
+        txtTelRefP = (EditText) view.findViewById(R.id.txtTelefonoReferenciasP);
+        txtCelRefP = (EditText) view.findViewById(R.id.txtCelularReferenciasP);
+        txtCorreoRefP = (EditText) view.findViewById(R.id.txtCorreoReferenciasP);
+        txtParentescoRefP = (EditText) view.findViewById(R.id.txtParentescoReferenciasP);
 
-        agregar =(Button)findViewById(R.id.btnGuardarReferenciasDistintoDomicilio);
+        agregar =(Button)view.findViewById(R.id.btnGuardarReferenciasDistintoDomicilio);
         agregar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //validarReferenciasDistintoDomiciolio();
@@ -48,6 +53,7 @@ public class ReferenciasPersonalesDistintoDomicilio extends AppCompatActivity {
                 mostraDatos();
             }
         });
+        return view;
     }
 
     public void validarReferenciasDistintoDomiciolio(){
@@ -127,7 +133,7 @@ public class ReferenciasPersonalesDistintoDomicilio extends AppCompatActivity {
 
     public void guardarReferenciasPersonalesDistintoDomiciolio() {
 
-        db = getApplicationContext().openOrCreateDatabase(DataDB.DB_NAME, android.content.Context.MODE_PRIVATE, null);
+        db = getActivity().getApplicationContext().openOrCreateDatabase(DataDB.DB_NAME, android.content.Context.MODE_PRIVATE, null);
 
         try {
             ContentValues values = new ContentValues();
@@ -156,7 +162,7 @@ public class ReferenciasPersonalesDistintoDomicilio extends AppCompatActivity {
     }
 
     public void mostraDatos() {
-        db = getApplicationContext().openOrCreateDatabase(DataDB.DB_NAME, android.content.Context.MODE_PRIVATE, null);
+        db = getActivity().getApplicationContext().openOrCreateDatabase(DataDB.DB_NAME, android.content.Context.MODE_PRIVATE, null);
         try {
             Cursor c = db.rawQuery("SELECT *  FROM " + DataDB.TABLE_NAME_INFO_REF_P, null);
             tamDatos = c.getCount();

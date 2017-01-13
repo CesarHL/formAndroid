@@ -1,6 +1,6 @@
-package mipymex.mcs.com.pruebas;
+package mipymex.mcs.com.pruebas.fragments;
 
-import android.app.Activity;
+import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
@@ -13,23 +13,26 @@ import android.graphics.RectF;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore.Images;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-import android.view.Window;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Calendar;
 
-public class CaptureSignature extends Activity {
+import mipymex.mcs.com.pruebas.R;
+
+public class CaptureSignature extends Fragment {
 
     LinearLayout mContent;
     signature mSignature;
@@ -41,14 +44,20 @@ public class CaptureSignature extends Activity {
     File mypath;
     protected String uniqueId;
 
-    @Override
+   /* @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            setContentView(R.layout.firma_solicitante);
+            setContentView(R.layout.firma_solicitante);*/
+   @Nullable
+   @Override
+   public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+       //Must be called before on create of its activity
+       //getActivity().requestWindowFeature(Window.FEATURE_NO_TITLE);
+       View view = inflater.inflate(R.layout.firma_solicitante, null);
 
         tempDir = Environment.getExternalStorageDirectory() + "/" + getResources().getString(R.string.external_dir) + "/";
-        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        ContextWrapper cw = new ContextWrapper(getActivity().getApplicationContext());
         File directory = cw.getDir(getResources().getString(R.string.external_dir), Context.MODE_PRIVATE);
 
         prepareDirectory();
@@ -57,12 +66,12 @@ public class CaptureSignature extends Activity {
         mypath= new File(directory,current);
 
 
-        mContent = (LinearLayout) findViewById(R.id.linearLayout);
-        mSignature = new signature(this, null);
+        mContent = (LinearLayout) view.findViewById(R.id.linearLayout);
+        mSignature = new signature(getActivity(), null);
         mSignature.setBackgroundColor(Color.WHITE);
         mContent.addView(mSignature, LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
-        mClear = (Button)findViewById(R.id.clear);
-        mGetSign = (Button)findViewById(R.id.getsign);
+        mClear = (Button)view.findViewById(R.id.clear);
+        mGetSign = (Button)view.findViewById(R.id.getsign);
         mGetSign.setEnabled(false);
         mView = mContent;
 
@@ -85,19 +94,19 @@ public class CaptureSignature extends Activity {
                     b.putString("status", "done");
                     Intent intent = new Intent();
                     intent.putExtras(b);
-                    setResult(RESULT_OK,intent);
-                 //   finish();
+                    getActivity().setResult(getActivity().RESULT_OK,intent);
+                    getActivity().finish();
                 }
             }
         });
-
+        return view;
 
     }
 
     @Override
-    protected void onDestroy() {
-        Log.w("GetSignature", "onDestory");
-        super.onDestroy();
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
     }
 
     private boolean captureSignature() {
@@ -106,7 +115,7 @@ public class CaptureSignature extends Activity {
         String errorMessage = "";
 
         if(error) {
-            Toast toast = Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.TOP, 105, 50);
             toast.show();
         }
@@ -136,6 +145,7 @@ public class CaptureSignature extends Activity {
 
     }
 
+
     private boolean prepareDirectory() {
         try {
             if (makedirs()) {
@@ -145,7 +155,7 @@ public class CaptureSignature extends Activity {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(this, "Could not initiate File System.. Is Sdcard mounted properly?", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "Could not initiate File System.. Is Sdcard mounted properly?", Toast.LENGTH_LONG).show();
             return false;
         }
     }
@@ -201,7 +211,7 @@ public class CaptureSignature extends Activity {
                 mBitmap.compress(Bitmap.CompressFormat.PNG, 90, mFileOutStream);
                 mFileOutStream.flush();
                 mFileOutStream.close();
-                String url = Images.Media.insertImage(getContentResolver(), mBitmap, "title", null);
+                String url = Images.Media.insertImage(getActivity().getContentResolver(), mBitmap, "title", null);
                 Log.v("log_tag","url: " + url);
                 //In case you want to delete the file
                 //boolean deleted = mypath.delete();

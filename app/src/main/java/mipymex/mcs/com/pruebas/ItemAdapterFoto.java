@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import mipymex.mcs.com.pruebas.fragments.CatalogoImagenes;
+
 public class ItemAdapterFoto extends BaseAdapter {
 
     private Context context;
